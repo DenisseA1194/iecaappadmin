@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B1E07392B6AF4F500BFDB45 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */; };
+		4B1E073B2B6AF51600BFDB45 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */; };
+		4B1E073F2B6AF54900BFDB45 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E073E2B6AF54900BFDB45 /* InputView.swift */; };
+		4B1E075A2B6AFA2600BFDB45 /* Registro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07592B6AFA2600BFDB45 /* Registro.swift */; };
+		4B1E075D2B6AFA4400BFDB45 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E075C2B6AFA4400BFDB45 /* Login.swift */; };
 		4B5E7ACC2B572EB1008095FC /* iecaappadminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */; };
 		4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACD2B572EB1008095FC /* ContentView.swift */; };
 		4B5E7AD02B572EB2008095FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACF2B572EB2008095FC /* Assets.xcassets */; };
@@ -34,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		4B1E073E2B6AF54900BFDB45 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		4B1E07592B6AFA2600BFDB45 /* Registro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registro.swift; sourceTree = "<group>"; };
+		4B1E075C2B6AFA4400BFDB45 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		4B5E7AC82B572EB1008095FC /* iecaappadmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iecaappadmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iecaappadminApp.swift; sourceTree = "<group>"; };
 		4B5E7ACD2B572EB1008095FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +81,198 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B1E07342B6AF41500BFDB45 /* Componentes */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */,
+				4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */,
+				4B1E073E2B6AF54900BFDB45 /* InputView.swift */,
+			);
+			path = Componentes;
+			sourceTree = "<group>";
+		};
+		4B1E07352B6AF42300BFDB45 /* Vista */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E074A2B6AF79600BFDB45 /* Instructores */,
+				4B1E074B2B6AF7A200BFDB45 /* Clientes */,
+				4B1E074C2B6AF7AA00BFDB45 /* Cursos */,
+				4B1E07572B6AF9A200BFDB45 /* CatalogoInstructores */,
+				4B1E07522B6AF95400BFDB45 /* CatalogoClientes */,
+				4B1E07542B6AF96D00BFDB45 /* CatalogoCursos */,
+				4B1E07592B6AFA2600BFDB45 /* Registro.swift */,
+				4B1E075C2B6AFA4400BFDB45 /* Login.swift */,
+			);
+			path = Vista;
+			sourceTree = "<group>";
+		};
+		4B1E07362B6AF42C00BFDB45 /* Controlador */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E074F2B6AF7DB00BFDB45 /* Instructores */,
+				4B1E074E2B6AF7D300BFDB45 /* Clientes */,
+				4B1E074D2B6AF7CE00BFDB45 /* Cursos */,
+				4B1E07582B6AF9A800BFDB45 /* CatalogoInstructores */,
+				4B1E07532B6AF95A00BFDB45 /* CatalogoClientes */,
+				4B1E07552B6AF98200BFDB45 /* CatalogoCursos */,
+			);
+			path = Controlador;
+			sourceTree = "<group>";
+		};
+		4B1E07372B6AF43B00BFDB45 /* Modelo */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E07472B6AF6EC00BFDB45 /* Instructores */,
+				4B1E07482B6AF6FA00BFDB45 /* Clientes */,
+				4B1E07462B6AF6A900BFDB45 /* Cursos */,
+				4B1E07562B6AF98D00BFDB45 /* CatalogoInstructores */,
+				4B1E07512B6AF94300BFDB45 /* CatalogoClientes */,
+				4B1E07502B6AF93400BFDB45 /* CatalogoCursos */,
+			);
+			path = Modelo;
+			sourceTree = "<group>";
+		};
+		4B1E07402B6AF5DD00BFDB45 /* Servicios */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E07412B6AF5FB00BFDB45 /* Autenticacion */,
+			);
+			path = Servicios;
+			sourceTree = "<group>";
+		};
+		4B1E07412B6AF5FB00BFDB45 /* Autenticacion */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Autenticacion;
+			sourceTree = "<group>";
+		};
+		4B1E07462B6AF6A900BFDB45 /* Cursos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cursos;
+			sourceTree = "<group>";
+		};
+		4B1E07472B6AF6EC00BFDB45 /* Instructores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Instructores;
+			sourceTree = "<group>";
+		};
+		4B1E07482B6AF6FA00BFDB45 /* Clientes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Clientes;
+			sourceTree = "<group>";
+		};
+		4B1E074A2B6AF79600BFDB45 /* Instructores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Instructores;
+			sourceTree = "<group>";
+		};
+		4B1E074B2B6AF7A200BFDB45 /* Clientes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Clientes;
+			sourceTree = "<group>";
+		};
+		4B1E074C2B6AF7AA00BFDB45 /* Cursos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cursos;
+			sourceTree = "<group>";
+		};
+		4B1E074D2B6AF7CE00BFDB45 /* Cursos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cursos;
+			sourceTree = "<group>";
+		};
+		4B1E074E2B6AF7D300BFDB45 /* Clientes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Clientes;
+			sourceTree = "<group>";
+		};
+		4B1E074F2B6AF7DB00BFDB45 /* Instructores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Instructores;
+			sourceTree = "<group>";
+		};
+		4B1E07502B6AF93400BFDB45 /* CatalogoCursos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoCursos;
+			sourceTree = "<group>";
+		};
+		4B1E07512B6AF94300BFDB45 /* CatalogoClientes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoClientes;
+			sourceTree = "<group>";
+		};
+		4B1E07522B6AF95400BFDB45 /* CatalogoClientes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoClientes;
+			sourceTree = "<group>";
+		};
+		4B1E07532B6AF95A00BFDB45 /* CatalogoClientes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoClientes;
+			sourceTree = "<group>";
+		};
+		4B1E07542B6AF96D00BFDB45 /* CatalogoCursos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoCursos;
+			sourceTree = "<group>";
+		};
+		4B1E07552B6AF98200BFDB45 /* CatalogoCursos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoCursos;
+			sourceTree = "<group>";
+		};
+		4B1E07562B6AF98D00BFDB45 /* CatalogoInstructores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoInstructores;
+			sourceTree = "<group>";
+		};
+		4B1E07572B6AF9A200BFDB45 /* CatalogoInstructores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoInstructores;
+			sourceTree = "<group>";
+		};
+		4B1E07582B6AF9A800BFDB45 /* CatalogoInstructores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatalogoInstructores;
+			sourceTree = "<group>";
+		};
 		4B5E7ABF2B572EB1008095FC = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +296,11 @@
 		4B5E7ACA2B572EB1008095FC /* iecaappadmin */ = {
 			isa = PBXGroup;
 			children = (
+				4B1E07372B6AF43B00BFDB45 /* Modelo */,
+				4B1E07352B6AF42300BFDB45 /* Vista */,
+				4B1E07362B6AF42C00BFDB45 /* Controlador */,
+				4B1E07342B6AF41500BFDB45 /* Componentes */,
+				4B1E07402B6AF5DD00BFDB45 /* Servicios */,
 				4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */,
 				4B5E7ACD2B572EB1008095FC /* ContentView.swift */,
 				4B5E7ACF2B572EB2008095FC /* Assets.xcassets */,
@@ -257,8 +464,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B1E075D2B6AFA4400BFDB45 /* Login.swift in Sources */,
 				4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */,
 				4B5E7ACC2B572EB1008095FC /* iecaappadminApp.swift in Sources */,
+				4B1E075A2B6AFA2600BFDB45 /* Registro.swift in Sources */,
+				4B1E073F2B6AF54900BFDB45 /* InputView.swift in Sources */,
+				4B1E07392B6AF4F500BFDB45 /* ButtonView.swift in Sources */,
+				4B1E073B2B6AF51600BFDB45 /* CheckBoxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
