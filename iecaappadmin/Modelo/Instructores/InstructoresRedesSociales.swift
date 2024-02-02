@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+struct InstructoresRedesSociales: Identifiable, Codable {
+    
+    var Id: String
+    var IdEmpresa: String
+    var IdInstructor: String
+    var FechaAlta: Date
+    var Notas: String
+    var IdRedSocial: String
+ 
+    var id: String {
+        return Id
+    }
+    
+}

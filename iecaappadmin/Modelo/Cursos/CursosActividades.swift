@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+struct CursosActividades: Identifiable, Codable {
+    
+    var Id: String
+    var IdEmpresa: String
+    var Nombre: String
+    var Fecha: Date
+    var Notas: String
+    var Observaciones: String
+    var IdCurso: String
+    var IdActividad: String
+    var Link: String
+
+    var id: String {
+        return Id
+    }
+    
+}

@@ -1,5 +1,5 @@
 //
-//  CursosBibliografias.swift
+//  CursosAutorizaciones.swift
 //  iecaappadmin
 //
 //  Created by Denisse Alejandra Martinez Mendiola on 01/02/24.
@@ -7,20 +7,22 @@
 
 import Foundation
 
-struct CursosBiografias: Identifiable, Codable {
+struct CursosAutorizaciones: Identifiable, Codable {
     
     var Id: String
-    var Nombre: String
     var IdCurso: String
-    var IdActividad: String
+    var IdUsuario: String
+    var FechaOperacion: Date
+    var Elabora: Bool
+    var Revisa: Bool
+    var Valida: Bool
+    var Aprueba: Bool
+    var Autoriza: Bool
     var Notas: String
-    var Autor: String
     var Observaciones: String
     var Fecha: Date
     var IdEmpresa: String
-    var Link: String
-    var IdTipoBibliografia: String
-  
+
     var id: String {
         return Id
     }

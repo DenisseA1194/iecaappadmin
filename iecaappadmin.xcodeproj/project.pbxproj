@@ -92,7 +92,7 @@
 		4B1E07FA2B6BF25D00BFDB45 /* ClientesRedesSociales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07F92B6BF25D00BFDB45 /* ClientesRedesSociales.swift */; };
 		4B1E07FC2B6BF27900BFDB45 /* ClientesTelefonos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07FB2B6BF27900BFDB45 /* ClientesTelefonos.swift */; };
 		4B1E07FE2B6BF29100BFDB45 /* ClientesTipoContacto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07FD2B6BF29100BFDB45 /* ClientesTipoContacto.swift */; };
-		4B1E08002B6BF2A500BFDB45 /* Cursos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07FF2B6BF2A500BFDB45 /* Cursos.swift */; };
+		4B1E08002B6BF2A500BFDB45 /* Curso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07FF2B6BF2A500BFDB45 /* Curso.swift */; };
 		4B1E08022B6BF2B500BFDB45 /* CursosActividades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08012B6BF2B500BFDB45 /* CursosActividades.swift */; };
 		4B1E08042B6BF2C200BFDB45 /* CursosBibliografias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08032B6BF2C200BFDB45 /* CursosBibliografias.swift */; };
 		4B1E08062B6BF2D900BFDB45 /* CursosCompetencias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08052B6BF2D900BFDB45 /* CursosCompetencias.swift */; };
@@ -103,6 +103,13 @@
 		4B1E08102B6BF33800BFDB45 /* CursosInstructores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E080F2B6BF33800BFDB45 /* CursosInstructores.swift */; };
 		4B1E08122B6BF34C00BFDB45 /* CursosTemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08112B6BF34C00BFDB45 /* CursosTemas.swift */; };
 		4B1E08142B6C0D4400BFDB45 /* Cliente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08132B6C0D4400BFDB45 /* Cliente.swift */; };
+		4B1E08162B6C22B300BFDB45 /* CursosAutorizaciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08152B6C22B300BFDB45 /* CursosAutorizaciones.swift */; };
+		4B1E08182B6C3E7200BFDB45 /* CursosCreadores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08172B6C3E7200BFDB45 /* CursosCreadores.swift */; };
+		4B1E081A2B6C401200BFDB45 /* CursosEquipos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08192B6C401200BFDB45 /* CursosEquipos.swift */; };
+		4B1E081C2B6C426E00BFDB45 /* CursosMateriales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E081B2B6C426E00BFDB45 /* CursosMateriales.swift */; };
+		4B1E081E2B6C42D800BFDB45 /* CursosModalidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E081D2B6C42D800BFDB45 /* CursosModalidades.swift */; };
+		4B1E08202B6C43FB00BFDB45 /* CursosTipoCliente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E081F2B6C43FB00BFDB45 /* CursosTipoCliente.swift */; };
+		4B1E08222B6C59AE00BFDB45 /* InstructoresDomicilios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08212B6C59AE00BFDB45 /* InstructoresDomicilios.swift */; };
 		4B5E7ACC2B572EB1008095FC /* iecaappadminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */; };
 		4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACD2B572EB1008095FC /* ContentView.swift */; };
 		4B5E7AD02B572EB2008095FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACF2B572EB2008095FC /* Assets.xcassets */; };
@@ -215,7 +222,7 @@
 		4B1E07F92B6BF25D00BFDB45 /* ClientesRedesSociales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientesRedesSociales.swift; sourceTree = "<group>"; };
 		4B1E07FB2B6BF27900BFDB45 /* ClientesTelefonos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientesTelefonos.swift; sourceTree = "<group>"; };
 		4B1E07FD2B6BF29100BFDB45 /* ClientesTipoContacto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientesTipoContacto.swift; sourceTree = "<group>"; };
-		4B1E07FF2B6BF2A500BFDB45 /* Cursos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cursos.swift; sourceTree = "<group>"; };
+		4B1E07FF2B6BF2A500BFDB45 /* Curso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curso.swift; sourceTree = "<group>"; };
 		4B1E08012B6BF2B500BFDB45 /* CursosActividades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosActividades.swift; sourceTree = "<group>"; };
 		4B1E08032B6BF2C200BFDB45 /* CursosBibliografias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosBibliografias.swift; sourceTree = "<group>"; };
 		4B1E08052B6BF2D900BFDB45 /* CursosCompetencias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosCompetencias.swift; sourceTree = "<group>"; };
@@ -226,6 +233,13 @@
 		4B1E080F2B6BF33800BFDB45 /* CursosInstructores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosInstructores.swift; sourceTree = "<group>"; };
 		4B1E08112B6BF34C00BFDB45 /* CursosTemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosTemas.swift; sourceTree = "<group>"; };
 		4B1E08132B6C0D4400BFDB45 /* Cliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cliente.swift; sourceTree = "<group>"; };
+		4B1E08152B6C22B300BFDB45 /* CursosAutorizaciones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosAutorizaciones.swift; sourceTree = "<group>"; };
+		4B1E08172B6C3E7200BFDB45 /* CursosCreadores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosCreadores.swift; sourceTree = "<group>"; };
+		4B1E08192B6C401200BFDB45 /* CursosEquipos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosEquipos.swift; sourceTree = "<group>"; };
+		4B1E081B2B6C426E00BFDB45 /* CursosMateriales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosMateriales.swift; sourceTree = "<group>"; };
+		4B1E081D2B6C42D800BFDB45 /* CursosModalidades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosModalidades.swift; sourceTree = "<group>"; };
+		4B1E081F2B6C43FB00BFDB45 /* CursosTipoCliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosTipoCliente.swift; sourceTree = "<group>"; };
+		4B1E08212B6C59AE00BFDB45 /* InstructoresDomicilios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructoresDomicilios.swift; sourceTree = "<group>"; };
 		4B5E7AC82B572EB1008095FC /* iecaappadmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iecaappadmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iecaappadminApp.swift; sourceTree = "<group>"; };
 		4B5E7ACD2B572EB1008095FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -332,16 +346,22 @@
 		4B1E07462B6AF6A900BFDB45 /* Cursos */ = {
 			isa = PBXGroup;
 			children = (
-				4B1E07FF2B6BF2A500BFDB45 /* Cursos.swift */,
+				4B1E07FF2B6BF2A500BFDB45 /* Curso.swift */,
 				4B1E08012B6BF2B500BFDB45 /* CursosActividades.swift */,
+				4B1E08152B6C22B300BFDB45 /* CursosAutorizaciones.swift */,
 				4B1E08032B6BF2C200BFDB45 /* CursosBibliografias.swift */,
 				4B1E08052B6BF2D900BFDB45 /* CursosCompetencias.swift */,
 				4B1E08072B6BF2EC00BFDB45 /* CursosCompetenciasaDesarrollar.swift */,
 				4B1E08092B6BF2FD00BFDB45 /* CursosCompetenciasaDesarrollarDescripciones.swift */,
+				4B1E08172B6C3E7200BFDB45 /* CursosCreadores.swift */,
 				4B1E080B2B6BF30C00BFDB45 /* CursosDocumentacion.swift */,
+				4B1E08192B6C401200BFDB45 /* CursosEquipos.swift */,
 				4B1E080D2B6BF31D00BFDB45 /* CursosEvaluaciones.swift */,
 				4B1E080F2B6BF33800BFDB45 /* CursosInstructores.swift */,
+				4B1E081B2B6C426E00BFDB45 /* CursosMateriales.swift */,
+				4B1E081D2B6C42D800BFDB45 /* CursosModalidades.swift */,
 				4B1E08112B6BF34C00BFDB45 /* CursosTemas.swift */,
+				4B1E081F2B6C43FB00BFDB45 /* CursosTipoCliente.swift */,
 			);
 			path = Cursos;
 			sourceTree = "<group>";
@@ -356,6 +376,7 @@
 				4B1E078C2B6BEE4500BFDB45 /* InstructoresDatosfiscales.swift */,
 				4B1E078E2B6BEE5700BFDB45 /* IntructoresDiscapacidades.swift */,
 				4B1E07902B6BEE6700BFDB45 /* InstructoresDocumentacion.swift */,
+				4B1E08212B6C59AE00BFDB45 /* InstructoresDomicilios.swift */,
 				4B1E07922B6BEE7700BFDB45 /* InstructoresEnfermedades.swift */,
 				4B1E07942B6BEE8700BFDB45 /* InstructoresEstadoSalud.swift */,
 				4B1E07962B6BEE9F00BFDB45 /* InstructoresExperiencia.swift */,
@@ -740,6 +761,7 @@
 				4B1E075D2B6AFA4400BFDB45 /* Login.swift in Sources */,
 				4B1E078B2B6BEE3600BFDB45 /* InstructoresCuentasBancarias.swift in Sources */,
 				4B1E07C32B6BF05C00BFDB45 /* CatalogoClientesRegimenFiscal.swift in Sources */,
+				4B1E081C2B6C426E00BFDB45 /* CursosMateriales.swift in Sources */,
 				4B1E077F2B6BEDA700BFDB45 /* CatalogoInstructoresTiposDeSangre.swift in Sources */,
 				4B1E080C2B6BF30C00BFDB45 /* CursosDocumentacion.swift in Sources */,
 				4B1E07EA2B6BF1DE00BFDB45 /* ClientesContratos.swift in Sources */,
@@ -747,6 +769,8 @@
 				4B1E07D72B6BF13D00BFDB45 /* CatalogoCursosMateriales.swift in Sources */,
 				4B1E07B32B6BEFAD00BFDB45 /* CatalogoClientesDepartamentos.swift in Sources */,
 				4B1E080A2B6BF2FD00BFDB45 /* CursosCompetenciasaDesarrollarDescripciones.swift in Sources */,
+				4B1E08162B6C22B300BFDB45 /* CursosAutorizaciones.swift in Sources */,
+				4B1E081A2B6C401200BFDB45 /* CursosEquipos.swift in Sources */,
 				4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */,
 				4B1E07732B6BED3A00BFDB45 /* CatalogoInstructoresInstituciones.swift in Sources */,
 				4B1E07E22B6BF18E00BFDB45 /* CatalogoCursosTipoBibliografia.swift in Sources */,
@@ -775,6 +799,7 @@
 				4B1E07B12B6BEF8500BFDB45 /* CatalogoClientesClasificaciones.swift in Sources */,
 				4B1E076F2B6BED1500BFDB45 /* CatalogoInstructoresEstadoSalud.swift in Sources */,
 				4B1E07AF2B6BEF7700BFDB45 /* CatalogoClientesCelulas.swift in Sources */,
+				4B1E08222B6C59AE00BFDB45 /* InstructoresDomicilios.swift in Sources */,
 				4B1E077B2B6BED8600BFDB45 /* CatalogoInstructoresTipoContrato.swift in Sources */,
 				4B1E08102B6BF33800BFDB45 /* CursosInstructores.swift in Sources */,
 				4B1E07E02B6BF17E00BFDB45 /* CatalogoCursosTemas.swift in Sources */,
@@ -796,7 +821,7 @@
 				4B1E076D2B6BED0400BFDB45 /* CatalogoInstructoresEstadoCivil.swift in Sources */,
 				4B1E07AB2B6BEF5800BFDB45 /* CatalogoClientes.swift in Sources */,
 				4B1E07CD2B6BF0DC00BFDB45 /* CatalogoCursosAreas.swift in Sources */,
-				4B1E08002B6BF2A500BFDB45 /* Cursos.swift in Sources */,
+				4B1E08002B6BF2A500BFDB45 /* Curso.swift in Sources */,
 				4B1E07772B6BED6200BFDB45 /* CatalogoInstructoresStatus.swift in Sources */,
 				4B1E07BD2B6BF03400BFDB45 /* CatalogoClientesOcupaciones.swift in Sources */,
 				4B1E07B72B6BEFD700BFDB45 /* CatalogoClientesEstadoCivil.swift in Sources */,
@@ -807,6 +832,7 @@
 				4B1E07E62B6BF1BB00BFDB45 /* ClientesCapacitandos.swift in Sources */,
 				4B1E07F42B6BF22D00BFDB45 /* ClientesDomicilios.swift in Sources */,
 				4B1E080E2B6BF31D00BFDB45 /* CursosEvaluaciones.swift in Sources */,
+				4B1E08182B6C3E7200BFDB45 /* CursosCreadores.swift in Sources */,
 				4B1E07CB2B6BF0C200BFDB45 /* CatalogoCursosActividades.swift in Sources */,
 				4B1E07752B6BED5200BFDB45 /* CatalogoInstructoresSeguroMedico.swift in Sources */,
 				4B1E07A52B6BEF0E00BFDB45 /* InstructoresSeguroMedico.swift in Sources */,
@@ -814,8 +840,10 @@
 				4B1E07792B6BED7300BFDB45 /* CatalogoInstructoresTipo.swift in Sources */,
 				4B1E07852B6BEDF400BFDB45 /* InstructoresAreasInteres.swift in Sources */,
 				4B1E079F2B6BEEE100BFDB45 /* InstructoresIdiomas.swift in Sources */,
+				4B1E08202B6C43FB00BFDB45 /* CursosTipoCliente.swift in Sources */,
 				4B1E07D52B6BF12D00BFDB45 /* CatalogoCursosInstrumentosEvaluacion.swift in Sources */,
 				4B1E08142B6C0D4400BFDB45 /* Cliente.swift in Sources */,
+				4B1E081E2B6C42D800BFDB45 /* CursosModalidades.swift in Sources */,
 				4B1E07F62B6BF23D00BFDB45 /* ClientesPersonaFisicaDatos.swift in Sources */,
 				4B1E079D2B6BEECE00BFDB45 /* InstructoresFormacionCursos.swift in Sources */,
 				4B1E07E82B6BF1D100BFDB45 /* ClientesContactos.swift in Sources */,
