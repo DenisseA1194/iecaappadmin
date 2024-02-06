@@ -164,12 +164,12 @@
 		4B1E088D2B6D9CBC00BFDB45 /* ClientesRedesSocialesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E088C2B6D9CBC00BFDB45 /* ClientesRedesSocialesAPIService.swift */; };
 		4B1E088F2B6D9CD100BFDB45 /* ClientesTelefonosAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E088E2B6D9CD100BFDB45 /* ClientesTelefonosAPIService.swift */; };
 		4B1E08912B6D9CE000BFDB45 /* ClientesTipoContactoAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08902B6D9CE000BFDB45 /* ClientesTipoContactoAPIService.swift */; };
-		4B1E08932B72855A00BFDB45 /* Curso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08922B72855A00BFDB45 /* Curso.swift */; };
-		4B1E08952B72856800BFDB45 /* CursosActividades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08942B72856800BFDB45 /* CursosActividades.swift */; };
-		4B1E08972B72857800BFDB45 /* CursosAutorizaciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08962B72857800BFDB45 /* CursosAutorizaciones.swift */; };
-		4B1E08992B72858C00BFDB45 /* CursosBibliografias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08982B72858C00BFDB45 /* CursosBibliografias.swift */; };
-		4B1E089B2B72859C00BFDB45 /* CursosCompetencias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E089A2B72859C00BFDB45 /* CursosCompetencias.swift */; };
-		4B1E089D2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E089C2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollar.swift */; };
+		4B1E08932B72855A00BFDB45 /* CursoAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08922B72855A00BFDB45 /* CursoAPIService.swift */; };
+		4B1E08952B72856800BFDB45 /* CursosActividadesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08942B72856800BFDB45 /* CursosActividadesAPIService.swift */; };
+		4B1E08972B72857800BFDB45 /* CursosAutorizacionesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08962B72857800BFDB45 /* CursosAutorizacionesAPIService.swift */; };
+		4B1E08992B72858C00BFDB45 /* CursosBibliografiasAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E08982B72858C00BFDB45 /* CursosBibliografiasAPIService.swift */; };
+		4B1E089B2B72859C00BFDB45 /* CursosCompetenciasAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E089A2B72859C00BFDB45 /* CursosCompetenciasAPIService.swift */; };
+		4B1E089D2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollarAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E089C2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollarAPIService.swift */; };
 		4B5E7ACC2B572EB1008095FC /* iecaappadminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */; };
 		4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACD2B572EB1008095FC /* ContentView.swift */; };
 		4B5E7AD02B572EB2008095FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5E7ACF2B572EB2008095FC /* Assets.xcassets */; };
@@ -353,12 +353,12 @@
 		4B1E088C2B6D9CBC00BFDB45 /* ClientesRedesSocialesAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientesRedesSocialesAPIService.swift; sourceTree = "<group>"; };
 		4B1E088E2B6D9CD100BFDB45 /* ClientesTelefonosAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientesTelefonosAPIService.swift; sourceTree = "<group>"; };
 		4B1E08902B6D9CE000BFDB45 /* ClientesTipoContactoAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientesTipoContactoAPIService.swift; sourceTree = "<group>"; };
-		4B1E08922B72855A00BFDB45 /* Curso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curso.swift; sourceTree = "<group>"; };
-		4B1E08942B72856800BFDB45 /* CursosActividades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosActividades.swift; sourceTree = "<group>"; };
-		4B1E08962B72857800BFDB45 /* CursosAutorizaciones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosAutorizaciones.swift; sourceTree = "<group>"; };
-		4B1E08982B72858C00BFDB45 /* CursosBibliografias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosBibliografias.swift; sourceTree = "<group>"; };
-		4B1E089A2B72859C00BFDB45 /* CursosCompetencias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosCompetencias.swift; sourceTree = "<group>"; };
-		4B1E089C2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosCompetenciasaDesarrollar.swift; sourceTree = "<group>"; };
+		4B1E08922B72855A00BFDB45 /* CursoAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursoAPIService.swift; sourceTree = "<group>"; };
+		4B1E08942B72856800BFDB45 /* CursosActividadesAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosActividadesAPIService.swift; sourceTree = "<group>"; };
+		4B1E08962B72857800BFDB45 /* CursosAutorizacionesAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosAutorizacionesAPIService.swift; sourceTree = "<group>"; };
+		4B1E08982B72858C00BFDB45 /* CursosBibliografiasAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosBibliografiasAPIService.swift; sourceTree = "<group>"; };
+		4B1E089A2B72859C00BFDB45 /* CursosCompetenciasAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosCompetenciasAPIService.swift; sourceTree = "<group>"; };
+		4B1E089C2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollarAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosCompetenciasaDesarrollarAPIService.swift; sourceTree = "<group>"; };
 		4B5E7AC82B572EB1008095FC /* iecaappadmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iecaappadmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5E7ACB2B572EB1008095FC /* iecaappadminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iecaappadminApp.swift; sourceTree = "<group>"; };
 		4B5E7ACD2B572EB1008095FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -558,12 +558,12 @@
 		4B1E074D2B6AF7CE00BFDB45 /* Cursos */ = {
 			isa = PBXGroup;
 			children = (
-				4B1E08922B72855A00BFDB45 /* Curso.swift */,
-				4B1E08942B72856800BFDB45 /* CursosActividades.swift */,
-				4B1E08962B72857800BFDB45 /* CursosAutorizaciones.swift */,
-				4B1E08982B72858C00BFDB45 /* CursosBibliografias.swift */,
-				4B1E089A2B72859C00BFDB45 /* CursosCompetencias.swift */,
-				4B1E089C2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollar.swift */,
+				4B1E08922B72855A00BFDB45 /* CursoAPIService.swift */,
+				4B1E08942B72856800BFDB45 /* CursosActividadesAPIService.swift */,
+				4B1E08962B72857800BFDB45 /* CursosAutorizacionesAPIService.swift */,
+				4B1E08982B72858C00BFDB45 /* CursosBibliografiasAPIService.swift */,
+				4B1E089A2B72859C00BFDB45 /* CursosCompetenciasAPIService.swift */,
+				4B1E089C2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollarAPIService.swift */,
 			);
 			path = Cursos;
 			sourceTree = "<group>";
@@ -969,7 +969,7 @@
 				4B1E081A2B6C401200BFDB45 /* CursosEquipos.swift in Sources */,
 				4B1E08382B6D93E400BFDB45 /* CatalogoInstructoresEstadoSaludAPIService.swift in Sources */,
 				4B1E083A2B6D93F600BFDB45 /* CatalogoInstructoresIdiomasAPIService.swift in Sources */,
-				4B1E08952B72856800BFDB45 /* CursosActividades.swift in Sources */,
+				4B1E08952B72856800BFDB45 /* CursosActividadesAPIService.swift in Sources */,
 				4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */,
 				4B1E07732B6BED3A00BFDB45 /* CatalogoInstructoresInstituciones.swift in Sources */,
 				4B1E07E22B6BF18E00BFDB45 /* CatalogoCursosTipoBibliografia.swift in Sources */,
@@ -987,7 +987,7 @@
 				4B1E07992B6BEEAF00BFDB45 /* InstructoresExperienciaEquipos.swift in Sources */,
 				4B1E07952B6BEE8700BFDB45 /* InstructoresEstadoSalud.swift in Sources */,
 				4B1E07672B6BEABA00BFDB45 /* CatalogoInstructoresDiscapacidades.swift in Sources */,
-				4B1E08972B72857800BFDB45 /* CursosAutorizaciones.swift in Sources */,
+				4B1E08972B72857800BFDB45 /* CursosAutorizacionesAPIService.swift in Sources */,
 				4B1E08362B6D93D400BFDB45 /* CatalogoInstructoresEstadoCivilAPIService.swift in Sources */,
 				4B1E07FC2B6BF27900BFDB45 /* ClientesTelefonos.swift in Sources */,
 				4B1E07CF2B6BF0EC00BFDB45 /* CatalogoCursosCampoDeFormacion.swift in Sources */,
@@ -1004,7 +1004,7 @@
 				4B1E07EC2B6BF1EC00BFDB45 /* ClientesCursos.swift in Sources */,
 				4B1E08892B6D9C9C00BFDB45 /* ClientesPersonaFisicaDatosAPIService.swift in Sources */,
 				4B1E07872B6BEE0500BFDB45 /* InstructoresContactos.swift in Sources */,
-				4B1E089D2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollar.swift in Sources */,
+				4B1E089D2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollarAPIService.swift in Sources */,
 				4B1E08832B6D9C7000BFDB45 /* ClientesDatosFicalesAPIService.swift in Sources */,
 				4B1E088D2B6D9CBC00BFDB45 /* ClientesRedesSocialesAPIService.swift in Sources */,
 				4B1E07C52B6BF08900BFDB45 /* CatalogoClientesSectores.swift in Sources */,
@@ -1048,7 +1048,7 @@
 				4B1E086B2B6D975300BFDB45 /* InstructoresIdiomasAPIService.swift in Sources */,
 				4B1E07AB2B6BEF5800BFDB45 /* CatalogoClientes.swift in Sources */,
 				4B1E07CD2B6BF0DC00BFDB45 /* CatalogoCursosAreas.swift in Sources */,
-				4B1E08932B72855A00BFDB45 /* Curso.swift in Sources */,
+				4B1E08932B72855A00BFDB45 /* CursoAPIService.swift in Sources */,
 				4B1E08002B6BF2A500BFDB45 /* Curso.swift in Sources */,
 				4B1E083E2B6D943700BFDB45 /* CatalogoInstructoresSeguroMedicoAPIService.swift in Sources */,
 				4B1E07772B6BED6200BFDB45 /* CatalogoInstructoresStatus.swift in Sources */,
@@ -1081,12 +1081,12 @@
 				4B1E07D52B6BF12D00BFDB45 /* CatalogoCursosInstrumentosEvaluacion.swift in Sources */,
 				4B1E08142B6C0D4400BFDB45 /* Cliente.swift in Sources */,
 				4B1E088B2B6D9CAD00BFDB45 /* ClientesProspeccionAPIService.swift in Sources */,
-				4B1E089B2B72859C00BFDB45 /* CursosCompetencias.swift in Sources */,
+				4B1E089B2B72859C00BFDB45 /* CursosCompetenciasAPIService.swift in Sources */,
 				4B1E081E2B6C42D800BFDB45 /* CursosModalidades.swift in Sources */,
 				4B1E07F62B6BF23D00BFDB45 /* ClientesPersonaFisicaDatos.swift in Sources */,
 				4B1E08322B6D93AA00BFDB45 /* CatalogoInstructoresEnfermedadesAPIService.swift in Sources */,
 				4B1E079D2B6BEECE00BFDB45 /* InstructoresFormacionCursos.swift in Sources */,
-				4B1E08992B72858C00BFDB45 /* CursosBibliografias.swift in Sources */,
+				4B1E08992B72858C00BFDB45 /* CursosBibliografiasAPIService.swift in Sources */,
 				4B1E084C2B6D94BA00BFDB45 /* CatalogoInstructoresTitulosAPIService.swift in Sources */,
 				4B1E07E82B6BF1D100BFDB45 /* ClientesContactos.swift in Sources */,
 				4B1E08082B6BF2EC00BFDB45 /* CursosCompetenciasaDesarrollar.swift in Sources */,
