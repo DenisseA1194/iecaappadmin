@@ -10,11 +10,11 @@ import Alamofire
 
 class CatalogoInstructoresApellidosAPIService {
   
-    private let baseURL = "http://webservices.iecapp.com"
+    private let webService = WebService()
     static let shared = CatalogoInstructoresApellidosAPIService()
     
     func editarCatalogoInstructoresApellidos(catalogoInstructoresApellidos: CatalogoInstructoresApellidos, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = baseURL + "/api/CatalogoInstructoresApellidos/\(catalogoInstructoresApellidos.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = webService.getBaseURL() + "/api/CatalogoInstructoresApellidos/\(catalogoInstructoresApellidos.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
         let parameters: [String: Any] = [
             "Apellido": catalogoInstructoresApellidos.Apellido,
@@ -43,7 +43,7 @@ class CatalogoInstructoresApellidosAPIService {
 
     
     func eliminarCatalogoInstructoresApellidos(idCatalogoInstructoresApellidos: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = baseURL + "/api/CatalogoInstructoresApellidos/\(idCatalogoInstructoresApellidos)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+           let url = webService.getBaseURL() + "/api/CatalogoInstructoresApellidos/\(idCatalogoInstructoresApellidos)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            
            AF.request(url, method: .delete)
                .validate()
@@ -58,7 +58,7 @@ class CatalogoInstructoresApellidosAPIService {
        }
 
         func fetchCatalogoInstructoresApellidos(completion: @escaping (Result<[CatalogoInstructoresApellidos], Error>) -> Void) {
-            AF.request(baseURL+"/api/CatalogoInstructoresApellidos?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(webService.getBaseURL()+"/api/CatalogoInstructoresApellidos?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [CatalogoInstructoresApellidos].self) { response in
                     switch response.result {
@@ -79,7 +79,7 @@ class CatalogoInstructoresApellidosAPIService {
               
            ]
         
-           AF.request(baseURL + "/api/CatalogoInstructoresApellidos", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(webService.getBaseURL() + "/api/CatalogoInstructoresApellidos", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: CatalogoInstructoresApellidos.self) { response in
                    switch response.result {

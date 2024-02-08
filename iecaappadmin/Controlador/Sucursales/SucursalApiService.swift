@@ -12,11 +12,17 @@ import Alamofire
 
 class SucursalAPIService {
   
-    private let baseURL = "http://webservices.iecapp.com"
-        static let shared = SucursalAPIService()
+    private let webService = WebService()
+    static let shared = SucursalAPIService()
     
     func editarSucursal(sucursal: Sucursal, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = baseURL + "/api/Sucursal/\(sucursal.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = webService.getBaseURL() + "/api/Sucursal/\(sucursal.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        
+        // Obtener la fecha actual
+        let currentDate = Date()
+               
+        // Formatear la fecha actual utilizando DateFormatterManager
+        let formattedDate = DateFormatterManager.shared.format(date: currentDate)
         
         let parameters: [String: Any] = [
             "Nombre": sucursal.Nombre,
@@ -26,7 +32,7 @@ class SucursalAPIService {
             "Region": sucursal.Region,
             "Latitud": sucursal.Latitud,
             "Longitud":sucursal.Longitud,
-            "Fecha":"2024-01-30T19:06:05.675Z",
+            "Fecha": formattedDate,
             "IdRazonSocial":sucursal.IdRazonSocial,
             "IdSucursalTipo":sucursal.IdSucursalTipo
         ]
@@ -50,7 +56,7 @@ class SucursalAPIService {
 
     
     func eliminarSucursal(idSucursal: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = baseURL + "/api/Sucursal/\(idSucursal)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+           let url = webService.getBaseURL() + "/api/Sucursal/\(idSucursal)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            
            AF.request(url, method: .delete)
                .validate()
@@ -65,7 +71,7 @@ class SucursalAPIService {
        }
 
         func fetchSucursales(completion: @escaping (Result<[Sucursal], Error>) -> Void) {
-            AF.request(baseURL+"/api/Sucursal?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(webService.getBaseURL()+"/api/Sucursal?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [Sucursal].self) { response in
                     switch response.result {
@@ -92,7 +98,7 @@ class SucursalAPIService {
               
            ]
         
-           AF.request(baseURL + "/api/Sucursal", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(webService.getBaseURL() + "/api/Sucursal", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: Sucursal.self) { response in
                    switch response.result {
