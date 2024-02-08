@@ -12,25 +12,24 @@ import Alamofire
 
 class SucursalesViewModel: ObservableObject {
     
+    @Published var sucursales: [Sucursal] = []
+
+    
     func editarSucursal(sucursal: Sucursal) {
-        // Agregar lógica para enviar los cambios al servidor, actualizar datos, etc.
-        // Aquí simplemente simulamos editar la sucursal en el ViewModel para fines de demostración.
-//        if let index = sucursales.firstIndex(where: { $0.Id == sucursal.Id }) {
-//            sucursales[index] = sucursal
-//        }
+       
         
                 SucursalAPIService.shared.editarSucursal(sucursal: sucursal) { [weak self] result in
                     switch result {
                     case .success:
                         DispatchQueue.main.async {
-                            // Actualizar la sucursal en la lista
+                           
                             if let index = self?.sucursales.firstIndex(where: { $0.Id == sucursal.Id }) {
                                 self?.sucursales[index] = sucursal
                             }
                         }
                     case .failure(let error):
                         print("Error al editar la sucursal:", error)
-                        // Puedes manejar el error de alguna manera si es necesario
+                       
                     }
                 }
             
@@ -55,8 +54,7 @@ class SucursalesViewModel: ObservableObject {
        }
     
     
-    @Published var sucursales: [Sucursal] = []  // Inicializar con un array vacío
-
+  
        func fetchSucursales() {
            
            

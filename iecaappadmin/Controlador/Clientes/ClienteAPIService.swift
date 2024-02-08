@@ -9,44 +9,39 @@ import Foundation
 import Alamofire
 
 
-
 class ClienteAPIService {
   
-    private let webService = WebService()
+    private let baseURL = "http://webservices.iecapp.com"
     static let shared = ClienteAPIService()
     
     func editarCliente(cliente: Cliente, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = webService.getBaseURL() + "/api/Clientes/\(cliente.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
-        
-        // Obtener la fecha actual
-        let currentDate = Date()
-               
-        // Formatear la fecha actual utilizando DateFormatterManager
-        let formattedDate = DateFormatterManager.shared.format(date: currentDate)
+        let url = baseURL + "/api/Cliente/\(cliente.IdCliente)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
         let parameters: [String: Any] = [
+            
             "IdCliente":cliente.IdCliente,
             "IdEmpresa": cliente.IdEmpresa,
             "IdTipo": cliente.IdTipo,
             "EsPersonaFisica": cliente.EsPersonaFisica,
             "Nombre": cliente.Nombre,
-            "IdApellidoPaterno":cliente.IdApellidoPaterno,
-            "IdApellidoMaterno": cliente.IdApellidoMaterno,
-            "NombreComercial":cliente.NombreComercial,
+            "IdApellidoPaterno": cliente.IdApellidoPaterno,
+            "IdApellidoMaterno":cliente.IdApellidoMaterno,
+            "NombreComercial":"2024-01-30T19:06:05.675Z",
             "IdPropietario":cliente.IdPropietario,
             "IdCelula":cliente.IdCelula,
-            "IdSector":cliente.IdSector,
-            "IdMedioCaptacion":cliente.IdMedioCaptacion,
+            "IdSector": cliente.Latitud,
+            "IdMedioCaptacion":cliente.Longitud,
             "IdPlataforma":cliente.IdPlataforma,
             "IdSucursal":cliente.IdSucursal,
             "IdClasificacion":cliente.IdClasificacion,
-            "Fecha": formattedDate,
+            "Fecha": cliente.Fecha,
             "Status":cliente.Status,
             "Observaciones":cliente.Observaciones,
             "CodigoRegistro":cliente.CodigoRegistro,
             "Latitud":cliente.Latitud,
             "Longitud":cliente.Longitud
         ]
+        
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted),
                let jsonString = String(data: jsonData, encoding: .utf8) {
                 print("JSON a enviar:")
@@ -67,8 +62,7 @@ class ClienteAPIService {
 
     
     func eliminarCliente(idCliente: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = webService.getBaseURL() + "/api/Clientes/\(idCliente)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
-           
+           let url = baseURL + "/api/Clientes/\(idCliente)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            AF.request(url, method: .delete)
                .validate()
                .response { response in
@@ -81,49 +75,50 @@ class ClienteAPIService {
                }
        }
 
-        func fetchCliente(completion: @escaping (Result<[Cliente], Error>) -> Void) {
-            AF.request(webService.getBaseURL()+"/api/Clientes?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+        func fetchClientes(completion: @escaping (Result<[Cliente], Error>) -> Void) {
+            AF.request(baseURL+"/ObtenerClientes?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [Cliente].self) { response in
                     switch response.result {
-                    case .success(let cliente):
-                        completion(.success(cliente))
+                    case .success(let clientes):
+                        completion(.success(clientes))
                     case .failure(let error):
                         completion(.failure(error))
                     }
                 }
         }
     
-    func agregarCliente(nuevoCliente: Cliente, completion: @escaping (Result<Cliente, Error>) -> Void) {
+    func agregarCliente(cliente: Cliente, completion: @escaping (Result<Cliente, Error>) -> Void) {
            let parameters: [String: Any] = [
-            "IdCliente":nuevoCliente.IdCliente,
-            "IdEmpresa": nuevoCliente.IdEmpresa,
-            "IdTipo": nuevoCliente.IdTipo,
-            "EsPersonaFisica": nuevoCliente.EsPersonaFisica,
-            "Nombre": nuevoCliente.Nombre,
-            "IdApellidoPaterno":nuevoCliente.IdApellidoPaterno,
-            "IdApellidoMaterno": nuevoCliente.IdApellidoMaterno,
-            "NombreComercial":nuevoCliente.NombreComercial,
-            "IdPropietario":nuevoCliente.IdPropietario,
-            "IdCelula":nuevoCliente.IdCelula,
-            "IdSector":nuevoCliente.IdSector,
-            "IdMedioCaptacion":nuevoCliente.IdMedioCaptacion,
-            "IdPlataforma":nuevoCliente.IdPlataforma,
-            "IdSucursal":nuevoCliente.IdSucursal,
-            "IdClasificacion":nuevoCliente.IdClasificacion,
-            "Fecha": nuevoCliente.Fecha,
-            "Status":nuevoCliente.Status,
-            "Observaciones":nuevoCliente.Observaciones,
-            "CodigoRegistro":nuevoCliente.CodigoRegistro,
-            "Latitud":nuevoCliente.Latitud,
-            "Longitud":nuevoCliente.Longitud
+            "IdCliente":cliente.IdCliente,
+            "IdEmpresa": cliente.IdEmpresa,
+            "IdTipo": cliente.IdTipo,
+            "EsPersonaFisica": cliente.EsPersonaFisica,
+            "Nombre": cliente.Nombre,
+            "IdApellidoPaterno": cliente.IdApellidoPaterno,
+            "IdApellidoMaterno":cliente.IdApellidoMaterno,
+            "NombreComercial":"2024-01-30T19:06:05.675Z",
+            "IdPropietario":cliente.IdPropietario,
+            "IdCelula":cliente.IdCelula,
+            "IdSector": cliente.Latitud,
+            "IdMedioCaptacion":cliente.Longitud,
+            "IdPlataforma":cliente.IdPlataforma,
+            "IdSucursal":cliente.IdSucursal,
+            "IdClasificacion":cliente.IdClasificacion,
+            "Fecha": cliente.Fecha,
+            "Status":cliente.Status,
+            "Observaciones":cliente.Observaciones,
+            "CodigoRegistro":cliente.CodigoRegistro,
+            "Latitud":cliente.Latitud,
+            "Longitud":cliente.Longitud
+              
            ]
         
-           AF.request(webService.getBaseURL() + "/api/Clientes", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/Cliente", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: Cliente.self) { response in
                    switch response.result {
-                   case .success(let cliente):
+                   case .success(let curso):
                        completion(.success(cliente))
                    case .failure(let error):
                        completion(.failure(error))
