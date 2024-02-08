@@ -12,7 +12,7 @@ struct Curso: Identifiable, Codable {
     var Id: String
     var Nombre: String
     var Version: String
-    var Fecha: Date
+    var Fecha: String
     var Borrado: Bool
     var IdCampoDeFormacion: String
     var IdEspecialidad: String
@@ -34,5 +34,12 @@ struct Curso: Identifiable, Codable {
     var id: String {
         return Id
     }
+    
+    var fecha: Date? {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Define el formato de la fecha que recibes
+           
+           return dateFormatter.date(from: Fecha)
+       }
     
 }

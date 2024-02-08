@@ -25,15 +25,21 @@ struct Cliente: Identifiable, Codable {
     var IdPlataforma: String
     var IdSucursal: String
     var IdClasificacion: String
-    var Fecha: Date
+    var Fecha: String
     var Status: String
     var Observaciones: String
     var CodigoRegistro: String
     var Latitud: Decimal
     var Longitud: Decimal
-    
     var id: String {
         return Id
     }
+    
+    var fecha: Date? {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Define el formato de la fecha que recibes
+           
+           return dateFormatter.date(from: Fecha)
+       }
     
 }
