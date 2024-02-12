@@ -13,10 +13,17 @@ struct CursosDocumentacion: Identifiable, Codable {
     var IdCurso: String
     var IdEmpresa: String
     var Nombre: String
-    var Fecha: Date
+    var Fecha: String
     var LinkDocumento: String
     var Notas: String
     var Referencias: String
+    
+    var fecha: Date? {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Define el formato de la fecha que recibes
+           
+           return dateFormatter.date(from: Fecha)
+       }
   
     var id: String {
         return Id

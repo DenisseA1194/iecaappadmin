@@ -313,42 +313,42 @@ struct AgregarCursoView: View {
                     
                     
                     
-                    
-                    Picker("Campo de formación", selection: $seleccion) {
-                        ForEach(0 ..< opciones.count) {
-                            Text(opciones[$0])
-                                .tag(opciones[$0])
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Picker("Especialidad", selection: $seleccion) {
-                        ForEach(0 ..< opciones.count) {
-                            Text(opciones[$0])
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Picker("Tipo confidencialidad", selection: $seleccion) {
-                        ForEach(0 ..< opciones.count) {
-                            Text(opciones[$0])
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Picker("Modalidad:", selection: $seleccion) {
-                        ForEach(0 ..< opciones.count) {
-                            Text(opciones[$0])
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Picker("Plataforma LMS Utilizada:", selection: $seleccion) {
-                        ForEach(0 ..< opciones.count) {
-                            Text(opciones[$0])
-                        }
-                    }
-                    .pickerStyle(.menu)
+//                    
+//                    Picker("Campo de formación", selection: $seleccion) {
+//                        ForEach(0 ..< opciones.count) {
+//                            Text(opciones[$0])
+//                                .tag(opciones[$0])
+//                        }
+//                    }
+//                    .pickerStyle(.menu)
+//                    
+//                    Picker("Especialidad", selection: $seleccion) {
+//                        ForEach(0 ..< opciones.count) {
+//                            Text(opciones[$0])
+//                        }
+//                    }
+//                    .pickerStyle(.menu)
+//                    
+//                    Picker("Tipo confidencialidad", selection: $seleccion) {
+//                        ForEach(0 ..< opciones.count) {
+//                            Text(opciones[$0])
+//                        }
+//                    }
+//                    .pickerStyle(.menu)
+//                    
+//                    Picker("Modalidad:", selection: $seleccion) {
+//                        ForEach(0 ..< opciones.count) {
+//                            Text(opciones[$0])
+//                        }
+//                    }
+//                    .pickerStyle(.menu)
+//                    
+//                    Picker("Plataforma LMS Utilizada:", selection: $seleccion) {
+//                        ForEach(0 ..< opciones.count) {
+//                            Text(opciones[$0])
+//                        }
+//                    }
+//                    .pickerStyle(.menu)
                     
                     
                     Button("Agregar") {

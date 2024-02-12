@@ -9,10 +9,12 @@ import SwiftUI
 
 struct CarouselView: View {
     let items: [String]
-   
+    @StateObject var cursosActividadesViewModel = CursosActividadesViewModel()
+
     @Binding var currentIndex: Int
     @State private var nombre: String = ""
     @State private var notas: String = ""
+    @State private var observaciones: String = ""
     @State private var mostrarBloque = false
     @State private var nombreSeleccionado = ""
  
@@ -23,22 +25,10 @@ struct CarouselView: View {
         
         if mostrarBloque {
             VStack{
-                TextField("Nombre",text: $nombre)
-                TextField("Notas",text: $notas)
-                Button(action: {
-                    // Acción que se ejecutará cuando se presione el botón
-                    // Aquí puedes agregar la lógica para agregar algo
-                    print("Botón Agregar presionado")
-                }) {
-                    
-                    Text("Agregar " + nombreSeleccionado)
-                        .font(.headline)
-                        .padding(8)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                    
-                }
+                
+                CursosActividadesView(cursosActividadesViewModel: cursosActividadesViewModel,selectedCurso: selectedCurso)
+
+             
             }
             Text(" ")
             

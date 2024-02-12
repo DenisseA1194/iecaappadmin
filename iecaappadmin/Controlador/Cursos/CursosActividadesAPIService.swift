@@ -93,7 +93,13 @@ class CursosActividadesAPIService {
             "Link": nuevoCursosActividades.Link
            ]
         
-           AF.request(webService.getBaseURL() + "/api/CursosActividades", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+        if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON a enviar:")
+                print(jsonString)
+            }
+        
+           AF.request(webService.getBaseURL() + "/InsertarCursosActividades", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: CursosActividades.self) { response in
                    switch response.result {
