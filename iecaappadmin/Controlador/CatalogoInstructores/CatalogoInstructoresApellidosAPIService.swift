@@ -16,10 +16,16 @@ class CatalogoInstructoresApellidosAPIService {
     func editarCatalogoInstructoresApellidos(catalogoInstructoresApellidos: CatalogoInstructoresApellidos, completion: @escaping (Result<Void, Error>) -> Void) {
         let url = webService.getBaseURL() + "/api/CatalogoInstructoresApellidos/\(catalogoInstructoresApellidos.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
+        // Obtener la fecha actual
+        let currentDate = Date()
+               
+        // Formatear la fecha actual utilizando DateFormatterManager
+        let formattedDate = DateFormatterManager.shared.format(date: currentDate)
+        
         let parameters: [String: Any] = [
             "Apellido": catalogoInstructoresApellidos.Apellido,
-            "IdEmpresa":catalogoInstructoresApellidos.IdEmpresa,
-            "Fecha":"2024-01-30T19:06:05.675Z",
+            "Fecha": formattedDate,
+            "IdEmpresa":catalogoInstructoresApellidos.IdEmpresa
             
          
         ]
@@ -62,8 +68,8 @@ class CatalogoInstructoresApellidosAPIService {
                 .validate()
                 .responseDecodable(of: [CatalogoInstructoresApellidos].self) { response in
                     switch response.result {
-                    case .success(let sucursales):
-                        completion(.success(sucursales))
+                    case .success(let catalogoInstructoresApellidos):
+                        completion(.success(catalogoInstructoresApellidos))
                     case .failure(let error):
                         completion(.failure(error))
                     }
@@ -73,8 +79,8 @@ class CatalogoInstructoresApellidosAPIService {
     func agregarCatalogoInstructoresApellidos(nuevoCatalogoInstructoresApellidos: CatalogoInstructoresApellidos, completion: @escaping (Result<CatalogoInstructoresApellidos, Error>) -> Void) {
            let parameters: [String: Any] = [
                "Apellido": nuevoCatalogoInstructoresApellidos.Apellido,
-               "IdEmpresa":nuevoCatalogoInstructoresApellidos.IdEmpresa,
-               "Fecha":nuevoCatalogoInstructoresApellidos.Fecha
+               "Fecha":nuevoCatalogoInstructoresApellidos.Fecha,
+               "IdEmpresa":nuevoCatalogoInstructoresApellidos.IdEmpresa
              
               
            ]
@@ -83,8 +89,8 @@ class CatalogoInstructoresApellidosAPIService {
                .validate()
                .responseDecodable(of: CatalogoInstructoresApellidos.self) { response in
                    switch response.result {
-                   case .success(let sucursal):
-                       completion(.success(sucursal))
+                   case .success(let catalogoInstructoresApellidos):
+                       completion(.success(catalogoInstructoresApellidos))
                    case .failure(let error):
                        completion(.failure(error))
                    }

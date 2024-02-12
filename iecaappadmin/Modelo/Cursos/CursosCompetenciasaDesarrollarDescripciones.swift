@@ -16,6 +16,7 @@ struct CursosCompetenciasaDesarrollarDescripciones: Identifiable, Codable {
     var IdCursosCompetenciasaDesarrollar: String
     var Notas: String
     var Observaciones: String
+    var Borrado: Bool
     
     var id: String {
         return Id

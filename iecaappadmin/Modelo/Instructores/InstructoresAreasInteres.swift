@@ -35,6 +35,7 @@ struct InstructoresAreaInteres: Identifiable, Codable {
     var DomingoTermina: TimeInterval
     var Nota: String
     var IdEmpresa: String
+    var Borrado: Bool
 
     var id: String {
         return Id

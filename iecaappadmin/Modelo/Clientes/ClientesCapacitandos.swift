@@ -44,6 +44,7 @@ struct ClientesCapacitandos: Identifiable, Codable {
     var FechaIngreso: Date
     var FotoLink: String
     var UuidFirebase: String
+    var Borrado: Bool
     
     var id: String {
         return Id

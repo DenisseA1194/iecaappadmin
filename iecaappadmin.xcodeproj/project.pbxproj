@@ -14,7 +14,6 @@
 		07B827F22B72C55000507E1A /* ClientesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827F12B72C55000507E1A /* ClientesView.swift */; };
 		07B827F42B72DAE400507E1A /* ClienteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827F32B72DAE400507E1A /* ClienteViewModel.swift */; };
 		07B827F62B73E79300507E1A /* CatalogoClientesCelulasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827F52B73E79300507E1A /* CatalogoClientesCelulasViewModel.swift */; };
-		07B827F82B73E80900507E1A /* CatalogoClientesCelulasAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827F72B73E80900507E1A /* CatalogoClientesCelulasAPIService.swift */; };
 		07B827FA2B73F6D800507E1A /* CursosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827F92B73F6D800507E1A /* CursosView.swift */; };
 		07B827FC2B73FC2200507E1A /* CursosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827FB2B73FC2200507E1A /* CursosViewModel.swift */; };
 		07B827FE2B755A5500507E1A /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827FD2B755A5500507E1A /* CarouselView.swift */; };
@@ -262,7 +261,6 @@
 		07B827F12B72C55000507E1A /* ClientesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClientesView.swift; path = iecaappadmin/Vista/Sucursales/ClientesView.swift; sourceTree = SOURCE_ROOT; };
 		07B827F32B72DAE400507E1A /* ClienteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClienteViewModel.swift; sourceTree = "<group>"; };
 		07B827F52B73E79300507E1A /* CatalogoClientesCelulasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogoClientesCelulasViewModel.swift; sourceTree = "<group>"; };
-		07B827F72B73E80900507E1A /* CatalogoClientesCelulasAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatalogoClientesCelulasAPIService.swift; path = iecaappadmin/Modelo/CatalogoClientes/CatalogoClientesCelulasAPIService.swift; sourceTree = SOURCE_ROOT; };
 		07B827F92B73F6D800507E1A /* CursosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CursosView.swift; path = iecaappadmin/Modelo/CatalogoClientes/CursosView.swift; sourceTree = SOURCE_ROOT; };
 		07B827FB2B73FC2200507E1A /* CursosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosViewModel.swift; sourceTree = "<group>"; };
 		07B827FD2B755A5500507E1A /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CarouselView.swift; path = iecaappadmin/Modelo/Cursos/CarouselView.swift; sourceTree = SOURCE_ROOT; };
@@ -683,6 +681,7 @@
 			isa = PBXGroup;
 			children = (
 				4B1E08132B6C0D4400BFDB45 /* Cliente.swift */,
+				07B827F32B72DAE400507E1A /* ClienteViewModel.swift */,
 				4B1E07E52B6BF1BB00BFDB45 /* ClientesCapacitandos.swift */,
 				4B1E07E72B6BF1D100BFDB45 /* ClientesContactos.swift */,
 				4B1E07E92B6BF1DE00BFDB45 /* ClientesContratos.swift */,
@@ -696,7 +695,6 @@
 				4B1E07F92B6BF25D00BFDB45 /* ClientesRedesSociales.swift */,
 				4B1E07FB2B6BF27900BFDB45 /* ClientesTelefonos.swift */,
 				4B1E07FD2B6BF29100BFDB45 /* ClientesTipoContacto.swift */,
-				07B827F32B72DAE400507E1A /* ClienteViewModel.swift */,
 			);
 			path = Clientes;
 			sourceTree = "<group>";
@@ -964,6 +962,13 @@
 			path = Utilidades;
 			sourceTree = "<group>";
 		};
+		4B1E08F02B756AE300BFDB45 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		4B5E7ABF2B572EB1008095FC = {
 			isa = PBXGroup;
 			children = (
@@ -971,7 +976,7 @@
 				4B5E7ADB2B572EB2008095FC /* iecaappadminTests */,
 				4B5E7AE52B572EB2008095FC /* iecaappadminUITests */,
 				4B5E7AC92B572EB1008095FC /* Products */,
-				07B827FF2B75698B00507E1A /* Recovered References */,
+				4B1E08F02B756AE300BFDB45 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1284,7 +1289,6 @@
 				4B1E082E2B6D90E300BFDB45 /* CatalogoInstructoresCursosAPIService.swift in Sources */,
 				4B1E086F2B6D977200BFDB45 /* InstructoresRedesSocialesAPIService.swift in Sources */,
 				4B1E07C12B6BF04E00BFDB45 /* CatalogoClientesPuestos.swift in Sources */,
-				07B827F82B73E80900507E1A /* CatalogoClientesCelulasAPIService.swift in Sources */,
 				4B1E07972B6BEE9F00BFDB45 /* InstructoresExperiencia.swift in Sources */,
 				4B1E084A2B6D94A200BFDB45 /* CatalogoInstructoresTiposDocumentosAPIService.swift in Sources */,
 				4B1E08712B6D977E00BFDB45 /* InstructoresSeguroMedicoAPIService.swift in Sources */,

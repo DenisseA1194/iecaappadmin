@@ -21,6 +21,7 @@ struct ClientesDatosCredito: Identifiable, Codable {
     var TasaInteres: Decimal
     var NumeroDePagos: Int
     var Modalidad: String
+    var Borrado: Bool
   
     
     var id: String {

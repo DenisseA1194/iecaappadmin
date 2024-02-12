@@ -25,6 +25,7 @@ struct InstructoresContratos: Identifiable, Codable {
     var Descripcion: String
     var LinkDocumento: String
     var IdTipoContrato: String
+    var Borrado: Bool
  
     var id: String {
         return Id

@@ -17,6 +17,7 @@ struct CursosTemas: Identifiable, Codable {
     var IdCurso: String
     var IdTema: String
     var Horas: Int
+    var Borrado: Bool
     
     var id: String {
         return Id

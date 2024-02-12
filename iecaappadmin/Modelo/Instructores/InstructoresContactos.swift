@@ -22,6 +22,7 @@ struct InstructoresContactos: Identifiable, Codable {
     var Notas: String
     var Direccion: String
     var FechaAlta: Date
+    var Borrado: Bool
  
     var id: String {
         return Id

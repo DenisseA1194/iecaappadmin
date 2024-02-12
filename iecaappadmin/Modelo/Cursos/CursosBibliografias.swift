@@ -27,6 +27,7 @@ struct CursosBiografias: Identifiable, Codable {
            
            return dateFormatter.date(from: Fecha)
        }
+    var Borrado: Bool
   
     var id: String {
         return Id

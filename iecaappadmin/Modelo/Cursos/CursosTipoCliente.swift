@@ -17,6 +17,7 @@ struct CursosTipoCliente: Identifiable, Codable {
     var Status: String
     var Fecha: Date
     var IdEmpresa: String
+    var Borrado: Bool
     
     var id: String {
         return Id

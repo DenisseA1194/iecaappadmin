@@ -18,6 +18,7 @@ struct CursosEvaluaciones: Identifiable, Codable {
     var Observaciones: String
     var Notas: String
     var Link: String
+    var Borrado: Bool
     
     var id: String {
         return Id
