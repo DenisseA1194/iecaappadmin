@@ -18,6 +18,7 @@ struct CursosCreadores: Identifiable, Codable {
     var LinkDocs: String
     var Fecha: Date
     var IdEmpresa: String
+    var Borrado: Bool
   
     var id: String {
         return Id

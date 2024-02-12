@@ -18,6 +18,7 @@ struct CursosActividades: Identifiable, Codable {
     var IdCurso: String
     var IdActividad: String
     var Link: String
+    var Borrado: Bool
 
     var id: String {
         return Id

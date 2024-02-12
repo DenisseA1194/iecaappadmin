@@ -30,6 +30,7 @@ struct InstructoresExperiencia: Identifiable, Codable {
     var Funciones: String
     var MotivoSalida: String
     var Notas: String
+    var Borrado: Bool
     
     var id: String {
         return Id

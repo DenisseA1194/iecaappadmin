@@ -22,6 +22,7 @@ struct CursosInstructores: Identifiable, Codable {
     var Status: String
     var FechaInicio: Date
     var FechaFinaliza: Date
+    var Borrado: Bool
     
     var id: String {
         return Id

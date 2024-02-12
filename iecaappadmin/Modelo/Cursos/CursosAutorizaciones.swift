@@ -22,6 +22,7 @@ struct CursosAutorizaciones: Identifiable, Codable {
     var Observaciones: String
     var Fecha: Date
     var IdEmpresa: String
+    var Borrado: Bool
 
     var id: String {
         return Id

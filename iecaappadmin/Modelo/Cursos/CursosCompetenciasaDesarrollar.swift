@@ -13,6 +13,7 @@ struct CursosCompetenciasaDesarrollar: Identifiable, Codable {
     var Nombre: String
     var Fecha: Date
     var IdEmpresa: String
+    var Borrado: Bool
   
     var id: String {
         return Id

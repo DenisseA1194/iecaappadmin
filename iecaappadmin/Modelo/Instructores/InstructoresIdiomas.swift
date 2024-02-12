@@ -20,6 +20,7 @@ struct InstructoresIdiomas: Identifiable, Codable {
     var NivelDeCompetencia: String
     var IdInstructor: String
     var IdEmpresa: String
+    var Borrado: Bool
  
     var id: String {
         return Id

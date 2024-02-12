@@ -23,6 +23,7 @@ struct InstructoresFormacionCursos: Identifiable, Codable {
     var IdCursoObtenido: String
     var Notas: String
     var IdAreaInteres: String
+    var Borrado: Bool
  
     var id: String {
         return Id

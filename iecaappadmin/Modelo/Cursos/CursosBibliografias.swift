@@ -20,6 +20,7 @@ struct CursosBiografias: Identifiable, Codable {
     var IdEmpresa: String
     var Link: String
     var IdTipoBibliografia: String
+    var Borrado: Bool
   
     var id: String {
         return Id

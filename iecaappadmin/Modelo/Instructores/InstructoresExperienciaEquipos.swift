@@ -16,6 +16,7 @@ struct InstructoresExperienciaEquipo: Identifiable, Codable {
     var Notas: String
     var Experiencia: String
     var IdEquipoHerramienta: String
+    var Borrado: Bool
  
     var id: String {
         return Id

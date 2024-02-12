@@ -15,6 +15,7 @@ struct InstructoresRedesSociales: Identifiable, Codable {
     var FechaAlta: Date
     var Notas: String
     var IdRedSocial: String
+    var Borrado: Bool
  
     var id: String {
         return Id

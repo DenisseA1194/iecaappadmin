@@ -17,6 +17,7 @@ struct CursosDocumentacion: Identifiable, Codable {
     var LinkDocumento: String
     var Notas: String
     var Referencias: String
+    var Borrado: Bool
   
     var id: String {
         return Id

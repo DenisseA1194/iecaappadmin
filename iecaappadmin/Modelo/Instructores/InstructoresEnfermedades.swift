@@ -16,6 +16,7 @@ struct InstructoresEnfermedades: Identifiable, Codable {
     var IdEnfermedad: String
     var FechaDeteccion: Date
     var Notas: String
+    var Borrado: Bool
  
     var id: String {
         return Id

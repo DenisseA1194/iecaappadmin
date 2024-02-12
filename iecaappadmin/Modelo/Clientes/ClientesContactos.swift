@@ -20,6 +20,7 @@ struct ClientesContactos: Identifiable, Codable {
     var Correo: String
     var Notas: String
     var FechaAlta: Date
+    var Borrado: Bool
  
     
     var id: String {

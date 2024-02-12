@@ -24,6 +24,7 @@ struct ClientesDomicilios: Identifiable, Codable {
     var IdEmpresa: String
     var Activo: Bool
     var Notas: String
+    var Borrado: Bool
 
     
     var id: String {

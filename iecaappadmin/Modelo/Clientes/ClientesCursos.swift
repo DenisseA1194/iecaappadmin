@@ -25,6 +25,7 @@ struct ClientesCursos: Identifiable, Codable {
     var IdModalidad: String
     var IdSucursal: String
     var IdCurso: String
+    var Borrado: Bool
     
     var id: String {
         return Id
