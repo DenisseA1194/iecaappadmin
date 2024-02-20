@@ -23,6 +23,23 @@
 		07B828082B79503C00507E1A /* CursosBibliografiaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828072B79503C00507E1A /* CursosBibliografiaViewModel.swift */; };
 		07B8280A2B7968E600507E1A /* CursosDocumentacionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828092B7968E600507E1A /* CursosDocumentacionView.swift */; };
 		07B8280C2B79823400507E1A /* CursosDocumentacionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8280B2B79823400507E1A /* CursosDocumentacionViewModel.swift */; };
+		07B8280F2B7A7A8100507E1A /* SlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8280E2B7A7A8100507E1A /* SlideMenu.swift */; };
+		07B828112B7ACA9900507E1A /* CatalogoCursosCampoDeFormacionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828102B7ACA9900507E1A /* CatalogoCursosCampoDeFormacionViewModel.swift */; };
+		07B828132B7AD1DF00507E1A /* CatalogoCursosEspecialidadesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828122B7AD1DF00507E1A /* CatalogoCursosEspecialidadesViewModel.swift */; };
+		07B828152B7AD37F00507E1A /* CatalogoCursosTipoConfidencialidadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828142B7AD37F00507E1A /* CatalogoCursosTipoConfidencialidadViewModel.swift */; };
+		07B828172B7AD45E00507E1A /* CatalogoCursosModalidadesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828162B7AD45E00507E1A /* CatalogoCursosModalidadesViewModel.swift */; };
+		07B828192B7BD65A00507E1A /* CatalogoCursosPlataformasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828182B7BD65A00507E1A /* CatalogoCursosPlataformasViewModel.swift */; };
+		07B8281F2B7E995200507E1A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 07B8281E2B7E995200507E1A /* FirebaseAuth */; };
+		07B828212B7E995200507E1A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 07B828202B7E995200507E1A /* FirebaseDatabase */; };
+		07B828232B7E995200507E1A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 07B828222B7E995200507E1A /* FirebaseFirestore */; };
+		07B828252B7E995200507E1A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 07B828242B7E995200507E1A /* FirebaseStorage */; };
+		07B828272B7E995200507E1A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 07B828262B7E995200507E1A /* FirebaseStorageCombine-Community */; };
+		07B8282A2B7E9EEA00507E1A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 07B828292B7E9EEA00507E1A /* GoogleSignIn */; };
+		07B8282C2B7E9EEA00507E1A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 07B8282B2B7E9EEA00507E1A /* GoogleSignInSwift */; };
+		07B8282E2B7EA08000507E1A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8282D2B7EA08000507E1A /* Utilities.swift */; };
+		07B828302B7EA56B00507E1A /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8282F2B7EA56B00507E1A /* AuthenticationManager.swift */; };
+		07B828322B7EB89900507E1A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07B828312B7EB89900507E1A /* GoogleService-Info.plist */; };
+		07B828342B80198800507E1A /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828332B80198800507E1A /* CustomAlert.swift */; };
 		4B1E07392B6AF4F500BFDB45 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */; };
 		4B1E073B2B6AF51600BFDB45 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */; };
 		4B1E073F2B6AF54900BFDB45 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E073E2B6AF54900BFDB45 /* InputView.swift */; };
@@ -270,6 +287,17 @@
 		07B828072B79503C00507E1A /* CursosBibliografiaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosBibliografiaViewModel.swift; sourceTree = "<group>"; };
 		07B828092B7968E600507E1A /* CursosDocumentacionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosDocumentacionView.swift; sourceTree = "<group>"; };
 		07B8280B2B79823400507E1A /* CursosDocumentacionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursosDocumentacionViewModel.swift; sourceTree = "<group>"; };
+		07B8280E2B7A7A8100507E1A /* SlideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenu.swift; sourceTree = "<group>"; };
+		07B828102B7ACA9900507E1A /* CatalogoCursosCampoDeFormacionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogoCursosCampoDeFormacionViewModel.swift; sourceTree = "<group>"; };
+		07B828122B7AD1DF00507E1A /* CatalogoCursosEspecialidadesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogoCursosEspecialidadesViewModel.swift; sourceTree = "<group>"; };
+		07B828142B7AD37F00507E1A /* CatalogoCursosTipoConfidencialidadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogoCursosTipoConfidencialidadViewModel.swift; sourceTree = "<group>"; };
+		07B828162B7AD45E00507E1A /* CatalogoCursosModalidadesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogoCursosModalidadesViewModel.swift; sourceTree = "<group>"; };
+		07B828182B7BD65A00507E1A /* CatalogoCursosPlataformasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogoCursosPlataformasViewModel.swift; sourceTree = "<group>"; };
+		07B8281C2B7E8B4500507E1A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07B8282D2B7EA08000507E1A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		07B8282F2B7EA56B00507E1A /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		07B828312B7EB89900507E1A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07B828332B80198800507E1A /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		4B1E073E2B6AF54900BFDB45 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -489,7 +517,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B828212B7E995200507E1A /* FirebaseDatabase in Frameworks */,
+				07B828232B7E995200507E1A /* FirebaseFirestore in Frameworks */,
 				4B1E08252B6D6CDA00BFDB45 /* Alamofire in Frameworks */,
+				07B8282C2B7E9EEA00507E1A /* GoogleSignInSwift in Frameworks */,
+				07B828252B7E995200507E1A /* FirebaseStorage in Frameworks */,
+				07B828272B7E995200507E1A /* FirebaseStorageCombine-Community in Frameworks */,
+				07B8281F2B7E995200507E1A /* FirebaseAuth in Frameworks */,
+				07B8282A2B7E9EEA00507E1A /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,14 +570,6 @@
 			path = Sucursales;
 			sourceTree = "<group>";
 		};
-		07B827FF2B75698B00507E1A /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				07B827F72B73E80900507E1A /* CatalogoClientesCelulasAPIService.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		07B828022B757E7A00507E1A /* Cursos */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +580,14 @@
 			path = Cursos;
 			sourceTree = "<group>";
 		};
+		07B8280D2B7A791E00507E1A /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				07B8280E2B7A7A8100507E1A /* SlideMenu.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		4B1E07342B6AF41500BFDB45 /* Componentes */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +595,7 @@
 				4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */,
 				4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */,
 				4B1E073E2B6AF54900BFDB45 /* InputView.swift */,
+				07B828332B80198800507E1A /* CustomAlert.swift */,
 			);
 			path = Componentes;
 			sourceTree = "<group>";
@@ -567,6 +603,7 @@
 		4B1E07352B6AF42300BFDB45 /* Vista */ = {
 			isa = PBXGroup;
 			children = (
+				07B8280D2B7A791E00507E1A /* Menu */,
 				07B827EB2B72ABBC00507E1A /* Sucursales */,
 				4B1E074A2B6AF79600BFDB45 /* Instructores */,
 				4B1E074B2B6AF7A200BFDB45 /* Clientes */,
@@ -799,16 +836,21 @@
 				4B1E07CA2B6BF0C200BFDB45 /* CatalogoCursosActividades.swift */,
 				4B1E07CC2B6BF0DC00BFDB45 /* CatalogoCursosAreas.swift */,
 				4B1E07CE2B6BF0EC00BFDB45 /* CatalogoCursosCampoDeFormacion.swift */,
+				07B828102B7ACA9900507E1A /* CatalogoCursosCampoDeFormacionViewModel.swift */,
 				4B1E07D02B6BF0F900BFDB45 /* CatalogoCursosEquipos.swift */,
 				4B1E07D22B6BF11900BFDB45 /* CatalogoCursosEspecialidades.swift */,
+				07B828122B7AD1DF00507E1A /* CatalogoCursosEspecialidadesViewModel.swift */,
 				4B1E07D42B6BF12D00BFDB45 /* CatalogoCursosInstrumentosEvaluacion.swift */,
 				4B1E07D62B6BF13D00BFDB45 /* CatalogoCursosMateriales.swift */,
 				4B1E07D82B6BF14C00BFDB45 /* CatalogoCursosModalidades.swift */,
+				07B828162B7AD45E00507E1A /* CatalogoCursosModalidadesViewModel.swift */,
 				4B1E07DA2B6BF15A00BFDB45 /* CatalogoCursosPlataformas.swift */,
+				07B828182B7BD65A00507E1A /* CatalogoCursosPlataformasViewModel.swift */,
 				4B1E07DC2B6BF16800BFDB45 /* CatalogoCursosProgramas.swift */,
 				4B1E07DF2B6BF17E00BFDB45 /* CatalogoCursosTemas.swift */,
 				4B1E07E12B6BF18E00BFDB45 /* CatalogoCursosTipoBibliografia.swift */,
 				4B1E07E32B6BF19E00BFDB45 /* CatalogoCursosTipoConfidencialidad.swift */,
+				07B828142B7AD37F00507E1A /* CatalogoCursosTipoConfidencialidadViewModel.swift */,
 			);
 			path = CatalogoCursos;
 			sourceTree = "<group>";
@@ -958,6 +1000,8 @@
 			children = (
 				4B1E089E2B72A12C00BFDB45 /* WebService.swift */,
 				4B1E08EE2B72C02700BFDB45 /* DateFormatterManager.swift */,
+				07B8282D2B7EA08000507E1A /* Utilities.swift */,
+				07B8282F2B7EA56B00507E1A /* AuthenticationManager.swift */,
 			);
 			path = Utilidades;
 			sourceTree = "<group>";
@@ -994,6 +1038,8 @@
 			isa = PBXGroup;
 			children = (
 				07B827EE2B72C14C00507E1A /* Info.plist */,
+				07B8281C2B7E8B4500507E1A /* GoogleService-Info.plist */,
+				07B828312B7EB89900507E1A /* GoogleService-Info.plist */,
 				4B1E07372B6AF43B00BFDB45 /* Modelo */,
 				4B1E07352B6AF42300BFDB45 /* Vista */,
 				4B1E07362B6AF42C00BFDB45 /* Controlador */,
@@ -1051,6 +1097,13 @@
 			name = iecaappadmin;
 			packageProductDependencies = (
 				4B1E08242B6D6CDA00BFDB45 /* Alamofire */,
+				07B8281E2B7E995200507E1A /* FirebaseAuth */,
+				07B828202B7E995200507E1A /* FirebaseDatabase */,
+				07B828222B7E995200507E1A /* FirebaseFirestore */,
+				07B828242B7E995200507E1A /* FirebaseStorage */,
+				07B828262B7E995200507E1A /* FirebaseStorageCombine-Community */,
+				07B828292B7E9EEA00507E1A /* GoogleSignIn */,
+				07B8282B2B7E9EEA00507E1A /* GoogleSignInSwift */,
 			);
 			productName = iecaappadmin;
 			productReference = 4B5E7AC82B572EB1008095FC /* iecaappadmin.app */;
@@ -1126,6 +1179,8 @@
 			mainGroup = 4B5E7ABF2B572EB1008095FC;
 			packageReferences = (
 				4B1E08232B6D6CDA00BFDB45 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				07B828282B7E9EEA00507E1A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 4B5E7AC92B572EB1008095FC /* Products */;
 			projectDirPath = "";
@@ -1145,6 +1200,7 @@
 			files = (
 				4B5E7AD32B572EB2008095FC /* Preview Assets.xcassets in Resources */,
 				4B5E7AD02B572EB2008095FC /* Assets.xcassets in Resources */,
+				07B828322B7EB89900507E1A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +1243,7 @@
 				4B1E08E32B72B4F000BFDB45 /* CatalogoCursosModalidadesAPIService.swift in Sources */,
 				4B1E07D72B6BF13D00BFDB45 /* CatalogoCursosMateriales.swift in Sources */,
 				4B1E07B32B6BEFAD00BFDB45 /* CatalogoClientesDepartamentos.swift in Sources */,
+				07B8280F2B7A7A8100507E1A /* SlideMenu.swift in Sources */,
 				4B1E08D52B72B45D00BFDB45 /* CatalogoCursosActividadesAPIService.swift in Sources */,
 				4B1E080A2B6BF2FD00BFDB45 /* CursosCompetenciasaDesarrollarDescripciones.swift in Sources */,
 				07B8280C2B79823400507E1A /* CursosDocumentacionViewModel.swift in Sources */,
@@ -1197,6 +1254,7 @@
 				4B1E083A2B6D93F600BFDB45 /* CatalogoInstructoresIdiomasAPIService.swift in Sources */,
 				4B1E08952B72856800BFDB45 /* CursosActividadesAPIService.swift in Sources */,
 				4B5E7ACE2B572EB1008095FC /* ContentView.swift in Sources */,
+				07B828342B80198800507E1A /* CustomAlert.swift in Sources */,
 				4B1E08DB2B72B48800BFDB45 /* CatalogoCursosEquiposAPIService.swift in Sources */,
 				4B1E08BD2B72B2A000BFDB45 /* CatalogoClientesDepartamentosAPIService.swift in Sources */,
 				4B1E07732B6BED3A00BFDB45 /* CatalogoInstructoresInstituciones.swift in Sources */,
@@ -1214,6 +1272,7 @@
 				4B1E084E2B6D96BB00BFDB45 /* InstructoresAreaInteresAPIService.swift in Sources */,
 				4B1E08542B6D96DA00BFDB45 /* InstructoresCuentasBancariasAPIService.swift in Sources */,
 				07B827FE2B755A5500507E1A /* CarouselView.swift in Sources */,
+				07B828152B7AD37F00507E1A /* CatalogoCursosTipoConfidencialidadViewModel.swift in Sources */,
 				4B1E08482B6D948800BFDB45 /* CatalogoInstructoresTiposDeSangreAPIService.swift in Sources */,
 				4B1E08562B6D96E700BFDB45 /* InstructoresDatosFiscalesAPIService.swift in Sources */,
 				4B1E087D2B6D9C4000BFDB45 /* ClientesContratosAPIService.swift in Sources */,
@@ -1231,6 +1290,7 @@
 				4B1E07BF2B6BF04200BFDB45 /* CatalogoClientesProfesiones.swift in Sources */,
 				4B1E08B32B72A38000BFDB45 /* CursosTipoClienteAPIService.swift in Sources */,
 				07B8280A2B7968E600507E1A /* CursosDocumentacionView.swift in Sources */,
+				07B828132B7AD1DF00507E1A /* CatalogoCursosEspecialidadesViewModel.swift in Sources */,
 				4B1E08422B6D945600BFDB45 /* CatalogoInstructoresTipoAPIService.swift in Sources */,
 				4B1E08D32B72B36000BFDB45 /* CatalogoClientesTipoDocumentoAPIService.swift in Sources */,
 				4B1E07652B6BEAA600BFDB45 /* CatalogoInstructoresCursos.swift in Sources */,
@@ -1249,6 +1309,7 @@
 				4B1E07872B6BEE0500BFDB45 /* InstructoresContactos.swift in Sources */,
 				4B1E089D2B7285AE00BFDB45 /* CursosCompetenciasaDesarrollarAPIService.swift in Sources */,
 				4B1E08832B6D9C7000BFDB45 /* ClientesDatosFicalesAPIService.swift in Sources */,
+				07B828172B7AD45E00507E1A /* CatalogoCursosModalidadesViewModel.swift in Sources */,
 				4B1E088D2B6D9CBC00BFDB45 /* ClientesRedesSocialesAPIService.swift in Sources */,
 				4B1E07C52B6BF08900BFDB45 /* CatalogoClientesSectores.swift in Sources */,
 				4B1E073F2B6AF54900BFDB45 /* InputView.swift in Sources */,
@@ -1274,6 +1335,7 @@
 				4B1E07F82B6BF24D00BFDB45 /* ClientesProspeccion.swift in Sources */,
 				4B1E07F22B6BF21700BFDB45 /* ClientesDocumentacion.swift in Sources */,
 				4B1E08A32B72A25200BFDB45 /* CursosCompetenciasaDesarrollarDescripcionesAPIService.swift in Sources */,
+				07B828112B7ACA9900507E1A /* CatalogoCursosCampoDeFormacionViewModel.swift in Sources */,
 				4B1E07C72B6BF09700BFDB45 /* CatalogoClientesTipo.swift in Sources */,
 				4B1E08732B6D978900BFDB45 /* InstructoresTipoAPIService.swift in Sources */,
 				4B1E07AD2B6BEF6800BFDB45 /* CatalogoClientesApellidos.swift in Sources */,
@@ -1288,6 +1350,7 @@
 				4B1E07812B6BEDB600BFDB45 /* CatalogoInstructoresTiposDocumentos.swift in Sources */,
 				4B1E082E2B6D90E300BFDB45 /* CatalogoInstructoresCursosAPIService.swift in Sources */,
 				4B1E086F2B6D977200BFDB45 /* InstructoresRedesSocialesAPIService.swift in Sources */,
+				07B8282E2B7EA08000507E1A /* Utilities.swift in Sources */,
 				4B1E07C12B6BF04E00BFDB45 /* CatalogoClientesPuestos.swift in Sources */,
 				4B1E07972B6BEE9F00BFDB45 /* InstructoresExperiencia.swift in Sources */,
 				4B1E084A2B6D94A200BFDB45 /* CatalogoInstructoresTiposDocumentosAPIService.swift in Sources */,
@@ -1336,6 +1399,7 @@
 				4B1E079F2B6BEEE100BFDB45 /* InstructoresIdiomas.swift in Sources */,
 				4B1E08C72B72B30700BFDB45 /* CatalogoClientesOcupacionesAPIService.swift in Sources */,
 				07B828082B79503C00507E1A /* CursosBibliografiaViewModel.swift in Sources */,
+				07B828192B7BD65A00507E1A /* CatalogoCursosPlataformasViewModel.swift in Sources */,
 				4B1E08872B6D9C8E00BFDB45 /* ClientesDomiciliosAPIService.swift in Sources */,
 				07B827FA2B73F6D800507E1A /* CursosView.swift in Sources */,
 				4B1E08522B6D96CF00BFDB45 /* InstructoresContratosAPIService.swift in Sources */,
@@ -1375,6 +1439,7 @@
 				4B1E073B2B6AF51600BFDB45 /* CheckBoxView.swift in Sources */,
 				4B1E08CD2B72B33000BFDB45 /* CatalogoClientesRegimenFiscalAPIService.swift in Sources */,
 				4B1E08912B6D9CE000BFDB45 /* ClientesTipoContactoAPIService.swift in Sources */,
+				07B828302B7EA56B00507E1A /* AuthenticationManager.swift in Sources */,
 				4B1E086D2B6D976900BFDB45 /* InstructoresPerfilAPIService.swift in Sources */,
 				4B1E07A32B6BEEFF00BFDB45 /* InstructoresRedesSociales.swift in Sources */,
 				4B1E087B2B6D9C2F00BFDB45 /* ClientesContactosAPIService.swift in Sources */,
@@ -1716,6 +1781,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.0;
+			};
+		};
+		07B828282B7E9EEA00507E1A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		4B1E08232B6D6CDA00BFDB45 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1727,6 +1808,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		07B8281E2B7E995200507E1A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		07B828202B7E995200507E1A /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		07B828222B7E995200507E1A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		07B828242B7E995200507E1A /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		07B828262B7E995200507E1A /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B8281D2B7E995200507E1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+		07B828292B7E9EEA00507E1A /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B828282B7E9EEA00507E1A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		07B8282B2B7E9EEA00507E1A /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07B828282B7E9EEA00507E1A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		4B1E08242B6D6CDA00BFDB45 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4B1E08232B6D6CDA00BFDB45 /* XCRemoteSwiftPackageReference "Alamofire" */;

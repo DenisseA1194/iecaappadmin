@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 struct CursosView: View {
-    
+    @Binding var presentSideMenu: Bool
     enum SortingOption: String, CaseIterable {
         case nombre = "Nombre"
         case objetivoGeneral = "ObjetivoGeneral"
@@ -21,7 +21,6 @@ struct CursosView: View {
             }
         }
     }
-    
     
     @StateObject private var viewModel = CursosViewModel()
     @Binding var showSignInView: Bool
@@ -49,6 +48,20 @@ struct CursosView: View {
     
     var body: some View {
         VStack{
+            
+            HStack {
+                
+                Button(action: {
+                    presentSideMenu.toggle()
+                }) {
+                    Image("hamburguesa")
+                        .foregroundColor(.blue)
+                        .imageScale(.large)
+                }
+                .padding()
+                Spacer()
+            }
+            
             NavigationView {
                 List {
                     SearchBar(searchText: $searchText)
@@ -57,8 +70,8 @@ struct CursosView: View {
                             // Asignar el curso seleccionado a una variable de estado en CursosView
                             self.selectedCurso = selectedCurso
                         })
-                            .listRowSeparator(.visible)
-                            .padding(.horizontal, 16)
+                        .listRowSeparator(.visible)
+                        .padding(.horizontal, 16)
                     }
                     
                     Button(action: {
@@ -91,9 +104,9 @@ struct CursosView: View {
             if mostrarBotones {
                 VStack {
                     if let nombre = selectedCurso?.Nombre {
-                               Text(nombre)
-                                   .font(.title3)
-                           }
+                        Text(nombre)
+                            .font(.title3)
+                    }
                     CarouselView(items: items, currentIndex: $currentIndex, selectedCurso: selectedCurso)
                 }
                 .padding()
@@ -137,8 +150,6 @@ struct CursoCellView: View {
                 Text(curso.Proposito)
                     .lineLimit(1)
             }
-            
-            
             Spacer()
             HStack {
                 Button(action: {
@@ -174,19 +185,19 @@ struct CursoCellView: View {
                 
                 
                 
-//                                                              Menu {
-//                                                                  Button("Editar") {
-//                                                                      // Acción para editar
-//                                                                      print("Editar")
-//                                                                  }.tint(.blue)
-//                                                                  Button("Eliminar") {
-//                                                                      // Acción para eliminar
-//                                                                      print("Eliminar")
-//                                                                  }.tint(.red)
-//                                                              } label: {
-//                                                                  Label("Más opciones", systemImage: "ellipsis.circle")
-//                                                                      .tint(.gray)  // Puedes establecer un color diferente si es necesario
-//                                                              }
+                //                                                              Menu {
+                //                                                                  Button("Editar") {
+                //                                                                      // Acción para editar
+                //                                                                      print("Editar")
+                //                                                                  }.tint(.blue)
+                //                                                                  Button("Eliminar") {
+                //                                                                      // Acción para eliminar
+                //                                                                      print("Eliminar")
+                //                                                                  }.tint(.red)
+                //                                                              } label: {
+                //                                                                  Label("Más opciones", systemImage: "ellipsis.circle")
+                //                                                                      .tint(.gray)  // Puedes establecer un color diferente si es necesario
+                //                                                              }
                 
             }
         }
@@ -201,10 +212,44 @@ struct EditarCursoView: View {
     @ObservedObject var cursosViewModel: CursosViewModel
     @Binding var isPresented: Bool
     
+    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
+    @StateObject var viewModelEspecialidad = CatalogoCursosEspecialidadesViewModel()
+    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
+    @StateObject var viewModelModalidad = CatalogoCursosModalidadesViewModel()
+    @StateObject var viewModelPlataforma = CatalogoCursosPlataformasViewModel()
+    
     @State private var nuevoNombre = ""
     @State private var nuevaVersion = ""
     @State private var nuevoObjetivoGeneral = ""
     @State private var nuevoProposito = ""
+    @State private var nuevoObjetivo = ""
+    @State private var nuevoNotas = ""
+    @State private var nuevoCodigo = ""
+    @State private var nuevoCodigoCliente = ""
+    @State private var nuevoCodigoInterno = ""
+    @State private var nuevoCodigoAlterno = ""
+    
+    @State private var idFormacion = ""
+    @State private var idEspecialidad = ""
+    @State private var idConfidencialidad = ""
+    @State private var idModalidad = ""
+    @State private var idPlataforma = ""
+    
+    //    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
+    @State var seleccion: Int = 0
+    @State private var isShowingForm = false
+    @State private var isShowingFormFormacion = false
+    @State private var isShowingFormEspecialidad = false
+    @State private var isShowingFormConfidencialidad = false
+    @State private var isShowingFormModalidad = false
+    @State private var isShowingFormPlataforma = false
+    
+    @State var seleccionFormacion: Int = 0
+    @State var seleccionEspecialidad: Int = 0
+    @State var seleccionConfidencialidad: Int = 0
+    @State var seleccionModalidad: Int = 0
+    @State var seleccionPlataforma: Int = 0
+    
     
     init(curso: Curso, cursosViewModel: CursosViewModel, isPresented: Binding<Bool>) {
         self.curso = curso
@@ -215,17 +260,261 @@ struct EditarCursoView: View {
         _nuevaVersion = State(initialValue: curso.Version)
         _nuevoObjetivoGeneral = State(initialValue: curso.ObjetivoGeneral)
         _nuevoProposito = State(initialValue: curso.Proposito)
+        _nuevoObjetivo = State(initialValue: curso.Objetivo)
+        _nuevoNotas = State(initialValue: curso.Notas)
+        _nuevoCodigo = State(initialValue: curso.Codigo)
+        _nuevoCodigoCliente = State(initialValue: curso.CodigoCliente)
+        _nuevoCodigoInterno = State(initialValue: curso.CodigoInterno)
+        _nuevoCodigoAlterno = State(initialValue: curso.CodigoAlterno)
+        
+        _idFormacion = State(initialValue: curso.IdCampoDeFormacion)
+        _idEspecialidad = State(initialValue: curso.IdEspecialidad)
+        _idConfidencialidad = State(initialValue: curso.IdTipoConfidencialidad)
+        _idModalidad = State(initialValue: curso.IdModalidad)
+        _idPlataforma = State(initialValue: curso.IdPlataformaLMSUtilizada)
+        
+        
+        
+        if let index = viewModel.catalogoCursosCampoDeFormacion.firstIndex(where: { $0.id == curso.IdCampoDeFormacion }) {
+            seleccionFormacion = index
+        }
     }
     
     var body: some View {
         NavigationView {
-            Form {
+            ScrollView {
                 Section(header: Text("Editar Curso")) {
                     
                     TextField("Nombre", text: $nuevoNombre)
+                        .padding()
                     TextField("Version", text: $nuevaVersion)
+                        .padding()
                     TextField("ObjetivoGeneral", text: $nuevoObjetivoGeneral)
+                        .padding()
                     TextField("Proposito", text: $nuevoProposito)
+                        .padding()
+                    TextField("Objetivo", text: $nuevoObjetivo)
+                        .padding()
+                    TextField("Notas", text: $nuevoNotas)
+                        .padding()
+                    TextField("Codigo", text: $nuevoCodigo)
+                        .padding()
+                    TextField("Codigo cliente", text: $nuevoCodigoCliente)
+                        .padding()
+                    TextField("Codigo interno", text: $nuevoCodigoInterno)
+                        .padding()
+                    TextField("Codigo alterno", text: $nuevoCodigoAlterno)
+                        .padding()
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            HStack{
+                                Text(" Campo de formación")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormFormacion.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormFormacion) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormFormacion, callingScreen: "Formacion", tituloScreen: " Campo de formación" )
+                                }.frame(width: 30, height: 40)
+                            }
+                            
+                            
+                            
+                            
+                            Picker("Campo de formación", selection: $seleccionFormacion) {
+                                
+                                ForEach(viewModel.catalogoCursosCampoDeFormacion.indices, id: \.self) { index in
+                                    
+                                    Text(viewModel.catalogoCursosCampoDeFormacion[index].Nombre)
+                                        .tag(index)
+                                    
+                                }
+                                
+                            }
+                            
+                            .pickerStyle(.menu)
+                            
+                        }
+                        .onAppear {
+                            
+                            viewModel.fetchCatalogoCursosCampoDeFormacion()
+                            viewModelEspecialidad.fetchCatalogoCursosEspecialidades()
+                            
+                            if let index = viewModel.catalogoCursosCampoDeFormacion.firstIndex(where: { $0.Nombre == "Lenguajes" }) {
+                                seleccionFormacion = index
+                                print("El registro está en la posición \(index)")
+                            } else {
+                                print(viewModel.catalogoCursosCampoDeFormacion)
+                            }
+                            
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            // Etiqueta para el segundo Picker
+                            
+                            HStack{
+                                Text(" Especialidad")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormEspecialidad.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormEspecialidad) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormEspecialidad, callingScreen: "Especialidad",tituloScreen: "Especialidad")
+                                }
+                            }
+                            
+                            
+                            Picker("Especialidad", selection: $seleccionEspecialidad) {
+                                ForEach(viewModelEspecialidad.catalogoCursosEspecialidades.indices, id: \.self) { index in
+                                    Text(viewModelEspecialidad.catalogoCursosEspecialidades[index].Nombre)
+                                        .tag(index)
+                                }
+                            }.onChange(of: idEspecialidad) { newValue in
+                                if let index = viewModelEspecialidad.catalogoCursosEspecialidades.firstIndex(where: { $0.id == idEspecialidad }) {
+                                    seleccionEspecialidad = index
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            
+                            
+                            HStack{
+                                Text(" Tipo confidencialidad")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormConfidencialidad.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormConfidencialidad) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormConfidencialidad, callingScreen: "Confidencialidad", tituloScreen: "Tipo de Confidencialidad")
+                                }
+                            }
+                            
+                            
+                            Picker("Tipo confidencialidad", selection: $seleccionConfidencialidad) {
+                                ForEach(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.indices, id: \.self) { index in
+                                    Text(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[index].Nombre)
+                                        .tag(index)
+                                }
+                            }.onChange(of: idConfidencialidad) { newValue in
+                                if let index = viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.firstIndex(where: { $0.id == idConfidencialidad }) {
+                                    seleccionConfidencialidad = index
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }.onAppear {
+                            viewModelConfidencialidad.fetchCatalogoCursosTipoConfidencialidad()
+                        }
+                        
+                        Spacer()
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            
+                            
+                            HStack{
+                                Text(" Modalidad")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormModalidad.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormModalidad) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormModalidad ,callingScreen: "Modalidad", tituloScreen: "Modalidad")
+                                }
+                            }
+                            
+                            
+                            
+                            Picker("Modalidad", selection: $seleccionModalidad) {
+                                ForEach(viewModelModalidad.catalogoCursosModalidades.indices, id: \.self) { index in
+                                    Text(viewModelModalidad.catalogoCursosModalidades[index].Nombre)
+                                        .tag(index)
+                                }
+                            }.onChange(of: idModalidad) { newValue in
+                                if let index = viewModelModalidad.catalogoCursosModalidades.firstIndex(where: { $0.id == idModalidad }) {
+                                    seleccionModalidad = index
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+                        .onAppear {
+                            viewModelModalidad.fetchCatalogoCursosModalidades()
+                        }
+                        Spacer()
+                    }
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            
+                            
+                            HStack{
+                                Text(" Plataforma LMS Utilizada")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormPlataforma.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormPlataforma) {
+                                    
+                                    FormularioView(isAdding:$isShowingFormPlataforma, callingScreen: "Plataforma", tituloScreen: " Plataforma").frame(width: 300, height: 400)
+                                }
+                            }
+                            
+                            
+                            Picker("Plataforma LMS Utilizada", selection: $seleccionPlataforma) {
+                                ForEach(viewModelPlataforma.catalogoCursosPlataformas.indices, id: \.self) { index in
+                                    Text(viewModelPlataforma.catalogoCursosPlataformas[index].Nombre)
+                                        .tag(index)
+                                }
+                            }.onChange(of: idPlataforma) { newValue in
+                                if let index = viewModelPlataforma.catalogoCursosPlataformas.firstIndex(where: { $0.id == idPlataforma }) {
+                                    seleccionPlataforma = index
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        } .onAppear {
+                            viewModelPlataforma.fetchCatalogoCursosPlataformas()
+                        }
+                        
+                        Spacer()
+                        
+                    }
                     
                 }
                 
@@ -239,6 +528,7 @@ struct EditarCursoView: View {
             .navigationBarItems(trailing: Button("Cerrar") {
                 isPresented.toggle()
             })
+            
         }
     }
     
@@ -246,8 +536,8 @@ struct EditarCursoView: View {
         
         let CursoEditado = Curso(
             Id : curso.Id,
-            Nombre : curso.Nombre,
-            Version : curso.Version,
+            Nombre : nuevoNombre,
+            Version : nuevaVersion,
             Fecha : curso.Fecha,
             Borrado : curso.Borrado,
             IdCampoDeFormacion: curso.IdCampoDeFormacion,
@@ -255,15 +545,15 @@ struct EditarCursoView: View {
             IdTipoConfidencialidad: curso.IdTipoConfidencialidad,
             IdModalidad: curso.IdModalidad,
             IdPlataformaLMSUtilizada: curso.IdPlataformaLMSUtilizada,
-            ObjetivoGeneral: curso.ObjetivoGeneral,
+            ObjetivoGeneral: nuevoObjetivoGeneral,
             RegistroSTPS: curso.RegistroSTPS,
-            Proposito: curso.Proposito,
-            Objetivo: curso.Objetivo,
-            Notas: curso.Notas,
-            Codigo: curso.Codigo,
-            CodigoCliente: curso.CodigoCliente,
-            CodigoInterno: curso.CodigoInterno,
-            CodigoAlterno: curso.CodigoAlterno,
+            Proposito: nuevoProposito,
+            Objetivo: nuevoObjetivo,
+            Notas: nuevoNotas,
+            Codigo: nuevoCodigo,
+            CodigoCliente: nuevoCodigoCliente,
+            CodigoInterno: nuevoCodigoInterno,
+            CodigoAlterno: nuevoCodigoAlterno,
             Activo: curso.Activo,
             IdEmpresa: curso.IdEmpresa
         )
@@ -276,19 +566,46 @@ struct EditarCursoView: View {
 
 
 struct AgregarCursoView: View {
+    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
+    @StateObject var viewModelEspecialidad = CatalogoCursosEspecialidadesViewModel()
+    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
+    @StateObject var viewModelModalidad = CatalogoCursosModalidadesViewModel()
+    @StateObject var viewModelPlataforma = CatalogoCursosPlataformasViewModel()
+    @State private var isShowingForm = false
+    @State private var isShowingFormFormacion = false
+    @State private var isShowingFormEspecialidad = false
+    @State private var isShowingFormConfidencialidad = false
+    @State private var isShowingFormModalidad = false
+    @State private var isShowingFormPlataforma = false
+    @State var seleccion: Int = 0
+    @State var seleccionFormacion: Int = 0
+    @State var seleccionEspecialidad: Int = 0
+    @State var seleccionConfidencialidad: Int = 0
+    @State var seleccionModalidad: Int = 0
+    @State var seleccionPlataforma: Int = 0
     @Binding var isAddingNewCursos: Bool
     @ObservedObject var cursosViewModel: CursosViewModel
     @State private var nuevoCursoNombre = ""
     @State private var nuevaCursoVersion = ""
     @State private var nuevaCursoObjetivoGeneral = ""
+    @State private var nuevoRegistroSTPS = ""
     @State private var nuevoCursoProposito = ""
-    let opciones = ["Persona fisica", "Persona moral"]
-    @State private var seleccion = 0
+    @State private var nuevoCursoObjetivo = ""
+    @State private var nuevoCursoNotas = ""
+    @State private var nuevoCursoCodigo = ""
+    @State private var nuevoCursoCodigoCliente = ""
+    @State private var nuevoCursoCodigoInterno = ""
+    @State private var nuevoCursoCodigoAlterno = ""
+    let camposFormacion = ["Etica", "Pnesamiento matematico"]
+    let ecpecialidades = ["Master en ingles"]
+    let tiposConfidencialidad = ["Operaciones de negocio", "Informacion al cliente"]
+    let modalidades = ["String", "Persona moral"]
+    let plataformasLMS = ["", ""]
     
     
     var body: some View {
         NavigationView {
-            List {
+            ScrollView {
                 VStack {
                     TextField("Nombre ", text: $nuevoCursoNombre)
                         .padding()
@@ -296,60 +613,197 @@ struct AgregarCursoView: View {
                         .padding()
                     TextField("Objetivo general", text: $nuevaCursoObjetivoGeneral)
                         .padding()
+                    TextField("Registro stps", text: $nuevoRegistroSTPS)
+                        .padding()
                     TextField("Propósito", text: $nuevoCursoProposito)
                         .padding()
-                    TextField("Objetivo", text: $nuevoCursoProposito)
+                    TextField("Objetivo", text: $nuevoCursoObjetivo)
                         .padding()
-                    TextField("Notas", text: $nuevoCursoProposito)
+                    TextField("Notas", text: $nuevoCursoNotas)
                         .padding()
-                    TextField("Codigo", text: $nuevoCursoProposito)
+                    TextField("Codigo", text: $nuevoCursoCodigo)
                         .padding()
-                    TextField("Codigo cliente", text: $nuevoCursoProposito)
+                    TextField("Codigo cliente", text: $nuevoCursoCodigoCliente)
                         .padding()
-                    TextField("Codigo interno", text: $nuevoCursoProposito)
+                    TextField("Codigo interno", text: $nuevoCursoCodigoInterno)
                         .padding()
-                    TextField("Codigo alterno", text: $nuevoCursoProposito)
+                    TextField("Codigo alterno", text: $nuevoCursoCodigoAlterno)
                         .padding()
                     
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            HStack{
+                                Text(" Campo de formación")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormFormacion.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormFormacion) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormFormacion, callingScreen: "Formacion", tituloScreen: " Campo de formación" )
+                                }.frame(width: 30, height: 40)
+                            }
+                            
+                            
+                            
+                            Picker("Campo de formación", selection: $seleccionFormacion) {
+                                ForEach(viewModel.catalogoCursosCampoDeFormacion.indices, id: \.self) { index in
+                                    Text(viewModel.catalogoCursosCampoDeFormacion[index].Nombre)
+                                        .tag(index)
+                                }
+                                
+                            }
+                            
+                            .pickerStyle(.menu)
+                            
+                        }
+                        .onAppear {
+                            
+                            viewModel.fetchCatalogoCursosCampoDeFormacion()
+                            viewModelEspecialidad.fetchCatalogoCursosEspecialidades()
+                        }
+                        Spacer()
+                    }
                     
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            // Etiqueta para el segundo Picker
+                            
+                            HStack{
+                                Text(" Especialidad")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormEspecialidad.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormEspecialidad) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormEspecialidad, callingScreen: "Especialidad",tituloScreen: "Especialidad")
+                                }
+                            }
+                            
+                            
+                            Picker("Especialidad", selection: $seleccionEspecialidad) {
+                                ForEach(viewModelEspecialidad.catalogoCursosEspecialidades.indices, id: \.self) { index in
+                                    Text(viewModelEspecialidad.catalogoCursosEspecialidades[index].Nombre)
+                                        .tag(index)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+                        
+                        Spacer()
+                    }
                     
-//                    
-//                    Picker("Campo de formación", selection: $seleccion) {
-//                        ForEach(0 ..< opciones.count) {
-//                            Text(opciones[$0])
-//                                .tag(opciones[$0])
-//                        }
-//                    }
-//                    .pickerStyle(.menu)
-//                    
-//                    Picker("Especialidad", selection: $seleccion) {
-//                        ForEach(0 ..< opciones.count) {
-//                            Text(opciones[$0])
-//                        }
-//                    }
-//                    .pickerStyle(.menu)
-//                    
-//                    Picker("Tipo confidencialidad", selection: $seleccion) {
-//                        ForEach(0 ..< opciones.count) {
-//                            Text(opciones[$0])
-//                        }
-//                    }
-//                    .pickerStyle(.menu)
-//                    
-//                    Picker("Modalidad:", selection: $seleccion) {
-//                        ForEach(0 ..< opciones.count) {
-//                            Text(opciones[$0])
-//                        }
-//                    }
-//                    .pickerStyle(.menu)
-//                    
-//                    Picker("Plataforma LMS Utilizada:", selection: $seleccion) {
-//                        ForEach(0 ..< opciones.count) {
-//                            Text(opciones[$0])
-//                        }
-//                    }
-//                    .pickerStyle(.menu)
-                    
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            
+                            
+                            HStack{
+                                Text(" Tipo confidencialidad")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormConfidencialidad.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormConfidencialidad) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormConfidencialidad, callingScreen: "Confidencialidad", tituloScreen: "Tipo de Confidencialidad")
+                                }
+                            }
+                            
+                            
+                            Picker("Tipo confidencialidad", selection: $seleccionConfidencialidad) {
+                                ForEach(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.indices, id: \.self) { index in
+                                    Text(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[index].Nombre)
+                                        .tag(index)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }.onAppear {
+                            viewModelConfidencialidad.fetchCatalogoCursosTipoConfidencialidad()
+                        }
+                        
+                        Spacer()
+                    }
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            
+                            
+                            HStack{
+                                Text("Modalidad")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormModalidad.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormModalidad) {
+                                    
+                                    FormularioView(isAdding: $isShowingFormModalidad ,callingScreen: "Modalidad", tituloScreen: "Modalidad")
+                                }
+                            }
+                            
+                            
+                            
+                            Picker("Modalidad", selection: $seleccionModalidad) {
+                                ForEach(viewModelModalidad.catalogoCursosModalidades.indices, id: \.self) { index in
+                                    Text(viewModelModalidad.catalogoCursosModalidades[index].Nombre)
+                                        .tag(index)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+                        .onAppear {
+                            viewModelModalidad.fetchCatalogoCursosModalidades()
+                        }
+                        Spacer()
+                    }
+                    HStack{
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            
+                            
+                            HStack{
+                                Text(" Plataforma LMS Utilizada")
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                Button(action: {
+                                    isShowingFormPlataforma.toggle()
+                                    
+                                }) {
+                                    Text("+").font(.title)
+                                }.sheet(isPresented: $isShowingFormPlataforma) {
+                                    
+                                    FormularioView(isAdding:$isShowingFormPlataforma, callingScreen: "Plataforma", tituloScreen: " Plataforma").frame(width: 300, height: 400)
+                                }
+                            }
+                            
+                            
+                            Picker("Plataforma LMS Utilizada", selection: $seleccionPlataforma) {
+                                ForEach(viewModelPlataforma.catalogoCursosPlataformas.indices, id: \.self) { index in
+                                    Text(viewModelPlataforma.catalogoCursosPlataformas[index].Nombre)
+                                        .tag(index)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        } .onAppear {
+                            viewModelPlataforma.fetchCatalogoCursosPlataformas()
+                        }
+                        
+                        Spacer()
+                    }
                     
                     Button("Agregar") {
                         agregarNuevoCurso()
@@ -367,30 +821,30 @@ struct AgregarCursoView: View {
     private func agregarNuevoCurso() {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd" // Define el formato de la fecha que deseas obtener
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         let currentDate = Date()
         
         let nuevoCurso = Curso(
             Id : "00000000-0000-0000-0000-000000000000",
-            Nombre : "",
-            Version : "",
-            Fecha : "",
+            Nombre : nuevoCursoNombre,
+            Version : nuevaCursoVersion,
+            Fecha : "2024-01-30T19:06:05.675Z",
             Borrado : false,
-            IdCampoDeFormacion: "00000000-0000-0000-0000-000000000000",
-            IdEspecialidad: "00000000-0000-0000-0000-000000000000",
-            IdTipoConfidencialidad: "00000000-0000-0000-0000-000000000000",
-            IdModalidad: "00000000-0000-0000-0000-000000000000",
-            IdPlataformaLMSUtilizada: "00000000-0000-0000-0000-000000000000",
-            ObjetivoGeneral: "",
-            RegistroSTPS: "",
-            Proposito: "",
-            Objetivo: "",
-            Notas: "",
-            Codigo: "",
-            CodigoCliente: "",
-            CodigoInterno: "",
-            CodigoAlterno: "",
+            IdCampoDeFormacion: viewModel.catalogoCursosCampoDeFormacion[seleccionFormacion].Id,
+            IdEspecialidad: viewModelEspecialidad.catalogoCursosEspecialidades[seleccionEspecialidad].Id,
+            IdTipoConfidencialidad: viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[seleccionConfidencialidad].Id,
+            IdModalidad: viewModelModalidad.catalogoCursosModalidades[seleccionModalidad].Id,
+            IdPlataformaLMSUtilizada: viewModelPlataforma.catalogoCursosPlataformas[seleccionPlataforma].Id,
+            ObjetivoGeneral: nuevaCursoObjetivoGeneral,
+            RegistroSTPS: nuevoRegistroSTPS,
+            Proposito: nuevoCursoProposito,
+            Objetivo: nuevoCursoObjetivo,
+            Notas: nuevoCursoNotas,
+            Codigo: nuevoCursoCodigo,
+            CodigoCliente: nuevoCursoCodigoCliente,
+            CodigoInterno: nuevoCursoCodigoInterno,
+            CodigoAlterno: nuevoCursoCodigoAlterno,
             Activo: true,
             IdEmpresa: "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         )
@@ -402,12 +856,175 @@ struct AgregarCursoView: View {
     }
 }
 
-
-
-
-
-struct CursosView_Previews: PreviewProvider {
-    static var previews: some View {
-        CursosView(showSignInView: .constant(false))
+struct FormularioView: View {
+    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
+    @StateObject var viewModelEspecialidad = CatalogoCursosEspecialidadesViewModel()
+    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
+    @StateObject var viewModelModalidad = CatalogoCursosModalidadesViewModel()
+    @StateObject var viewModelPlataforma = CatalogoCursosPlataformasViewModel()
+    @Binding var isAdding: Bool
+    @State private var nombre: String = ""
+    var callingScreen: String
+    var tituloScreen: String
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Agrega un nuevo "+tituloScreen)
+                TextField("Nombre", text: $nombre)
+                    .padding()
+                
+                Button(action: {
+                    
+                    verificarSeleccion()
+                }) {
+                    Text("Agregar").padding().foregroundColor(.white)
+                }
+                .background(Color.blue)
+                .cornerRadius(8)
+                .padding()
+            } .navigationBarItems(trailing: Button("Cerrar") {
+                isAdding.toggle()
+            })
+        }
+        .navigationTitle("Nuevo Registro")
+        
+    }
+    
+    func guardarNuevoCampoEspecialidad(nombre: String){
+        
+        
+        let nuevoCatalogoCursosEspecialidades = CatalogoCursosEspecialidades(
+            Id : "00000000-0000-0000-0000-000000000000",
+            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
+            IdArea: "00000000-0000-0000-0000-000000000000",
+            Fecha : "2024-01-30T19:06:05.675Z",
+            Nombre : nombre,
+            Notas : "",
+            Observaciones: "",
+            Status : true,
+            Borrado: false
+            
+        )
+        
+        
+        
+        viewModelEspecialidad.agregarCatalogoCursosEspecialidades(nuevoCatalogoCursosEspecialidades: nuevoCatalogoCursosEspecialidades)
+        isAdding.toggle()
+    }
+    
+    
+    func guardarNuevoCampoFormacion(nombre: String){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Define el formato de la fecha que deseas obtener
+        
+        let currentDate = Date()
+        
+        let nuevoCatalogoCursosCampoDeFormacion = CatalogoCursosCampoDeFormacion(
+            Id : "00000000-0000-0000-0000-000000000000",
+            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
+            Fecha : "2024-01-30T19:06:05.675Z",
+            Nombre : nombre,
+            Notas : "",
+            Status : true,
+            Borrado: false
+            
+        )
+        
+        
+        
+        viewModel.agregarCatalogoCursosCampoDeFormacion(nuevoCatalogoCursosCampoDeFormacion: nuevoCatalogoCursosCampoDeFormacion)
+        isAdding.toggle()
+    }
+    
+    func guardarNuevoConfidencialidad(nombre: String){
+        
+        
+        let nuevoCatalogoCursosTipoConfidencialidad = CatalogoCursosTipoConfidencialidad(
+            Id : "00000000-0000-0000-0000-000000000000",
+            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
+            Fecha : "2024-01-30T19:06:05.675Z",
+            Nombre : nombre,
+            Notas : "",
+            Observaciones: "",
+            Status : true,
+            Borrado: false
+            
+        )
+        
+        
+        
+        viewModelConfidencialidad.agregarCatalogoCursosTipoConfidencialidad(nuevoCatalogoCursosTipoConfidencialidad: nuevoCatalogoCursosTipoConfidencialidad)
+        isAdding.toggle()
+    }
+    
+    func guardarNuevoModalidad(nombre: String){
+        
+        
+        let nuevoCatalogoCursosModalidades = CatalogoCursosModalidades(
+            Id : "00000000-0000-0000-0000-000000000000",
+            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
+            Fecha : "2024-01-30T19:06:05.675Z",
+            Nombre : nombre,
+            Notas : "",
+            Observaciones: "",
+            Status : true,
+            Borrado: false
+            
+        )
+        
+        
+        
+        viewModelModalidad.agregarCatalogoCursosModalidades(nuevoCatalogoCursosModalidades: nuevoCatalogoCursosModalidades)
+        isAdding.toggle()
+    }
+    
+    func guardarNuevoPlataforma(nombre: String){
+        
+        let nuevoCatalogoCursosPlataformas = CatalogoCursosPlataformas(
+            Id : "00000000-0000-0000-0000-000000000000",
+            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
+            Fecha : "2024-01-30T19:06:05.675Z",
+            Nombre : nombre,
+            Notas : "",
+            Observaciones: "",
+            Marca:"",
+            LinkAcceso:"",
+            Proveedor: "",
+            Sincrona:true,
+            Asincrona:true,
+            Status : true,
+            Borrado: false
+            
+        )
+        
+        viewModelPlataforma.agregarCatalogoCursosPlataformas(nuevoCatalogoCursosPlataformas: nuevoCatalogoCursosPlataformas)
+        isAdding.toggle()
+    }
+    
+    func verificarSeleccion() {
+        print(callingScreen)
+        switch callingScreen {
+        case "Formacion":
+            print("funciona? xxx")
+            guardarNuevoCampoFormacion(nombre: nombre)
+        case "Especialidad":
+            guardarNuevoCampoEspecialidad(nombre: nombre)
+        case "Confidencialidad":
+            guardarNuevoConfidencialidad(nombre: nombre)
+        case "Modalidad":
+            guardarNuevoModalidad(nombre: nombre)
+        default:
+            guardarNuevoPlataforma(nombre: nombre)
+        }
     }
 }
+
+
+
+
+//struct CursosView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CursosView(showSignInView: .constant(false))
+//    }
+//}

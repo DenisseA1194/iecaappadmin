@@ -13,7 +13,7 @@ class CursoAPIService{
     static let shared = CursoAPIService()
     
     func editarCurso(curso: Curso, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = baseURL + "/api/Curso/\(curso.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = baseURL + "/api/Cursos?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
         let parameters: [String: Any] = [
             
@@ -90,7 +90,7 @@ class CursoAPIService{
            let parameters: [String: Any] = [
             "Id" : curso.Id,
             "Nombre" : curso.Nombre,
-            "Version" : curso.Version,
+            "Version" : Int(curso.Version),
             "Fecha" : "2024-01-30T19:06:05.675Z",
             "Borrado" : curso.Borrado,
             "IdCampoDeFormacion": curso.IdCampoDeFormacion,
@@ -111,7 +111,14 @@ class CursoAPIService{
             "IdEmpresa": curso.IdEmpresa,
            ]
         
-           AF.request(baseURL + "/api/Curso", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+        if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON a enviar:")
+                print(jsonString)
+            }
+
+        
+           AF.request(baseURL + "/api/Cursos", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: Curso.self) { response in
                    switch response.result {

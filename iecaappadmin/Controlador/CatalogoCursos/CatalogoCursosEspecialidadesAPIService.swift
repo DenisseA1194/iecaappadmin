@@ -63,19 +63,25 @@ class CatalogoCursosEspecialidadesAPIService {
                        completion(.failure(error))
                    }
                }
+        
+     
        }
 
         func fetchCatalogoCursosEspecialidades(completion: @escaping (Result<[CatalogoCursosEspecialidades], Error>) -> Void) {
+      
             AF.request(webService.getBaseURL()+"/api/CatalogoCursosEspecialidades?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [CatalogoCursosEspecialidades].self) { response in
                     switch response.result {
                     case .success(let catalogoCursosEspecialidades):
+                        print(catalogoCursosEspecialidades)
                         completion(.success(catalogoCursosEspecialidades))
                     case .failure(let error):
                         completion(.failure(error))
                     }
                 }
+            
+            
         }
     
     func agregarCatalogoCursosEspecialidades(nuevoCatalogoCursosEspecialidades: CatalogoCursosEspecialidades, completion: @escaping (Result<CatalogoCursosEspecialidades, Error>) -> Void) {

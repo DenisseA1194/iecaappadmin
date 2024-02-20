@@ -8,7 +8,11 @@
 import Foundation
 
 class WebService {
-    private let baseURL = "http://webservices.iecapp.com"
+    private var baseURL = ""
+    
+    func setBaseURL(_ url: String) {
+           baseURL = url
+       }
     
     func getBaseURL() -> String {
         return baseURL

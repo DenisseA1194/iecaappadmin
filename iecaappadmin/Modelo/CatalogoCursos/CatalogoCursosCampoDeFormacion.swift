@@ -11,11 +11,11 @@ struct CatalogoCursosCampoDeFormacion: Identifiable, Codable {
     
     var Id: String
     var IdEmpresa: String
-    var Fecha: Date
+    var Fecha: String
     var Nombre: String
     var Notas: String
     var Status: Bool
-    var Borrado: Bool
+    var Borrado: Bool?
     
     var id: String {
         return Id

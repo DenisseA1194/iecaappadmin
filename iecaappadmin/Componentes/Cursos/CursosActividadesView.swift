@@ -91,7 +91,8 @@ struct CursosActividadesView: View {
             Observaciones: observaciones,
             IdCurso: idCurso,
             IdActividad:"00000000-0000-0000-0000-000000000000",
-            Link:""
+            Link:"",
+            Borrado: false
         )
         
         cursosActividadesViewModel.agregarNuevoCurso(nuevoCurso: nuevoCursoActividad)

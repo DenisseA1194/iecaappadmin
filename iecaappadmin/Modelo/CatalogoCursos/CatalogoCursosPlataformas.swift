@@ -11,7 +11,7 @@ struct CatalogoCursosPlataformas: Identifiable, Codable {
     
     var Id: String
     var IdEmpresa: String
-    var Fecha: Date
+    var Fecha: String
     var Nombre: String
     var Notas: String
     var Observaciones: String
@@ -21,7 +21,7 @@ struct CatalogoCursosPlataformas: Identifiable, Codable {
     var Sincrona: Bool
     var Asincrona: Bool
     var Status: Bool
-    var Borrado: Bool
+    var Borrado: Bool?
     
     var id: String {
         return Id

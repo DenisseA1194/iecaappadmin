@@ -103,6 +103,8 @@ class CatalogoCursosPlataformasAPIService {
                    switch response.result {
                    case .success(let catalogoCursosPlataformas):
                        completion(.success(catalogoCursosPlataformas))
+                      
+                      
                    case .failure(let error):
                        completion(.failure(error))
                    }

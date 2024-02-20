@@ -89,7 +89,8 @@ struct CursosBiografiasView: View {
             Fecha: "2024-01-30T19:06:05.675Z",
             LinkDocumento: "",
             Notas: notas,
-            Referencias: referencias
+            Referencias: referencias,
+            Borrado: false
          
         )
         

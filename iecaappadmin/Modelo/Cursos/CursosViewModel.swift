@@ -71,7 +71,7 @@ class CursosViewModel: ObservableObject {
                 }
             case .failure(let error):
             self?.actualizarListaCursos()
-                print("Error al agregar la sucursal:", error)
+                print("Error al agregar curso:", error)
             }
         }
        }
