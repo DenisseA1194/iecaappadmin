@@ -34,14 +34,66 @@ struct Usuario {
     var cliente: Bool
     var fechahora: String
 }
+
+
+extension String {
+    // Esta función verifica si la contraseña cumple con los requisitos mínimos y devuelve un mensaje indicando los requisitos que faltan
+    func isValidPassword() -> (isValid: Bool, message: String) {
+        // Verificar la longitud mínima
+        if self.count < 8 {
+            return (false, "La contraseña debe tener al menos 8 caracteres")
+        }
+        
+        // Verificar si contiene al menos una letra minúscula
+        let lowercaseLetterRegEx  = ".*[a-z]+.*"
+        let lowercaseTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegEx)
+        if !lowercaseTest.evaluate(with: self) {
+            return (false, "La contraseña debe contener al menos una letra minúscula")
+        }
+        
+        // Verificar si contiene al menos una letra mayúscula
+        let uppercaseLetterRegEx  = ".*[A-Z]+.*"
+        let uppercaseTest = NSPredicate(format:"SELF MATCHES %@", uppercaseLetterRegEx)
+        if !uppercaseTest.evaluate(with: self) {
+            return (false, "La contraseña debe contener al menos una letra mayúscula")
+        }
+        
+        // Verificar si contiene al menos un dígito
+        let digitRegEx  = ".*[0-9]+.*"
+        let digitTest = NSPredicate(format:"SELF MATCHES %@", digitRegEx)
+        if !digitTest.evaluate(with: self) {
+            return (false, "La contraseña debe contener al menos un número")
+        }
+        
+        // Verificar si contiene al menos un carácter especial
+        let specialCharacterRegEx  = ".*[^A-Za-z0-9]+.*"
+        let specialCharacterTest = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
+        if !specialCharacterTest.evaluate(with: self) {
+            return (false, "La contraseña debe contener al menos un carácter especial")
+        }
+        
+        // Si pasa todas las verificaciones, la contraseña es válida
+        return (true, "La contraseña es válida")
+    }
+}
+
 struct Registro: View {
     
     @State private var email = ""
     @State private var fullname = ""
     @State private var password = ""
     @State private var confirmPassword = ""
-    @State private var showAlert = false
+    @State private var showAlertError = false
+    @State private var showAlertPasswordInseguro = false
     @State private var showAlertCorreo = false
+    @State private var mensajePasswordInsegura = ""
+    @State private var mensajeUsuario = ""
+    @State private var mensajeAlerta = ""
+    @State private var tituloAlerta = ""
+    @State private var showAlert = false
+    @State private var isBackToLogin = false
+    @State private var showAlertUserExists = false
+    @State private var showAlertUsuarioAgregado = false
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     //    @StateObject private var viewModel = AuthenticationViewModel()
@@ -55,6 +107,8 @@ struct Registro: View {
             return
         }
         try await AuthenticationManager.shared.createUser(email: email, password: password, fullname: fullname)
+        
+        
     }
     
     
@@ -138,21 +192,48 @@ struct Registro: View {
                 .cornerRadius(5)
                 //Guardar registro
                 Button{
+                    
                     if self.password == self.confirmPassword {
-                        Task {
-                            do {
-                                try await sigUp(email: self.email, password: self.password)
-                                self.showAlertCorreo = true
-                                return
-                            }catch{
-                                print(error)
+                        if password.isValidPassword().isValid {
+                            Task {
+                                do {
+                                    let isUserExists = try await AuthenticationManager.shared.checkIfUserExists(email: self.email, password: self.password)
+                                    if isUserExists {
+                                        self.isBackToLogin = true
+                                        self.mensajeAlerta = "El usuario ya existe. Por favor, inicia sesión."
+                                        self.tituloAlerta = "Usuario ya registrado"
+                                        self.showAlert = true
+                                        return
+                                    }
+                                    else{
+                                        
+                                        try await sigUp(email: self.email, password: self.password)
+                                        self.isBackToLogin = true
+                                        self.mensajeAlerta = "Se envio un email de confirmacion al correo "+email
+                                        self.tituloAlerta = "Se ha registrado el usuario"
+                                        self.showAlert = true
+                                        
+                                    }
+                                } catch {
+                                    
+                                    print(error)
+                                    //                                    showAlertError = true
+                                    self.mensajeAlerta = "El usuario ya esta registrado"
+                                    self.tituloAlerta = "Error"
+                                    self.showAlert = true
+                                    
+                                }
                             }
+                        } else {
+                            tituloAlerta = "Contrasena insegura"
+                            self.mensajeAlerta = password.isValidPassword().message
+                            self.showAlert = true
                         }
-                        //
                     } else {
+                        tituloAlerta = "Error"
+                        self.mensajeAlerta = "La contrasena no coincide"
                         self.showAlert = true
                     }
-                    
                 }label: {
                     HStack{
                         Text("SOLICITUD DE REGISTRO")
@@ -162,11 +243,13 @@ struct Registro: View {
                     .foregroundColor(.white)
                     .frame(width: UIScreen.main.bounds.width-32, height: 48)
                 }.alert(isPresented: $showAlert) {
-                    Alert(title: Text("Error"), message: Text("Las contraseñas no coinciden"), dismissButton: .default(Text("OK")))
-                } .alert(isPresented: $showAlertCorreo) {
-                    Alert(title: Text("Correo de Confirmación Enviado"), message: Text("Se ha enviado un correo de confirmacion a tu correo electronico"), dismissButton: .default(Text("OK")) {
-                        hideKeyboard()
-                        self.presentationMode.wrappedValue.dismiss()
+                    Alert(title: Text(tituloAlerta), message: Text(mensajeAlerta), dismissButton: .default(Text("OK")){
+                        
+                        if isBackToLogin {
+                            hideKeyboard()
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        
                     })
                 }
                 .background(Color(.azulMarino))

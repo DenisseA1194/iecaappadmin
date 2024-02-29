@@ -71,22 +71,22 @@ class SucursalesViewModel: ObservableObject {
            }
        }
     
-    func agregarNuevaSucursal(nuevaSucursal: Sucursal) {
-        
-        SucursalAPIService.shared.agregarSucursal(nuevaSucursal: nuevaSucursal) { [weak self] result in
-        switch result {
-            case .success(let sucursal):
-                DispatchQueue.main.async {
-                    self?.sucursales.append(sucursal)
-                    self?.actualizarListaSucursales()
-                }
-            case .failure(let error):
-            self?.actualizarListaSucursales()
-                print("Error al agregar la sucursal:", error)
-                // Puedes manejar el error de alguna manera si es necesario
-            }
-        }
-       }
+//    func agregarNuevaSucursal(nuevaSucursal: Sucursal) {
+//        
+//        SucursalAPIService.shared.agregarSucursal(nuevaSucursal: nuevaSucursal) { [weak self] result in
+//        switch result {
+//            case .success(let sucursal):
+//                DispatchQueue.main.async {
+//                    self?.sucursales.append(sucursal)
+//                    self?.actualizarListaSucursales()
+//                }
+//            case .failure(let error):
+//            self?.actualizarListaSucursales()
+//                print("Error al agregar la sucursal:", error)
+//                // Puedes manejar el error de alguna manera si es necesario
+//            }
+//        }
+//       }
     
     func actualizarListaSucursales() {
            fetchSucursales()

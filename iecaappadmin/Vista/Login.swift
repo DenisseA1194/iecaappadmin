@@ -68,8 +68,8 @@ final class SignInEmailViewModel: ObservableObject {
 struct Login: View {
     @StateObject private var viewModel = SignInEmailViewModel()
     //    @Binding var showSignInView: Bool
-    @State private var email = ""
-    @State private var password = ""
+    @State private var email = "omarcampos2596@gmail.com"
+    @State private var password = "$Barbara456"
     @State private var newPassword = ""
     @State var isLoading: Bool = false
     @State var isPresented: Bool = false
@@ -78,6 +78,7 @@ struct Login: View {
     @State private var showSignInView: Bool = false
     @State private var showMainTabbedView = false
     @State private var showAlertCorreo = false
+    @State private var showAlertResetPassword = false
     
     //  @EnvironmentObject var viewModel: AuthViewModel
     
@@ -91,11 +92,10 @@ struct Login: View {
         
     }
     
-    
     func sigIn(correo: String, contrasena: String) async throws -> String{
         guard !correo.isEmpty, !contrasena.isEmpty else{
-            print("No email or password found")
-            return "No email or password found"
+            
+            return "El usuario con el que intenta ingresar no ha sido registrado"
         }
         
         print(correo," "+contrasena)
@@ -106,6 +106,21 @@ struct Login: View {
         
         return respuesta
         
+    }
+    
+    func resetPasswordUser(email: String) {
+        // Llamar a la función resetPassword
+        Task {
+            do {
+                // Suponiendo que `newPassword` contiene el correo electrónico del usuario
+                try await AuthenticationManager.shared.resetPassword(email: newPassword)
+                // La llamada asíncrona se realizó correctamente
+                print("La contraseña se restableció correctamente.")
+            } catch {
+                // Manejar errores
+                print("Error al restablecer la contraseña:", error.localizedDescription)
+            }
+        }
     }
     
     
@@ -169,11 +184,11 @@ struct Login: View {
                         
                         //Inicio sesión
                         Button {
-                           
+                            
                             Task {
                                 do {
-                                   respuestaCorreo = try await sigIn(correo: email, contrasena: password)
-                                    if respuestaCorreo == "El correo electrónico del usuario no está verificado" || respuestaCorreo == "No email or password found" {
+                                    respuestaCorreo = try await sigIn(correo: email, contrasena: password)
+                                    if respuestaCorreo == "El correo electrónico del usuario no está verificado" || respuestaCorreo == "El usuario con el que intenta ingresar no ha sido registrado" {
                                         showAlertCorreo = true
                                     }else{
                                         showMainTabbedView = true
@@ -184,7 +199,7 @@ struct Login: View {
                                 }catch{
                                     print(error)
                                 }
-                
+                                
                             }
                             
                         } label: {
@@ -199,7 +214,7 @@ struct Login: View {
                             .cornerRadius(10)
                             .padding(.top, 24)
                         }.alert(isPresented: $showAlertCorreo) {
-                            Alert(title: Text("Problam al iniciar sesion"), message: Text(respuestaCorreo), dismissButton: .default(Text("OK")) {
+                            Alert(title: Text("Error al iniciar sesion"), message: Text(respuestaCorreo), dismissButton: .default(Text("OK")) {
                                 
                             })
                         }
@@ -239,19 +254,26 @@ struct Login: View {
                             .foregroundColor(.black)
                             .frame(width: UIScreen.main.bounds.width-32, height: 48)
                             
+                        }.alert(isPresented: $showAlertResetPassword) {
+                            Alert(title: Text("Se envio un correo para restablecer la contrasena"), message: Text(respuestaCorreo), dismissButton: .default(Text("OK")) {
+                                
+                            })
                         }
                         .background(Color(.white))
                         .cornerRadius(10)
                         
                         .alert("Recupera contraseña", isPresented: $isPresented, actions: {
-                            SecureField("Contraseña", text: $newPassword)
+                            TextField("Correo", text: $newPassword)
                             
                             
                             Button("Cancelar", role: .cancel, action: {})
-                            Button("Guardar", action: {})
+                            Button("Enviar", action: {
+                                resetPasswordUser(email: newPassword)
+                                showAlertResetPassword = true
+                            })
                             
                         }, message: {
-                            Text("Ingresa tu nueva contraseña")
+                            Text("Ingresa tu correo")
                         })
                         
                     }.padding()

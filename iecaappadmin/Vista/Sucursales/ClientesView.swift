@@ -48,7 +48,7 @@ struct ClientesView: View {
           NavigationView {
               List {
                   
-                  SearchBar(searchText: $searchText)
+                 // SearchBar(searchText: $searchText)
                  
                   ForEach(sortedCliente) { cliente in
                       ClienteCellView(cliente: cliente, viewModel: viewModel)
@@ -154,11 +154,11 @@ struct SearchBarClientes: View {
             }
     }
 
-    struct ClienteListView_Previews: PreviewProvider {
-        static var previews: some View {
-            SucursalesView(showSignInView: .constant(false))
-        }
-    }
+//    struct ClienteListView_Previews: PreviewProvider {
+//        static var previews: some View {
+//            SucursalesView(showSignInView: .constant(false))
+//        }
+//    }
 struct EditarClienteView: View {
     let cliente: Cliente
     @ObservedObject var clientesViewModel: ClientesViewModel

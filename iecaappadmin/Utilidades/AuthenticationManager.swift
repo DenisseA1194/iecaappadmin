@@ -65,6 +65,16 @@ extension AuthenticationManager {
        
        }
     
+    func checkIfUserExists(email: String, password: String) async throws -> Bool {
+            
+            do {
+                _ = try await Auth.auth().signIn(withEmail: email, password: password)
+                return true
+            } catch {
+                return false
+            }
+        }
+    
     @discardableResult
     func createUser(email: String, password: String, fullname: String) async throws -> AuthDataResultModel{
         var authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -165,7 +175,7 @@ extension AuthenticationManager {
         } catch {
             
             print("Error al iniciar sesión:", error.localizedDescription)
-            return "Error"
+            return "El usuario con el que intenta ingresar no ha sido registrado"
         }
     }
     

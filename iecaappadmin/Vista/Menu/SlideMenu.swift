@@ -69,6 +69,8 @@ enum SideMenuRowType: Int, CaseIterable{
     case statement
     case editarcurso
     case editarevaluacion
+    case tipoSucursal
+    case instituto
     
     var title: String{
         switch self {
@@ -77,17 +79,21 @@ enum SideMenuRowType: Int, CaseIterable{
         case .cursos:
             return "Cursos"
         case .evaluaciones:
-            return "Evaluaciones"
+            return "Zonas"
         case .ingresos:
-            return "Ingresos"
+            return "Usuarios"
         case .statement:
-            return "Statement"
+            return "Puestos"
         case .editarcurso:
-            return "Editar curso"
+            return "Departamentos"
         case .editarevaluacion:
-            return "Editar evaluacion"
+            return "Sucursales"
         case .profile:
-            return "Profile"
+            return "Razon social"
+        case .tipoSucursal:
+            return "Tipo sucursal"
+        case .instituto:
+            return "Institucion"
             
         }
         
@@ -110,6 +116,10 @@ enum SideMenuRowType: Int, CaseIterable{
         case .editarevaluacion:
             return "IECA_azul"
         case .profile:
+            return "IECA_azul"
+        case .tipoSucursal:
+            return "IECA_azul"
+        case .instituto:
             return "IECA_azul"
         }
     }
@@ -175,13 +185,13 @@ struct SideMenuView: View {
                                 presentSideMenu.toggle()
                             }
                         }
-                        SectionHeader(title: "Alumno")
-                        ForEach(SideMenuRowType2.allCases, id: \.self){ row in
-                            RowView(isSelected: selectedSideMenuTab == row.rawValue, imageName: row.iconName, title: row.title) {
-                                selectedSideMenuTab = row.rawValue
-                                presentSideMenu.toggle()
-                            }
-                        }
+//                        SectionHeader(title: "Alumno")
+//                        ForEach(SideMenuRowType2.allCases, id: \.self){ row in
+//                            RowView(isSelected: selectedSideMenuTab == row.rawValue, imageName: row.iconName, title: row.title) {
+//                                selectedSideMenuTab = row.rawValue
+//                                presentSideMenu.toggle()
+//                            }
+//                        }
                         Spacer()
                     }
                 }
@@ -196,8 +206,6 @@ struct SideMenuView: View {
             Spacer()
         }
         .background(.clear)
-        
-        
     }
     
     func ProfileImageView() -> some View{
@@ -216,7 +224,7 @@ struct SideMenuView: View {
                 Spacer()
             }
             
-            Text("Omar campos")
+            Text("Usuario")
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.black)
             
@@ -233,7 +241,7 @@ struct SideMenuView: View {
             VStack(alignment: .leading){
                 HStack(spacing: 20){
                     Rectangle()
-                        .fill(isSelected ? .purple : .white)
+                        .fill(isSelected ? .blue : .white)
                         .frame(width: 5)
                     
                     ZStack{
@@ -270,11 +278,28 @@ struct MainTabbedView: View {
                     .tag(0)
                 CursosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
                     .tag(1)
-                CursosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                RazonesSocialesView()
                     .tag(2)
-                CursosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                ZonasView()
                     .tag(3)
-            }
+                UsuariosView()
+                    .tag(4)
+                PuestosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                    .tag(5)
+                DepartamentosView()
+                    .tag(6)
+                SucursalesView()
+                    .tag(7)
+                TipoSucursalView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                    .tag(8)
+                InstitucionesView()
+                    .tag(9)
+            }.overlay (
+                HStack {
+                  
+                }
+                , alignment: .bottom
+            )
             
             SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
         }

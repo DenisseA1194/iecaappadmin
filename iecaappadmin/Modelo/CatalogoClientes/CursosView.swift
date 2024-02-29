@@ -64,7 +64,7 @@ struct CursosView: View {
             
             NavigationView {
                 List {
-                    SearchBar(searchText: $searchText)
+                    //SearchBar(searchText: $searchText)
                     ForEach(sortedCurso) { curso in
                         CursoCellView(curso: curso, viewModel: viewModel, mostrarBotones: $mostrarBotones, didSelectCurso: { selectedCurso in
                             // Asignar el curso seleccionado a una variable de estado en CursosView

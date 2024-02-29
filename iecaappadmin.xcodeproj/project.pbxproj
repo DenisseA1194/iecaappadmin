@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072AF7BC2B8D084200D9E38B /* ZonasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072AF7BB2B8D084200D9E38B /* ZonasView.swift */; };
+		072AF7BF2B8D1E5E00D9E38B /* UsuariosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072AF7BE2B8D1E5E00D9E38B /* UsuariosView.swift */; };
+		072AF7C22B8D378800D9E38B /* PuestosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072AF7C12B8D378800D9E38B /* PuestosView.swift */; };
+		072AF7C52B8D4C9D00D9E38B /* DepartamentosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072AF7C42B8D4C9D00D9E38B /* DepartamentosView.swift */; };
+		072AF7C72B8D50FE00D9E38B /* TipoSucursalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072AF7C62B8D50FE00D9E38B /* TipoSucursalView.swift */; };
 		07B827E52B728B0E00507E1A /* Sucursales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827E42B728B0E00507E1A /* Sucursales.swift */; };
 		07B827E72B728C6300507E1A /* SucursalesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827E62B728C6300507E1A /* SucursalesViewModel.swift */; };
 		07B827EA2B7292DA00507E1A /* SucursalApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B827E92B7292DA00507E1A /* SucursalApiService.swift */; };
@@ -40,6 +45,15 @@
 		07B828302B7EA56B00507E1A /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8282F2B7EA56B00507E1A /* AuthenticationManager.swift */; };
 		07B828322B7EB89900507E1A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07B828312B7EB89900507E1A /* GoogleService-Info.plist */; };
 		07B828342B80198800507E1A /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828332B80198800507E1A /* CustomAlert.swift */; };
+		07B828362B87AE8200507E1A /* RazonesSocialesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828352B87AE8200507E1A /* RazonesSocialesView.swift */; };
+		07B8283A2B87B6CB00507E1A /* RazonSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B828392B87B6CB00507E1A /* RazonSocialViewModel.swift */; };
+		07B8283C2B87B75700507E1A /* RazonSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8283B2B87B75700507E1A /* RazonSocial.swift */; };
+		07CAF4242B8E39A200AD7855 /* InstitucionesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAF4232B8E39A200AD7855 /* InstitucionesView.swift */; };
+		07CAF4272B8FAD2400AD7855 /* RazonSocialAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAF4262B8FAD2400AD7855 /* RazonSocialAPIService.swift */; };
+		07CAF42B2B90DF1000AD7855 /* UsuariosApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAF42A2B90DF1000AD7855 /* UsuariosApiService.swift */; };
+		07CAF42D2B91118300AD7855 /* SucursalTipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAF42C2B91118300AD7855 /* SucursalTipo.swift */; };
+		07CAF42F2B91123B00AD7855 /* SucursalTipoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAF42E2B91123B00AD7855 /* SucursalTipoViewModel.swift */; };
+		07CAF4312B9112CA00AD7855 /* SucursalTipoApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAF4302B9112CA00AD7855 /* SucursalTipoApiService.swift */; };
 		4B1E07392B6AF4F500BFDB45 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */; };
 		4B1E073B2B6AF51600BFDB45 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */; };
 		4B1E073F2B6AF54900BFDB45 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E073E2B6AF54900BFDB45 /* InputView.swift */; };
@@ -270,6 +284,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072AF7BB2B8D084200D9E38B /* ZonasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZonasView.swift; sourceTree = "<group>"; };
+		072AF7BE2B8D1E5E00D9E38B /* UsuariosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsuariosView.swift; sourceTree = "<group>"; };
+		072AF7C12B8D378800D9E38B /* PuestosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuestosView.swift; sourceTree = "<group>"; };
+		072AF7C42B8D4C9D00D9E38B /* DepartamentosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartamentosView.swift; sourceTree = "<group>"; };
+		072AF7C62B8D50FE00D9E38B /* TipoSucursalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipoSucursalView.swift; sourceTree = "<group>"; };
 		07B827E42B728B0E00507E1A /* Sucursales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sucursales.swift; sourceTree = "<group>"; };
 		07B827E62B728C6300507E1A /* SucursalesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucursalesViewModel.swift; sourceTree = "<group>"; };
 		07B827E92B7292DA00507E1A /* SucursalApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucursalApiService.swift; sourceTree = "<group>"; };
@@ -298,6 +317,15 @@
 		07B8282F2B7EA56B00507E1A /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		07B828312B7EB89900507E1A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07B828332B80198800507E1A /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		07B828352B87AE8200507E1A /* RazonesSocialesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RazonesSocialesView.swift; sourceTree = "<group>"; };
+		07B828392B87B6CB00507E1A /* RazonSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RazonSocialViewModel.swift; sourceTree = "<group>"; };
+		07B8283B2B87B75700507E1A /* RazonSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RazonSocial.swift; sourceTree = "<group>"; };
+		07CAF4232B8E39A200AD7855 /* InstitucionesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitucionesView.swift; sourceTree = "<group>"; };
+		07CAF4262B8FAD2400AD7855 /* RazonSocialAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RazonSocialAPIService.swift; sourceTree = "<group>"; };
+		07CAF42A2B90DF1000AD7855 /* UsuariosApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsuariosApiService.swift; sourceTree = "<group>"; };
+		07CAF42C2B91118300AD7855 /* SucursalTipo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucursalTipo.swift; sourceTree = "<group>"; };
+		07CAF42E2B91123B00AD7855 /* SucursalTipoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucursalTipoViewModel.swift; sourceTree = "<group>"; };
+		07CAF4302B9112CA00AD7855 /* SucursalTipoApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucursalTipoApiService.swift; sourceTree = "<group>"; };
 		4B1E07382B6AF4F500BFDB45 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		4B1E073A2B6AF51600BFDB45 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		4B1E073E2B6AF54900BFDB45 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -545,11 +573,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		072AF7BA2B8D03A900D9E38B /* Zonas */ = {
+			isa = PBXGroup;
+			children = (
+				072AF7BB2B8D084200D9E38B /* ZonasView.swift */,
+			);
+			path = Zonas;
+			sourceTree = "<group>";
+		};
+		072AF7BD2B8D1D2C00D9E38B /* Usuarios */ = {
+			isa = PBXGroup;
+			children = (
+				072AF7BE2B8D1E5E00D9E38B /* UsuariosView.swift */,
+			);
+			path = Usuarios;
+			sourceTree = "<group>";
+		};
+		072AF7C02B8D377600D9E38B /* Puestos */ = {
+			isa = PBXGroup;
+			children = (
+				072AF7C12B8D378800D9E38B /* PuestosView.swift */,
+			);
+			path = Puestos;
+			sourceTree = "<group>";
+		};
+		072AF7C32B8D4BE400D9E38B /* Departamentos */ = {
+			isa = PBXGroup;
+			children = (
+				072AF7C42B8D4C9D00D9E38B /* DepartamentosView.swift */,
+			);
+			path = Departamentos;
+			sourceTree = "<group>";
+		};
 		07B827E32B728A0D00507E1A /* Sucursales */ = {
 			isa = PBXGroup;
 			children = (
 				07B827E42B728B0E00507E1A /* Sucursales.swift */,
 				07B827E62B728C6300507E1A /* SucursalesViewModel.swift */,
+				07CAF42C2B91118300AD7855 /* SucursalTipo.swift */,
+				07CAF42E2B91123B00AD7855 /* SucursalTipoViewModel.swift */,
 			);
 			path = Sucursales;
 			sourceTree = "<group>";
@@ -558,6 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				07B827E92B7292DA00507E1A /* SucursalApiService.swift */,
+				07CAF4302B9112CA00AD7855 /* SucursalTipoApiService.swift */,
 			);
 			path = Sucursales;
 			sourceTree = "<group>";
@@ -566,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				07B827EC2B72AF3D00507E1A /* SucursalesView.swift */,
+				072AF7C62B8D50FE00D9E38B /* TipoSucursalView.swift */,
 			);
 			path = Sucursales;
 			sourceTree = "<group>";
@@ -588,6 +652,54 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		07B828372B87AE9800507E1A /* RazonesSociales */ = {
+			isa = PBXGroup;
+			children = (
+				07B828352B87AE8200507E1A /* RazonesSocialesView.swift */,
+			);
+			path = RazonesSociales;
+			sourceTree = "<group>";
+		};
+		07B828382B87B6AF00507E1A /* RazonSocial */ = {
+			isa = PBXGroup;
+			children = (
+				07B828392B87B6CB00507E1A /* RazonSocialViewModel.swift */,
+				07B8283B2B87B75700507E1A /* RazonSocial.swift */,
+			);
+			path = RazonSocial;
+			sourceTree = "<group>";
+		};
+		07CAF4222B8E394400AD7855 /* Instituciones */ = {
+			isa = PBXGroup;
+			children = (
+				07CAF4232B8E39A200AD7855 /* InstitucionesView.swift */,
+			);
+			path = Instituciones;
+			sourceTree = "<group>";
+		};
+		07CAF4252B8FAD1400AD7855 /* RazonSocial */ = {
+			isa = PBXGroup;
+			children = (
+				07CAF4262B8FAD2400AD7855 /* RazonSocialAPIService.swift */,
+			);
+			path = RazonSocial;
+			sourceTree = "<group>";
+		};
+		07CAF4282B9051F400AD7855 /* Usuarios */ = {
+			isa = PBXGroup;
+			children = (
+				07CAF42A2B90DF1000AD7855 /* UsuariosApiService.swift */,
+			);
+			path = Usuarios;
+			sourceTree = "<group>";
+		};
+		07CAF4292B90DEC500AD7855 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		4B1E07342B6AF41500BFDB45 /* Componentes */ = {
 			isa = PBXGroup;
 			children = (
@@ -603,6 +715,12 @@
 		4B1E07352B6AF42300BFDB45 /* Vista */ = {
 			isa = PBXGroup;
 			children = (
+				07CAF4222B8E394400AD7855 /* Instituciones */,
+				072AF7C32B8D4BE400D9E38B /* Departamentos */,
+				072AF7C02B8D377600D9E38B /* Puestos */,
+				072AF7BD2B8D1D2C00D9E38B /* Usuarios */,
+				072AF7BA2B8D03A900D9E38B /* Zonas */,
+				07B828372B87AE9800507E1A /* RazonesSociales */,
 				07B8280D2B7A791E00507E1A /* Menu */,
 				07B827EB2B72ABBC00507E1A /* Sucursales */,
 				4B1E074A2B6AF79600BFDB45 /* Instructores */,
@@ -620,6 +738,9 @@
 		4B1E07362B6AF42C00BFDB45 /* Controlador */ = {
 			isa = PBXGroup;
 			children = (
+				07CAF4292B90DEC500AD7855 /* New Group */,
+				07CAF4282B9051F400AD7855 /* Usuarios */,
+				07CAF4252B8FAD1400AD7855 /* RazonSocial */,
 				07B827E82B7290F100507E1A /* Sucursales */,
 				4B1E07582B6AF9A800BFDB45 /* Instructores */,
 				4B1E074E2B6AF7D300BFDB45 /* Clientes */,
@@ -634,6 +755,7 @@
 		4B1E07372B6AF43B00BFDB45 /* Modelo */ = {
 			isa = PBXGroup;
 			children = (
+				07B828382B87B6AF00507E1A /* RazonSocial */,
 				07B827E32B728A0D00507E1A /* Sucursales */,
 				4B1E07472B6AF6EC00BFDB45 /* Instructores */,
 				4B1E07482B6AF6FA00BFDB45 /* Clientes */,
@@ -1239,6 +1361,7 @@
 				4B1E080C2B6BF30C00BFDB45 /* CursosDocumentacion.swift in Sources */,
 				4B1E07EA2B6BF1DE00BFDB45 /* ClientesContratos.swift in Sources */,
 				4B1E07932B6BEE7700BFDB45 /* InstructoresEnfermedades.swift in Sources */,
+				07B828362B87AE8200507E1A /* RazonesSocialesView.swift in Sources */,
 				4B1E08302B6D93A100BFDB45 /* CatalogoInstructoresDiscapacidadesAPIService.swift in Sources */,
 				4B1E08E32B72B4F000BFDB45 /* CatalogoCursosModalidadesAPIService.swift in Sources */,
 				4B1E07D72B6BF13D00BFDB45 /* CatalogoCursosMateriales.swift in Sources */,
@@ -1249,6 +1372,7 @@
 				07B8280C2B79823400507E1A /* CursosDocumentacionViewModel.swift in Sources */,
 				4B1E08162B6C22B300BFDB45 /* CursosAutorizaciones.swift in Sources */,
 				4B1E08C52B72B2E100BFDB45 /* CatalogoClientesMediosDeCaptacionAPIService.swift in Sources */,
+				07B8283C2B87B75700507E1A /* RazonSocial.swift in Sources */,
 				4B1E081A2B6C401200BFDB45 /* CursosEquipos.swift in Sources */,
 				4B1E08382B6D93E400BFDB45 /* CatalogoInstructoresEstadoSaludAPIService.swift in Sources */,
 				4B1E083A2B6D93F600BFDB45 /* CatalogoInstructoresIdiomasAPIService.swift in Sources */,
@@ -1268,6 +1392,7 @@
 				4B5E7ACC2B572EB1008095FC /* iecaappadminApp.swift in Sources */,
 				4B1E078D2B6BEE4500BFDB45 /* InstructoresDatosfiscales.swift in Sources */,
 				4B1E08CF2B72B34300BFDB45 /* CatalogoClientesSectoresAPIService.swift in Sources */,
+				072AF7C72B8D50FE00D9E38B /* TipoSucursalView.swift in Sources */,
 				4B1E08462B6D947700BFDB45 /* CatalogoInstructoresTipoNominaAPIService.swift in Sources */,
 				4B1E084E2B6D96BB00BFDB45 /* InstructoresAreaInteresAPIService.swift in Sources */,
 				4B1E08542B6D96DA00BFDB45 /* InstructoresCuentasBancariasAPIService.swift in Sources */,
@@ -1287,6 +1412,7 @@
 				4B1E08AD2B72A31900BFDB45 /* CursosMaterialesAPIService.swift in Sources */,
 				4B1E07CF2B6BF0EC00BFDB45 /* CatalogoCursosCampoDeFormacion.swift in Sources */,
 				07B827F42B72DAE400507E1A /* ClienteViewModel.swift in Sources */,
+				072AF7BC2B8D084200D9E38B /* ZonasView.swift in Sources */,
 				4B1E07BF2B6BF04200BFDB45 /* CatalogoClientesProfesiones.swift in Sources */,
 				4B1E08B32B72A38000BFDB45 /* CursosTipoClienteAPIService.swift in Sources */,
 				07B8280A2B7968E600507E1A /* CursosDocumentacionView.swift in Sources */,
@@ -1294,16 +1420,19 @@
 				4B1E08422B6D945600BFDB45 /* CatalogoInstructoresTipoAPIService.swift in Sources */,
 				4B1E08D32B72B36000BFDB45 /* CatalogoClientesTipoDocumentoAPIService.swift in Sources */,
 				4B1E07652B6BEAA600BFDB45 /* CatalogoInstructoresCursos.swift in Sources */,
+				07CAF42B2B90DF1000AD7855 /* UsuariosApiService.swift in Sources */,
 				4B1E08DD2B72B49600BFDB45 /* CatalogoCursosEspecialidadesAPIService.swift in Sources */,
 				4B1E085E2B6D970F00BFDB45 /* InstructoresEnfermedadesAPIService.swift in Sources */,
 				4B1E07D12B6BF0F900BFDB45 /* CatalogoCursosEquipos.swift in Sources */,
 				4B1E075A2B6AFA2600BFDB45 /* Registro.swift in Sources */,
 				4B1E08A12B72A23000BFDB45 /* CursosCreadoresAPIService.swift in Sources */,
 				4B1E08042B6BF2C200BFDB45 /* CursosBibliografias.swift in Sources */,
+				07CAF4272B8FAD2400AD7855 /* RazonSocialAPIService.swift in Sources */,
 				4B1E07DB2B6BF15A00BFDB45 /* CatalogoCursosPlataformas.swift in Sources */,
 				4B1E082A2B6D8D5D00BFDB45 /* CatalogoInstructoresAreasDeInteresAPIService.swift in Sources */,
 				4B1E07B92B6BEFE600BFDB45 /* CatalogoClientesGradoDeEstudios.swift in Sources */,
 				4B1E07EC2B6BF1EC00BFDB45 /* ClientesCursos.swift in Sources */,
+				07CAF4312B9112CA00AD7855 /* SucursalTipoApiService.swift in Sources */,
 				4B1E08892B6D9C9C00BFDB45 /* ClientesPersonaFisicaDatosAPIService.swift in Sources */,
 				4B1E08ED2B72B54300BFDB45 /* CatalogoCursosTipoConfidencialidadAPIService.swift in Sources */,
 				4B1E07872B6BEE0500BFDB45 /* InstructoresContactos.swift in Sources */,
@@ -1315,6 +1444,7 @@
 				4B1E073F2B6AF54900BFDB45 /* InputView.swift in Sources */,
 				07B827F62B73E79300507E1A /* CatalogoClientesCelulasViewModel.swift in Sources */,
 				4B1E08582B6D96F100BFDB45 /* InstructoresDiscapacidadesAPIService.swift in Sources */,
+				07CAF4242B8E39A200AD7855 /* InstitucionesView.swift in Sources */,
 				4B1E07D32B6BF11900BFDB45 /* CatalogoCursosEspecialidades.swift in Sources */,
 				4B1E08AB2B72A2CB00BFDB45 /* CursosInstructoresAPIService.swift in Sources */,
 				4B1E08EF2B72C02700BFDB45 /* DateFormatterManager.swift in Sources */,
@@ -1331,6 +1461,7 @@
 				4B1E08102B6BF33800BFDB45 /* CursosInstructores.swift in Sources */,
 				4B1E08402B6D944600BFDB45 /* CatalogoInstructoresStatusAPIService.swift in Sources */,
 				4B1E07E02B6BF17E00BFDB45 /* CatalogoCursosTemas.swift in Sources */,
+				072AF7C22B8D378800D9E38B /* PuestosView.swift in Sources */,
 				4B1E07EE2B6BF1FA00BFDB45 /* ClientesDatosCredito.swift in Sources */,
 				4B1E07F82B6BF24D00BFDB45 /* ClientesProspeccion.swift in Sources */,
 				4B1E07F22B6BF21700BFDB45 /* ClientesDocumentacion.swift in Sources */,
@@ -1385,6 +1516,7 @@
 				4B1E08852B6D9C8000BFDB45 /* ClientesDocumentacionAPIService.swift in Sources */,
 				4B1E085A2B6D96FA00BFDB45 /* InstructoresDocumentacionAPIService.swift in Sources */,
 				4B1E07F42B6BF22D00BFDB45 /* ClientesDomicilios.swift in Sources */,
+				072AF7C52B8D4C9D00D9E38B /* DepartamentosView.swift in Sources */,
 				4B1E080E2B6BF31D00BFDB45 /* CursosEvaluaciones.swift in Sources */,
 				4B1E08182B6C3E7200BFDB45 /* CursosCreadores.swift in Sources */,
 				4B1E08342B6D93BD00BFDB45 /* CatalogoInstructoresEquiposHerramientasAPIService.swift in Sources */,
@@ -1435,6 +1567,7 @@
 				4B1E07832B6BEDCB00BFDB45 /* CatalogoInstructoresTitulos.swift in Sources */,
 				4B1E08D72B72B46A00BFDB45 /* CatalogoCursosAreasAPIService.swift in Sources */,
 				4B1E08692B6D974A00BFDB45 /* InstructoresFormacionCursosAPIService.swift in Sources */,
+				07B8283A2B87B6CB00507E1A /* RazonSocialViewModel.swift in Sources */,
 				4B1E07B52B6BEFC300BFDB45 /* CatalogoClientesDetalles.swift in Sources */,
 				4B1E073B2B6AF51600BFDB45 /* CheckBoxView.swift in Sources */,
 				4B1E08CD2B72B33000BFDB45 /* CatalogoClientesRegimenFiscalAPIService.swift in Sources */,
@@ -1442,15 +1575,18 @@
 				07B828302B7EA56B00507E1A /* AuthenticationManager.swift in Sources */,
 				4B1E086D2B6D976900BFDB45 /* InstructoresPerfilAPIService.swift in Sources */,
 				4B1E07A32B6BEEFF00BFDB45 /* InstructoresRedesSociales.swift in Sources */,
+				07CAF42D2B91118300AD7855 /* SucursalTipo.swift in Sources */,
 				4B1E087B2B6D9C2F00BFDB45 /* ClientesContactosAPIService.swift in Sources */,
 				4B1E08602B6D971A00BFDB45 /* InstructoresEstadoSaludAPIService.swift in Sources */,
 				4B1E08652B6D973700BFDB45 /* InstructoresExperienciaEquipoAPIService.swift in Sources */,
 				4B1E08AF2B72A33900BFDB45 /* CursosModalidadesAPIService.swift in Sources */,
+				072AF7BF2B8D1E5E00D9E38B /* UsuariosView.swift in Sources */,
 				4B1E08672B6D974000BFDB45 /* InstructoresFormacionAcademicaAPIService.swift in Sources */,
 				4B1E078F2B6BEE5700BFDB45 /* IntructoresDiscapacidades.swift in Sources */,
 				4B1E07712B6BED2900BFDB45 /* CatalogoInstructoresIdiomas.swift in Sources */,
 				4B1E07F02B6BF20800BFDB45 /* ClientesDatosFicales.swift in Sources */,
 				4B1E07BB2B6BF01E00BFDB45 /* CatalogoClientesMediosDeCaptacion.swift in Sources */,
+				07CAF42F2B91123B00AD7855 /* SucursalTipoViewModel.swift in Sources */,
 				4B1E08E12B72B4E400BFDB45 /* CatalogoCursosMaterialesAPIService.swift in Sources */,
 				4B1E08122B6BF34C00BFDB45 /* CursosTemas.swift in Sources */,
 				4B1E08812B6D9C6300BFDB45 /* ClientesDatosCreditoAPIService.swift in Sources */,
