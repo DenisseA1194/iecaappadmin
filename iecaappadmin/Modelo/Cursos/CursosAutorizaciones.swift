@@ -20,7 +20,7 @@ struct CursosAutorizaciones: Identifiable, Codable {
     var Autoriza: Bool
     var Notas: String
     var Observaciones: String
-    var Fecha: Date
+    var Fecha: String
     var IdEmpresa: String
     var Borrado: Bool
 

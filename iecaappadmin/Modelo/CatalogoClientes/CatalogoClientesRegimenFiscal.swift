@@ -15,7 +15,7 @@ struct CatalogoClientesRegimenFiscal: Identifiable, Codable {
     var Descripcion: String
     var Fisica: String
     var Moral: String
-    var Borrado: Bool
+    var Borrado: Bool?
     
     var id: String {
         return Id

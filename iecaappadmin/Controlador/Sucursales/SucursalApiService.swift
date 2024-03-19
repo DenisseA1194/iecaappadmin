@@ -18,7 +18,7 @@ class SucursalAPIService {
     
     func editarSucursal(sucursal: Sucursal, completion: @escaping (Result<Void, Error>) -> Void) {
         let url = baseURL + "/api/Sucursal/\(sucursal.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
-        
+        print(url)
         // Obtener la fecha actual
         let currentDate = Date()
                
@@ -37,10 +37,12 @@ class SucursalAPIService {
             "IdTitular": sucursal.IdTitular,
             "IdRazonSocial": sucursal.IdRazonSocial,
             "IdZona": sucursal.IdZona,
-            "Tipo": sucursal.Tipo,
+            "IdSucursalTipo": sucursal.IdSucursalTipo,
             "Notas": sucursal.Notas,
             "borrado": sucursal.borrado,
-            "Fecha": sucursal.Fecha
+            "Fecha": sucursal.Fecha,
+            "LinkImagen": sucursal.LinkImagen,
+            "IdEmpresa": sucursal.IdEmpresa
         ]
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted),
                let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -103,13 +105,15 @@ class SucursalAPIService {
             "IdTitular": nuevaSucursal.IdTitular,
             "IdRazonSocial": nuevaSucursal.IdRazonSocial,
             "IdZona": nuevaSucursal.IdZona,
-            "Tipo": nuevaSucursal.Tipo,
+            "IdSucursalTipo": nuevaSucursal.IdSucursalTipo,
             "Notas": nuevaSucursal.Notas,
             "borrado": nuevaSucursal.borrado,
-            "Fecha": nuevaSucursal.Fecha
+            "Fecha": nuevaSucursal.Fecha,
+            "LinkImagen": nuevaSucursal.LinkImagen,
+            "IdEmpresa": nuevaSucursal.IdEmpresa
            ]
         
-           AF.request(webService.getBaseURL() + "/api/Sucursal", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/Sucursal", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: Sucursal.self) { response in
                    switch response.result {

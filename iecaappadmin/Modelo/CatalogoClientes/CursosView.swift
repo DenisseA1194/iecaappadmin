@@ -1,435 +1,322 @@
 //
-//  CursosView.swift
+//  ZonasView.swift
 //  iecaappadmin
 //
-//  Created by Omar on 07/02/24.
+//  Created by Omar on 26/02/24.
 //
 
 import SwiftUI
-import Alamofire
 
 struct CursosView: View {
-    @Binding var presentSideMenu: Bool
-    enum SortingOption: String, CaseIterable {
-        case nombre = "Nombre"
-        case objetivoGeneral = "ObjetivoGeneral"
-        
-        var keyPath: KeyPath<Curso, String> {
-            switch self {
-            case .nombre: return \.Nombre
-            case .objetivoGeneral: return \.ObjetivoGeneral
-            }
-        }
-    }
     
-    @StateObject private var viewModel = CursosViewModel()
-    @Binding var showSignInView: Bool
-    @State private var isAddingNewCursos = false
-    @State private var isEditingCurso = false
-    @State private var mostrarBotones = false
-    @State private var NombreRegistroSeleccionado = ""
-    @State private var searchText = ""
-    @State private var selectedSortingOption: SortingOption = .nombre
-    @State private var selectedCurso: Curso? = nil
-    @State private var currentIndex = 0
-    let items = ["","Actividades", "Autorizaciones", "Bibliografia", "Competencias", "Comp a desarrollar", "Descripciones", "Creadores", "Documentacion", "Equipos", "Evaluaciones", "Instructores", "Materiales", "Modalidades", "Temas", "Tipo de cliente"]
-    
-    
-    var sortedCurso: [Curso] {
-        if searchText.isEmpty {
-            return viewModel.cursos.sorted(by: { $0[keyPath: selectedSortingOption.keyPath] < $1[keyPath: selectedSortingOption.keyPath] }) ?? []
-        } else {
-            let filtered = viewModel.cursos.filter { curso in
-                return curso.Nombre.lowercased().contains(searchText.lowercased())
-            }
-            return filtered.sorted(by: { $0[keyPath: selectedSortingOption.keyPath] < $1[keyPath: selectedSortingOption.keyPath] }) ?? []
-        }
-    }
-    
-    var body: some View {
-        VStack{
-            
-            HStack {
-                
-                Button(action: {
-                    presentSideMenu.toggle()
-                }) {
-                    Image("hamburguesa")
-                        .foregroundColor(.blue)
-                        .imageScale(.large)
-                }
-                .padding()
-                Spacer()
-            }
-            
-            NavigationView {
-                List {
-                    //SearchBar(searchText: $searchText)
-                    ForEach(sortedCurso) { curso in
-                        CursoCellView(curso: curso, viewModel: viewModel, mostrarBotones: $mostrarBotones, didSelectCurso: { selectedCurso in
-                            // Asignar el curso seleccionado a una variable de estado en CursosView
-                            self.selectedCurso = selectedCurso
-                        })
-                        .listRowSeparator(.visible)
-                        .padding(.horizontal, 16)
-                    }
-                    
-                    Button(action: {
-                        isAddingNewCursos.toggle()
-                    }) {
-                        Text("Agregar Cursos")
-                    }
-                } .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Menu("Ordenar por") {
-                            ForEach(SortingOption.allCases, id: \.self) { option in
-                                Button(action: {
-                                    selectedSortingOption = option
-                                }) {
-                                    Label(option.rawValue, systemImage: "arrow.up.arrow.down")
-                                }
-                            }
-                        }
-                    }
-                }
-                .onAppear {
-                    viewModel.fetchCursos()
-                }
-                .navigationTitle("Cursos")
-                .sheet(isPresented: $isAddingNewCursos) {
-                    AgregarCursoView(isAddingNewCursos: $isAddingNewCursos, cursosViewModel: viewModel)
-                }
-            }
-            
-            if mostrarBotones {
-                VStack {
-                    if let nombre = selectedCurso?.Nombre {
-                        Text(nombre)
-                            .font(.title3)
-                    }
-                    CarouselView(items: items, currentIndex: $currentIndex, selectedCurso: selectedCurso)
-                }
-                .padding()
-            }
-        }
-    }
-}
-
-struct SearchBarCursos: View {
-    @Binding var searchText: String
-    
-    var body: some View {
-        HStack {
-            TextField("Buscar", text: $searchText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
-            if !searchText.isEmpty {
-                Button(action: {
-                    searchText = ""
-                }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.gray)
-                }
-                .padding(.trailing, 8)
-            }
-        }
-    }
-}
-
-struct CursoCellView: View {
-    let curso: Curso
-    @ObservedObject var viewModel: CursosViewModel
-    @State private var isPresentingEditForm = false
-    @Binding var mostrarBotones: Bool
-    var didSelectCurso: (Curso) -> Void
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(curso.Nombre)
-                Text(curso.Version)
-                Text(curso.Proposito)
-                    .lineLimit(1)
-            }
-            Spacer()
-            HStack {
-                Button(action: {
-                    didSelectCurso(curso)
-                    mostrarBotones = true
-                    //                    isPresentingEditForm.toggle()
-                }) {
-                    //                                       Image(systemName: "pencil")
-                }
-                .foregroundColor(.blue)
-                .sheet(isPresented: $isPresentingEditForm) {
-                    
-                    EditarCursoView(curso: curso, cursosViewModel: viewModel, isPresented: $isPresentingEditForm)
-                }
-            }.swipeActions{
-                
-                
-                
-                Button(action: {
-                    isPresentingEditForm.toggle()
-                    // Acción del primer botón
-                    print("Edit")
-                }) {
-                    Label("Editar", systemImage: "pencil")
-                        .tint(.blue)
-                }
-                Button(action: {
-                    viewModel.eliminarCurso(curso: curso)
-                }) {
-                    Label("Eliminar", systemImage: "trash")
-                        .tint(.red)
-                }
-                
-                
-                
-                //                                                              Menu {
-                //                                                                  Button("Editar") {
-                //                                                                      // Acción para editar
-                //                                                                      print("Editar")
-                //                                                                  }.tint(.blue)
-                //                                                                  Button("Eliminar") {
-                //                                                                      // Acción para eliminar
-                //                                                                      print("Eliminar")
-                //                                                                  }.tint(.red)
-                //                                                              } label: {
-                //                                                                  Label("Más opciones", systemImage: "ellipsis.circle")
-                //                                                                      .tint(.gray)  // Puedes establecer un color diferente si es necesario
-                //                                                              }
-                
-            }
-        }
-        .padding(8)
-    }
-}
-
-
-
-struct EditarCursoView: View {
-    let curso: Curso
-    @ObservedObject var cursosViewModel: CursosViewModel
-    @Binding var isPresented: Bool
-    
-    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
+    @State var seleccionCurso: Int = 0
+    @State var seleccionCampoFormacion: Int = 0
+    @State var seleccionArea: Int = 0
+    @State var seleccionEspecialidad: Int = 0
+    @State var seleccionModalidad: Int = 0
+    @State var seleccionConfidencialidad: Int = 0
+    @State var seleccionPlataforma: Int = 0
+    @StateObject var viewModelCurso = CursosViewModel()
+    @StateObject var viewModelCampoFormacion = CatalogoCursosCampoDeFormacionViewModel()
+    @StateObject var viewModelArea = AreaViewModel()
     @StateObject var viewModelEspecialidad = CatalogoCursosEspecialidadesViewModel()
-    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
     @StateObject var viewModelModalidad = CatalogoCursosModalidadesViewModel()
+    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
     @StateObject var viewModelPlataforma = CatalogoCursosPlataformasViewModel()
     
-    @State private var nuevoNombre = ""
-    @State private var nuevaVersion = ""
-    @State private var nuevoObjetivoGeneral = ""
-    @State private var nuevoProposito = ""
-    @State private var nuevoObjetivo = ""
-    @State private var nuevoNotas = ""
-    @State private var nuevoCodigo = ""
-    @State private var nuevoCodigoCliente = ""
-    @State private var nuevoCodigoInterno = ""
-    @State private var nuevoCodigoAlterno = ""
     
-    @State private var idFormacion = ""
-    @State private var idEspecialidad = ""
-    @State private var idConfidencialidad = ""
-    @State private var idModalidad = ""
-    @State private var idPlataforma = ""
+    @State private var _Nombre = ""
+    @State private var _Notas = ""
+    @State private var _Id = ""
+    @State private var _Version = 0.0
+    @State private var _Codigo = ""
+    @State private var _STPS = ""
+    @State private var _CodigoCliente = ""
+    @State private var _CodigoAlterno = ""
+    @State private var _CodigoInterno = ""
+    @State private var _Proposito = ""
+    @State private var _Objetivo = ""
+    @State private var _ObjetivoGeneral = ""
+    @State private var _LinkLogo = ""
     
-    //    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
-    @State var seleccion: Int = 0
-    @State private var isShowingForm = false
-    @State private var isShowingFormFormacion = false
-    @State private var isShowingFormEspecialidad = false
-    @State private var isShowingFormConfidencialidad = false
-    @State private var isShowingFormModalidad = false
-    @State private var isShowingFormPlataforma = false
+    @State private var _IdCampoDeFormacion = ""
+    @State private var _IdEspecialidad = ""
+    @State private var _IdTipoConfidencialidad = ""
+    @State private var _IdModalidad = ""
+    @State private var _IdPlataformaLMSUtilizada = ""
+    @State private var _IdArea = ""
     
-    @State var seleccionFormacion: Int = 0
-    @State var seleccionEspecialidad: Int = 0
-    @State var seleccionConfidencialidad: Int = 0
-    @State var seleccionModalidad: Int = 0
-    @State var seleccionPlataforma: Int = 0
+    @State private var buttonText = "Agregar"
     
     
-    init(curso: Curso, cursosViewModel: CursosViewModel, isPresented: Binding<Bool>) {
-        self.curso = curso
-        self.cursosViewModel = cursosViewModel
-        self._isPresented = isPresented
-        
-        _nuevoNombre = State(initialValue: curso.Nombre)
-        _nuevaVersion = State(initialValue: curso.Version)
-        _nuevoObjetivoGeneral = State(initialValue: curso.ObjetivoGeneral)
-        _nuevoProposito = State(initialValue: curso.Proposito)
-        _nuevoObjetivo = State(initialValue: curso.Objetivo)
-        _nuevoNotas = State(initialValue: curso.Notas)
-        _nuevoCodigo = State(initialValue: curso.Codigo)
-        _nuevoCodigoCliente = State(initialValue: curso.CodigoCliente)
-        _nuevoCodigoInterno = State(initialValue: curso.CodigoInterno)
-        _nuevoCodigoAlterno = State(initialValue: curso.CodigoAlterno)
-        
-        _idFormacion = State(initialValue: curso.IdCampoDeFormacion)
-        _idEspecialidad = State(initialValue: curso.IdEspecialidad)
-        _idConfidencialidad = State(initialValue: curso.IdTipoConfidencialidad)
-        _idModalidad = State(initialValue: curso.IdModalidad)
-        _idPlataforma = State(initialValue: curso.IdPlataformaLMSUtilizada)
-        
-        
-        
-        if let index = viewModel.catalogoCursosCampoDeFormacion.firstIndex(where: { $0.id == curso.IdCampoDeFormacion }) {
-            seleccionFormacion = index
-        }
+    //    datos de aviso e imagen
+    @State private var imageUrl: String?
+    @State private var urlImagenFirebase: String? = ""
+    @State private var isShowingImagePicker = false
+    @State private var selectedImage: UIImage?
+    @State private var image: Image?
+    @State private var showAlert = false
+    @State private var showAlertAgregarModificar = false
+    @State private var avisoText = ""
+    
+    
+    
+    func limpiarFormulario() {
+        _Nombre = ""
+        _Notas = ""
+        imageUrl = nil
+        urlImagenFirebase = nil
     }
+    
+    func ConsultarEspecialidades() async throws  {
+        
+    }
+    
+    func todosLosCamposEstanCompletos() -> Bool {
+        // Verificar si el campo de nombre no está vacío
+        guard !_Nombre.isEmpty else {
+            // Si el campo está vacío, retornar falso
+            return false
+        }
+        
+        // Si el campo no está vacío, retornar verdadero
+        return true
+    }
+    
+    
+    
+    
+    
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                Section(header: Text("Editar Curso")) {
-                    
-                    TextField("Nombre", text: $nuevoNombre)
-                        .padding()
-                    TextField("Version", text: $nuevaVersion)
-                        .padding()
-                    TextField("ObjetivoGeneral", text: $nuevoObjetivoGeneral)
-                        .padding()
-                    TextField("Proposito", text: $nuevoProposito)
-                        .padding()
-                    TextField("Objetivo", text: $nuevoObjetivo)
-                        .padding()
-                    TextField("Notas", text: $nuevoNotas)
-                        .padding()
-                    TextField("Codigo", text: $nuevoCodigo)
-                        .padding()
-                    TextField("Codigo cliente", text: $nuevoCodigoCliente)
-                        .padding()
-                    TextField("Codigo interno", text: $nuevoCodigoInterno)
-                        .padding()
-                    TextField("Codigo alterno", text: $nuevoCodigoAlterno)
-                        .padding()
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            HStack{
-                                Text(" Campo de formación")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormFormacion.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormFormacion) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormFormacion, callingScreen: "Formacion", tituloScreen: " Campo de formación" )
-                                }.frame(width: 30, height: 40)
-                            }
-                            
-                            
-                            
-                            
-                            Picker("Campo de formación", selection: $seleccionFormacion) {
-                                
-                                ForEach(viewModel.catalogoCursosCampoDeFormacion.indices, id: \.self) { index in
-                                    
-                                    Text(viewModel.catalogoCursosCampoDeFormacion[index].Nombre)
-                                        .tag(index)
-                                    
-                                }
-                                
-                            }
-                            
-                            .pickerStyle(.menu)
-                            
+            Form {
+                Section(header: Text("Selecciona un curso")) {
+                    Picker("Cursos", selection: $seleccionCurso) {
+                        
+                        ForEach(viewModelCurso.cursos.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelCurso.cursos[index].Nombre)
+                                .tag(index)
                         }
-                        .onAppear {
+                        
+//                        
+//                        let i = 0
+//                        ForEach([0] + viewModelCurso.cursos.indices.map { $0 + 1 }, id: \.self) { index in
+//                            if index == 0 {
+//                                Text("")
+//                                    .tag(0)
+//                            } else {
+//                                Text(viewModelCurso.cursos[index - 1].Nombre)
+//                                    .tag(index)
+//                            }
+//                        }
+                    }.onChange(of: seleccionCurso) { index in
+                        
+                        if index != 0 {
+                            let Seleccionada = viewModelCurso.cursos[index]
                             
-                            viewModel.fetchCatalogoCursosCampoDeFormacion()
-                            viewModelEspecialidad.fetchCatalogoCursosEspecialidades()
-                            
-                            if let index = viewModel.catalogoCursosCampoDeFormacion.firstIndex(where: { $0.Nombre == "Lenguajes" }) {
-                                seleccionFormacion = index
-                                print("El registro está en la posición \(index)")
+                            let stringValue = "123"
+                            if let intValue = Int(stringValue) {
+                                // Aquí intValue contendrá el valor entero 123
+                                print(intValue)
                             } else {
-                                print(viewModel.catalogoCursosCampoDeFormacion)
+                                // Manejar el caso en el que la conversión falla
+                                print("No se pudo convertir a entero")
                             }
                             
+                            _Nombre = Seleccionada.Nombre
+                            _Notas = Seleccionada.Notas
+                            _Id = Seleccionada.Id
+                            _Version = Seleccionada.Version
+                            _Codigo = Seleccionada.Codigo
+                            _STPS = Seleccionada.RegistroSTPS
+                            _CodigoCliente = Seleccionada.CodigoCliente
+                            _CodigoAlterno = Seleccionada.CodigoAlterno
+                            _CodigoInterno = Seleccionada.CodigoInterno
+                            _Proposito = Seleccionada.Proposito
+                            _Objetivo = Seleccionada.Objetivo
+                            _ObjetivoGeneral = Seleccionada.ObjetivoGeneral
+                            urlImagenFirebase = Seleccionada.LinkFoto
+                            _IdCampoDeFormacion = Seleccionada.IdCampoDeFormacion
+                            _IdEspecialidad = Seleccionada.IdEspecialidad
+                            _IdTipoConfidencialidad = Seleccionada.IdTipoConfidencialidad
+                            _IdModalidad = Seleccionada.IdModalidad
+                            _IdPlataformaLMSUtilizada = Seleccionada.IdModalidad
+                            _IdArea = Seleccionada.IdArea
+                   
+                          
+                            viewModelEspecialidad.fetchCatalogoCursosEspecialidades(idArea: Seleccionada.IdArea) { result in
+                                switch result {
+                                case .success(let catalogoCursosEspecialidades):
+                                    if !catalogoCursosEspecialidades.isEmpty {
+                                        let Seleccionada = viewModelCurso.cursos[index]
+                                        
+                                        if let registro = viewModelEspecialidad.catalogoCursosEspecialidades.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdEspecialidad.uppercased() }) {
+                                            seleccionEspecialidad = registro
+                                        }
+                                    } else {
+                                        // No se han traído registros, manejar caso aquí
+                                    }
+                                case .failure(let error):
+                                    // Manejar el error
+                                    print("Error al obtener el catálogo de cursos especialidad: \(error.localizedDescription)")
+                                }
+                            }
+                            
+//                            Esta es el codigo que depende de los registros obtenidos
+                            if index != 0 {
+                                let seleccion =  viewModelCurso.cursos[index]
+                           
+                                if let registro = viewModelEspecialidad.catalogoCursosEspecialidades.firstIndex(where: { $0.Id.uppercased() == seleccion.IdEspecialidad.uppercased() }) {
+                                    seleccionEspecialidad = registro
+                                }
+  
+                            }else{
+                                //                             limpiarFormulario()
+                                
+                            }
+                            
+                            if let registro = viewModelCampoFormacion.catalogoCursosCampoDeFormacion.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdCampoDeFormacion.uppercased() }) {
+                                seleccionCampoFormacion = registro
+                            }
+                            
+                            if let registro = viewModelArea.areas.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdArea.uppercased() }) {
+                                seleccionArea = registro
+                                viewModelEspecialidad.fetchCatalogoCursosEspecialidades(idArea: _IdArea)
+                            }
+                            
+                            if let registro = viewModelModalidad.catalogoCursosModalidades.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdModalidad.uppercased() }) {
+                                seleccionModalidad = registro
+                            }
+                            
+                            if let registro = viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdTipoConfidencialidad.uppercased() }) {
+                                seleccionConfidencialidad = registro
+                            }
+                            
+                            if let registro = viewModelPlataforma.catalogoCursosPlataformas.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdPlataformaLMSUtilizada.uppercased() }) {
+                                seleccionPlataforma = registro
+                            }
+                            
+                            if let registro = viewModelEspecialidad.catalogoCursosEspecialidades.firstIndex(where: { $0.Id.uppercased() == Seleccionada.IdEspecialidad.uppercased() }) {
+                                
+                                seleccionEspecialidad = registro
+                            }else{
+                                
+                                
+                            }
+                            buttonText = "Actualizar"
+                        }else{
+                            //                             limpiarFormulario()
+                            
                         }
-                        Spacer()
+                        
+                    }.onAppear {
+                        
+                        
+                      
+                        
+                        
+                        
+                    }.toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                buttonText = "Agregar"
+                                limpiarFormulario()
+                                showAlert.toggle()
+                            }) {
+                                
+                                Image(systemName: "plus")
+                                
+                            }.alert(isPresented: $showAlert) {
+                                Alert(title: Text("Aviso"), message: Text("Agrega una nueva zona"), dismissButton: .default(Text("Aceptar")))
+                            }
+                        }
+                    }
+                }
+                
+                Section() {
+                    TextField("Nombre", text: $_Nombre)
+                    VStack(alignment: .leading) {
+                        Text("Notas:") // Etiqueta para el TextEditor
+                            .font(.headline)
+                            .padding(.top)
+                        
+                        TextEditor(text: $_Notas)
+                            .frame(minHeight: 80) // Altura mínima del TextEditor
+                            .padding()
+                            .background(Color.gray.opacity(0.1)) // Fondo del TextEditor
+                            .cornerRadius(8) // Bordes redondeados
+                            .padding()
+                    }
+                    Picker("Campo formacion", selection: $seleccionCampoFormacion) {
+                        
+                        ForEach(viewModelCampoFormacion.catalogoCursosCampoDeFormacion.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelCampoFormacion.catalogoCursosCampoDeFormacion[index].Nombre)
+                                .tag(index)
+                        }
+                    }.onChange(of: seleccionCampoFormacion) { index in
+                        
+                        if index != 0 {
+                            let zonaSeleccionada = viewModelCampoFormacion.catalogoCursosCampoDeFormacion[index]
+                            
+                            
+                            _IdCampoDeFormacion = zonaSeleccionada.Id
+                            
+                            
+                            
+                        }else{
+                            //                             limpiarFormulario()
+                            
+                        }
+                        
+                    }.onAppear {
+                        
+                        //                        viewModelCurso.fetchCursos()
+                        
+                        
                     }
                     
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            // Etiqueta para el segundo Picker
-                            
-                            HStack{
-                                Text(" Especialidad")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormEspecialidad.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormEspecialidad) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormEspecialidad, callingScreen: "Especialidad",tituloScreen: "Especialidad")
-                                }
-                            }
-                            
-                            
-                            Picker("Especialidad", selection: $seleccionEspecialidad) {
-                                ForEach(viewModelEspecialidad.catalogoCursosEspecialidades.indices, id: \.self) { index in
-                                    Text(viewModelEspecialidad.catalogoCursosEspecialidades[index].Nombre)
-                                        .tag(index)
-                                }
-                            }.onChange(of: idEspecialidad) { newValue in
-                                if let index = viewModelEspecialidad.catalogoCursosEspecialidades.firstIndex(where: { $0.id == idEspecialidad }) {
-                                    seleccionEspecialidad = index
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }
+                    Picker("Areas", selection: $seleccionArea) {
                         
-                        Spacer()
+                        ForEach(viewModelArea.areas.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelArea.areas[index].Nombre)
+                                .tag(index)
+                        }
+                    }.onChange(of: seleccionArea) { index in
+                        
+                        
+                        let areaSeleccionada = viewModelArea.areas[index]
+                        
+                        viewModelEspecialidad.catalogoCursosEspecialidades = []
+                        
+                        _IdArea = areaSeleccionada.Id
+                        
+                        viewModelEspecialidad.fetchCatalogoCursosEspecialidades(idArea: _IdArea)
+                        
+                        
+                        
+                        
+                    }.onAppear {
+                        
+                        
+                        //                        viewModelCurso.fetchCursos()
+                        
+                        
+                        
                     }
                     
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            
-                            
-                            HStack{
-                                Text(" Tipo confidencialidad")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormConfidencialidad.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormConfidencialidad) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormConfidencialidad, callingScreen: "Confidencialidad", tituloScreen: "Tipo de Confidencialidad")
-                                }
-                            }
-                            
-                            
-                            Picker("Tipo confidencialidad", selection: $seleccionConfidencialidad) {
-                                ForEach(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.indices, id: \.self) { index in
-                                    Text(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[index].Nombre)
-                                        .tag(index)
-                                }
-                            }.onChange(of: idConfidencialidad) { newValue in
-                                if let index = viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.firstIndex(where: { $0.id == idConfidencialidad }) {
-                                    seleccionConfidencialidad = index
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }.onAppear {
-                            viewModelConfidencialidad.fetchCatalogoCursosTipoConfidencialidad()
+                    Picker("Especialidad", selection: $seleccionEspecialidad) {
+                        
+                        ForEach(viewModelEspecialidad.catalogoCursosEspecialidades.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelEspecialidad.catalogoCursosEspecialidades[index].Nombre)
+                                .tag(index)
                         }
+                    }.onChange(of: seleccionEspecialidad) { index in
+                       
                         
-                        Spacer()
                         
+                        
+                    }.onAppear {
                         
                         
                         
@@ -437,594 +324,249 @@ struct EditarCursoView: View {
                         
                     }
                     
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            
-                            
-                            HStack{
-                                Text(" Modalidad")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormModalidad.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormModalidad) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormModalidad ,callingScreen: "Modalidad", tituloScreen: "Modalidad")
-                                }
-                            }
-                            
-                            
-                            
-                            Picker("Modalidad", selection: $seleccionModalidad) {
-                                ForEach(viewModelModalidad.catalogoCursosModalidades.indices, id: \.self) { index in
-                                    Text(viewModelModalidad.catalogoCursosModalidades[index].Nombre)
-                                        .tag(index)
-                                }
-                            }.onChange(of: idModalidad) { newValue in
-                                if let index = viewModelModalidad.catalogoCursosModalidades.firstIndex(where: { $0.id == idModalidad }) {
-                                    seleccionModalidad = index
-                                }
-                            }
-                            .pickerStyle(.menu)
+                    Picker("Modalidad", selection: $seleccionModalidad) {
+                        
+                        ForEach(viewModelModalidad.catalogoCursosModalidades.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelModalidad.catalogoCursosModalidades[index].Nombre)
+                                .tag(index)
                         }
-                        .onAppear {
-                            viewModelModalidad.fetchCatalogoCursosModalidades()
-                        }
-                        Spacer()
-                    }
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
+                    }.onChange(of: seleccionModalidad) { index in
+                        
+                        if index != 0 {
+                            let zonaSeleccionada = viewModelModalidad.catalogoCursosModalidades[index]
+                            
+                            
+                            _IdModalidad = zonaSeleccionada.Id
                             
                             
                             
-                            HStack{
-                                Text(" Plataforma LMS Utilizada")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormPlataforma.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormPlataforma) {
-                                    
-                                    FormularioView(isAdding:$isShowingFormPlataforma, callingScreen: "Plataforma", tituloScreen: " Plataforma").frame(width: 300, height: 400)
-                                }
-                            }
+                        }else{
+                            //                             limpiarFormulario()
                             
-                            
-                            Picker("Plataforma LMS Utilizada", selection: $seleccionPlataforma) {
-                                ForEach(viewModelPlataforma.catalogoCursosPlataformas.indices, id: \.self) { index in
-                                    Text(viewModelPlataforma.catalogoCursosPlataformas[index].Nombre)
-                                        .tag(index)
-                                }
-                            }.onChange(of: idPlataforma) { newValue in
-                                if let index = viewModelPlataforma.catalogoCursosPlataformas.firstIndex(where: { $0.id == idPlataforma }) {
-                                    seleccionPlataforma = index
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        } .onAppear {
-                            viewModelPlataforma.fetchCatalogoCursosPlataformas()
                         }
                         
-                        Spacer()
+                    }.onAppear {
+                        
+                        
+                        //                        viewModelCurso.fetchCursos()
+                        
+                        
                         
                     }
+                    
+                    
+                    Picker("Confidencialidad", selection: $seleccionConfidencialidad) {
+                        
+                        ForEach(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[index].Nombre)
+                                .tag(index)
+                        }
+                    }.onChange(of: seleccionConfidencialidad) { index in
+                        
+                        if index != 0 {
+                            let zonaSeleccionada = viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[index]
+                            
+                            
+                            _IdTipoConfidencialidad = zonaSeleccionada.Id
+                            
+                            
+                            
+                        }else{
+                            //                             limpiarFormulario()
+                            
+                        }
+                        
+                    }.onAppear {
+                        
+                        
+                        //                        viewModelCurso.fetchCursos()
+                        
+                        
+                        
+                    }
+                    
+                    Picker("Plataforma", selection: $seleccionPlataforma) {
+                        
+                        ForEach(viewModelPlataforma.catalogoCursosPlataformas.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelPlataforma.catalogoCursosPlataformas[index].Nombre)
+                                .tag(index)
+                        }
+                    }.onChange(of: seleccionPlataforma) { index in
+                        
+                        if index != 0 {
+                            let zonaSeleccionada = viewModelPlataforma.catalogoCursosPlataformas[index]
+                            
+                            
+                            _IdPlataformaLMSUtilizada = zonaSeleccionada.Id
+                            
+                            
+                            
+                        }else{
+                            //                             limpiarFormulario()
+                            
+                        }
+                        
+                    }.onAppear {
+                        
+                        
+                        //                        viewModelCurso.fetchCursos()
+                        
+                        
+                        
+                    }
+                    
+                    
+                    TextField("Version", text: Binding<String>(
+                        get: { String(_Version) }, // Convierte el entero _Version a una cadena
+                        set: { _Version = Double($0) ?? 0 } // Convierte la cadena introducida en el TextField a un entero
+                    ))
+                    TextField("Codigo", text: $_Codigo)
+                    TextField("STPS", text: $_STPS)
+                    TextField("Codigo cliente", text: $_CodigoCliente)
+                    TextField("Codigo alterno", text: $_CodigoAlterno)
+                    TextField("Codigo interno", text: $_CodigoInterno)
+                    TextField("Proposito", text: $_Proposito)
+                    TextField("Objetivo", text: $_Objetivo)
+                    TextField("Objetivo general", text: $_ObjetivoGeneral)
+                    
+                    HStack {
+                        Spacer()
+                        if let selectedImage = urlImagenFirebase {
+                            AsyncImage(url: URL(string: urlImagenFirebase ?? "logo")) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 100, height: 100)
+                                } else if phase.error != nil {
+                                    // Handle error
+                                    Image("logo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 100, height: 100)
+                                } else {
+                                    // Placeholder image or activity indicator while loading
+                                    //                                   /* */ProgressView()
+                                    Image("logo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 100, height: 100)
+                                }
+                            }
+                        } else {
+                            Image("logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100, height: 100)
+                        }
+                        Spacer()
+                        Button("Seleccionar imagen") {
+                            imageUrl = "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C/FotoUsuario/"
+                            isShowingImagePicker.toggle()
+                        }
+                        .sheet(isPresented: $isShowingImagePicker) {
+                            ImagePicker(image: $image, isPresented: $isShowingImagePicker, imageUrl: $imageUrl, urlImagenFirebase: $urlImagenFirebase)
+                        }
+                    }
+                    
                     
                 }
                 
                 Section {
-                    Button("Guardar Cambios") {
-                        editarCurso()
+                    Button(action: {
+                        if todosLosCamposEstanCompletos() {
+                            if buttonText == "Agregar"{
+                                avisoText = "Registro Agregado"
+                                showAlertAgregarModificar.toggle()
+                                let nuevoCurso = Curso(
+                                    Id:"",
+                                    Nombre: _Nombre,
+                                    Version: _Version,
+                                    Fecha: "2024-01-30T19:06:05.675Z",
+                                    Borrado: false,
+                                    IdCampoDeFormacion: _IdCampoDeFormacion,
+                                    IdEspecialidad: _IdEspecialidad,
+                                    IdTipoConfidencialidad: _IdTipoConfidencialidad,
+                                    IdModalidad: _IdModalidad,
+                                    IdPlataformaLMSUtilizada: _IdPlataformaLMSUtilizada,
+                                    ObjetivoGeneral: _ObjetivoGeneral,
+                                    RegistroSTPS: _STPS,
+                                    Proposito: _Proposito,
+                                    Objetivo: _Objetivo,
+                                    Notas: _Notas,
+                                    Codigo: _Codigo,
+                                    CodigoCliente: _CodigoCliente,
+                                    CodigoInterno: _CodigoInterno,
+                                    CodigoAlterno: _CodigoAlterno,
+                                    Activo: true,
+                                    IdArea:_IdArea,
+                                    LinkFoto: urlImagenFirebase!,
+                                    IdEmpresa: "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+                                    
+                                    
+                                )
+                                viewModelCurso.agregarNuevoCurso(nuevoCurso: nuevoCurso)
+                                viewModelCurso.fetchCursos()
+                            }else{
+                                avisoText = "Registro Modificado"
+                                showAlertAgregarModificar.toggle()
+                                let curso = Curso(
+                                    Id:_Id,
+                                    Nombre: _Nombre,
+                                    Version: _Version,
+                                    Fecha: "2024-01-30T19:06:05.675Z",
+                                    Borrado: false,
+                                    IdCampoDeFormacion: _IdCampoDeFormacion,
+                                    IdEspecialidad: _IdEspecialidad,
+                                    IdTipoConfidencialidad: _IdTipoConfidencialidad,
+                                    IdModalidad: _IdModalidad,
+                                    IdPlataformaLMSUtilizada: _IdPlataformaLMSUtilizada,
+                                    ObjetivoGeneral: _ObjetivoGeneral,
+                                    RegistroSTPS: _STPS,
+                                    Proposito: _Proposito,
+                                    Objetivo: _Objetivo,
+                                    Notas: _Notas,
+                                    Codigo: _Codigo,
+                                    CodigoCliente: _CodigoCliente,
+                                    CodigoInterno: _CodigoInterno,
+                                    CodigoAlterno: _CodigoAlterno,
+                                    Activo: true,
+                                    IdArea:_IdArea,
+                                    LinkFoto: urlImagenFirebase!,
+                                    IdEmpresa: "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+                                )
+                                viewModelCurso.editarCurso(curso: curso)
+                                viewModelCurso.fetchCursos()
+                            }
+                        }else{
+                            avisoText = "Debes llenar todos los campos"
+                            showAlertAgregarModificar.toggle()
+                        }
+                        
+                    }) {
+                        Text(buttonText)
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                    }.alert(isPresented: $showAlertAgregarModificar) {
+                        Alert(title: Text("Aviso"), message: Text(avisoText), dismissButton: .default(Text("Aceptar")))
                     }
                 }
             }
-            .navigationTitle("Editar Curso")
-            .navigationBarItems(trailing: Button("Cerrar") {
-                isPresented.toggle()
-            })
-            
-        }
-    }
-    
-    private func editarCurso() {
-        
-        let CursoEditado = Curso(
-            Id : curso.Id,
-            Nombre : nuevoNombre,
-            Version : nuevaVersion,
-            Fecha : curso.Fecha,
-            Borrado : curso.Borrado,
-            IdCampoDeFormacion: curso.IdCampoDeFormacion,
-            IdEspecialidad: curso.IdEspecialidad,
-            IdTipoConfidencialidad: curso.IdTipoConfidencialidad,
-            IdModalidad: curso.IdModalidad,
-            IdPlataformaLMSUtilizada: curso.IdPlataformaLMSUtilizada,
-            ObjetivoGeneral: nuevoObjetivoGeneral,
-            RegistroSTPS: curso.RegistroSTPS,
-            Proposito: nuevoProposito,
-            Objetivo: nuevoObjetivo,
-            Notas: nuevoNotas,
-            Codigo: nuevoCodigo,
-            CodigoCliente: nuevoCodigoCliente,
-            CodigoInterno: nuevoCodigoInterno,
-            CodigoAlterno: nuevoCodigoAlterno,
-            Activo: curso.Activo,
-            IdEmpresa: curso.IdEmpresa
-        )
-        
-        cursosViewModel.editarCurso(curso: CursoEditado)
-        isPresented.toggle()
-    }
-}
-
-
-
-struct AgregarCursoView: View {
-    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
-    @StateObject var viewModelEspecialidad = CatalogoCursosEspecialidadesViewModel()
-    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
-    @StateObject var viewModelModalidad = CatalogoCursosModalidadesViewModel()
-    @StateObject var viewModelPlataforma = CatalogoCursosPlataformasViewModel()
-    @State private var isShowingForm = false
-    @State private var isShowingFormFormacion = false
-    @State private var isShowingFormEspecialidad = false
-    @State private var isShowingFormConfidencialidad = false
-    @State private var isShowingFormModalidad = false
-    @State private var isShowingFormPlataforma = false
-    @State var seleccion: Int = 0
-    @State var seleccionFormacion: Int = 0
-    @State var seleccionEspecialidad: Int = 0
-    @State var seleccionConfidencialidad: Int = 0
-    @State var seleccionModalidad: Int = 0
-    @State var seleccionPlataforma: Int = 0
-    @Binding var isAddingNewCursos: Bool
-    @ObservedObject var cursosViewModel: CursosViewModel
-    @State private var nuevoCursoNombre = ""
-    @State private var nuevaCursoVersion = ""
-    @State private var nuevaCursoObjetivoGeneral = ""
-    @State private var nuevoRegistroSTPS = ""
-    @State private var nuevoCursoProposito = ""
-    @State private var nuevoCursoObjetivo = ""
-    @State private var nuevoCursoNotas = ""
-    @State private var nuevoCursoCodigo = ""
-    @State private var nuevoCursoCodigoCliente = ""
-    @State private var nuevoCursoCodigoInterno = ""
-    @State private var nuevoCursoCodigoAlterno = ""
-    let camposFormacion = ["Etica", "Pnesamiento matematico"]
-    let ecpecialidades = ["Master en ingles"]
-    let tiposConfidencialidad = ["Operaciones de negocio", "Informacion al cliente"]
-    let modalidades = ["String", "Persona moral"]
-    let plataformasLMS = ["", ""]
-    
-    
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
-                    TextField("Nombre ", text: $nuevoCursoNombre)
-                        .padding()
-                    TextField("Versión", text: $nuevaCursoVersion)
-                        .padding()
-                    TextField("Objetivo general", text: $nuevaCursoObjetivoGeneral)
-                        .padding()
-                    TextField("Registro stps", text: $nuevoRegistroSTPS)
-                        .padding()
-                    TextField("Propósito", text: $nuevoCursoProposito)
-                        .padding()
-                    TextField("Objetivo", text: $nuevoCursoObjetivo)
-                        .padding()
-                    TextField("Notas", text: $nuevoCursoNotas)
-                        .padding()
-                    TextField("Codigo", text: $nuevoCursoCodigo)
-                        .padding()
-                    TextField("Codigo cliente", text: $nuevoCursoCodigoCliente)
-                        .padding()
-                    TextField("Codigo interno", text: $nuevoCursoCodigoInterno)
-                        .padding()
-                    TextField("Codigo alterno", text: $nuevoCursoCodigoAlterno)
-                        .padding()
-                    
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            HStack{
-                                Text(" Campo de formación")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormFormacion.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormFormacion) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormFormacion, callingScreen: "Formacion", tituloScreen: " Campo de formación" )
-                                }.frame(width: 30, height: 40)
-                            }
-                            
-                            
-                            
-                            Picker("Campo de formación", selection: $seleccionFormacion) {
-                                ForEach(viewModel.catalogoCursosCampoDeFormacion.indices, id: \.self) { index in
-                                    Text(viewModel.catalogoCursosCampoDeFormacion[index].Nombre)
-                                        .tag(index)
-                                }
-                                
-                            }
-                            
-                            .pickerStyle(.menu)
-                            
-                        }
-                        .onAppear {
-                            
-                            viewModel.fetchCatalogoCursosCampoDeFormacion()
-                            viewModelEspecialidad.fetchCatalogoCursosEspecialidades()
-                        }
-                        Spacer()
-                    }
-                    
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            // Etiqueta para el segundo Picker
-                            
-                            HStack{
-                                Text(" Especialidad")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormEspecialidad.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormEspecialidad) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormEspecialidad, callingScreen: "Especialidad",tituloScreen: "Especialidad")
-                                }
-                            }
-                            
-                            
-                            Picker("Especialidad", selection: $seleccionEspecialidad) {
-                                ForEach(viewModelEspecialidad.catalogoCursosEspecialidades.indices, id: \.self) { index in
-                                    Text(viewModelEspecialidad.catalogoCursosEspecialidades[index].Nombre)
-                                        .tag(index)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }
-                        
-                        Spacer()
-                    }
-                    
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            
-                            
-                            HStack{
-                                Text(" Tipo confidencialidad")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormConfidencialidad.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormConfidencialidad) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormConfidencialidad, callingScreen: "Confidencialidad", tituloScreen: "Tipo de Confidencialidad")
-                                }
-                            }
-                            
-                            
-                            Picker("Tipo confidencialidad", selection: $seleccionConfidencialidad) {
-                                ForEach(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad.indices, id: \.self) { index in
-                                    Text(viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[index].Nombre)
-                                        .tag(index)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }.onAppear {
-                            viewModelConfidencialidad.fetchCatalogoCursosTipoConfidencialidad()
-                        }
-                        
-                        Spacer()
-                    }
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            
-                            
-                            HStack{
-                                Text("Modalidad")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormModalidad.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormModalidad) {
-                                    
-                                    FormularioView(isAdding: $isShowingFormModalidad ,callingScreen: "Modalidad", tituloScreen: "Modalidad")
-                                }
-                            }
-                            
-                            
-                            
-                            Picker("Modalidad", selection: $seleccionModalidad) {
-                                ForEach(viewModelModalidad.catalogoCursosModalidades.indices, id: \.self) { index in
-                                    Text(viewModelModalidad.catalogoCursosModalidades[index].Nombre)
-                                        .tag(index)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }
-                        .onAppear {
-                            viewModelModalidad.fetchCatalogoCursosModalidades()
-                        }
-                        Spacer()
-                    }
-                    HStack{
-                        VStack(alignment: .leading, spacing: 16) {
-                            
-                            
-                            
-                            HStack{
-                                Text(" Plataforma LMS Utilizada")
-                                    .font(.headline)
-                                    .foregroundColor(.gray)
-                                Button(action: {
-                                    isShowingFormPlataforma.toggle()
-                                    
-                                }) {
-                                    Text("+").font(.title)
-                                }.sheet(isPresented: $isShowingFormPlataforma) {
-                                    
-                                    FormularioView(isAdding:$isShowingFormPlataforma, callingScreen: "Plataforma", tituloScreen: " Plataforma").frame(width: 300, height: 400)
-                                }
-                            }
-                            
-                            
-                            Picker("Plataforma LMS Utilizada", selection: $seleccionPlataforma) {
-                                ForEach(viewModelPlataforma.catalogoCursosPlataformas.indices, id: \.self) { index in
-                                    Text(viewModelPlataforma.catalogoCursosPlataformas[index].Nombre)
-                                        .tag(index)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        } .onAppear {
-                            viewModelPlataforma.fetchCatalogoCursosPlataformas()
-                        }
-                        
-                        Spacer()
-                    }
-                    
-                    Button("Agregar") {
-                        agregarNuevoCurso()
-                    }
-                    .padding()
-                }
-                .navigationTitle("Agregar Curso")
-                .navigationBarItems(trailing: Button("Cerrar") {
-                    isAddingNewCursos.toggle()
-                })
-            }
-        }
-    }
-    
-    private func agregarNuevoCurso() {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        let currentDate = Date()
-        
-        let nuevoCurso = Curso(
-            Id : "00000000-0000-0000-0000-000000000000",
-            Nombre : nuevoCursoNombre,
-            Version : nuevaCursoVersion,
-            Fecha : "2024-01-30T19:06:05.675Z",
-            Borrado : false,
-            IdCampoDeFormacion: viewModel.catalogoCursosCampoDeFormacion[seleccionFormacion].Id,
-            IdEspecialidad: viewModelEspecialidad.catalogoCursosEspecialidades[seleccionEspecialidad].Id,
-            IdTipoConfidencialidad: viewModelConfidencialidad.catalogoCursosTipoConfidencialidad[seleccionConfidencialidad].Id,
-            IdModalidad: viewModelModalidad.catalogoCursosModalidades[seleccionModalidad].Id,
-            IdPlataformaLMSUtilizada: viewModelPlataforma.catalogoCursosPlataformas[seleccionPlataforma].Id,
-            ObjetivoGeneral: nuevaCursoObjetivoGeneral,
-            RegistroSTPS: nuevoRegistroSTPS,
-            Proposito: nuevoCursoProposito,
-            Objetivo: nuevoCursoObjetivo,
-            Notas: nuevoCursoNotas,
-            Codigo: nuevoCursoCodigo,
-            CodigoCliente: nuevoCursoCodigoCliente,
-            CodigoInterno: nuevoCursoCodigoInterno,
-            CodigoAlterno: nuevoCursoCodigoAlterno,
-            Activo: true,
-            IdEmpresa: "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
-        )
-        
-        print(nuevoCurso)
-        
-        cursosViewModel.agregarNuevoCurso(nuevoCurso:nuevoCurso)
-        isAddingNewCursos.toggle()
-    }
-}
-
-struct FormularioView: View {
-    @StateObject var viewModel = CatalogoCursosCampoDeFormacionViewModel()
-    @StateObject var viewModelEspecialidad = CatalogoCursosEspecialidadesViewModel()
-    @StateObject var viewModelConfidencialidad = CatalogoCursosTipoConfidencialidadViewModel()
-    @StateObject var viewModelModalidad = CatalogoCursosModalidadesViewModel()
-    @StateObject var viewModelPlataforma = CatalogoCursosPlataformasViewModel()
-    @Binding var isAdding: Bool
-    @State private var nombre: String = ""
-    var callingScreen: String
-    var tituloScreen: String
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Agrega un nuevo "+tituloScreen)
-                TextField("Nombre", text: $nombre)
-                    .padding()
-                
-                Button(action: {
-                    
-                    verificarSeleccion()
-                }) {
-                    Text("Agregar").padding().foregroundColor(.white)
-                }
-                .background(Color.blue)
-                .cornerRadius(8)
-                .padding()
-            } .navigationBarItems(trailing: Button("Cerrar") {
-                isAdding.toggle()
-            })
-        }
-        .navigationTitle("Nuevo Registro")
-        
-    }
-    
-    func guardarNuevoCampoEspecialidad(nombre: String){
-        
-        
-        let nuevoCatalogoCursosEspecialidades = CatalogoCursosEspecialidades(
-            Id : "00000000-0000-0000-0000-000000000000",
-            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
-            IdArea: "00000000-0000-0000-0000-000000000000",
-            Fecha : "2024-01-30T19:06:05.675Z",
-            Nombre : nombre,
-            Notas : "",
-            Observaciones: "",
-            Status : true,
-            Borrado: false
-            
-        )
-        
-        
-        
-        viewModelEspecialidad.agregarCatalogoCursosEspecialidades(nuevoCatalogoCursosEspecialidades: nuevoCatalogoCursosEspecialidades)
-        isAdding.toggle()
-    }
-    
-    
-    func guardarNuevoCampoFormacion(nombre: String){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd" // Define el formato de la fecha que deseas obtener
-        
-        let currentDate = Date()
-        
-        let nuevoCatalogoCursosCampoDeFormacion = CatalogoCursosCampoDeFormacion(
-            Id : "00000000-0000-0000-0000-000000000000",
-            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
-            Fecha : "2024-01-30T19:06:05.675Z",
-            Nombre : nombre,
-            Notas : "",
-            Status : true,
-            Borrado: false
-            
-        )
-        
-        
-        
-        viewModel.agregarCatalogoCursosCampoDeFormacion(nuevoCatalogoCursosCampoDeFormacion: nuevoCatalogoCursosCampoDeFormacion)
-        isAdding.toggle()
-    }
-    
-    func guardarNuevoConfidencialidad(nombre: String){
-        
-        
-        let nuevoCatalogoCursosTipoConfidencialidad = CatalogoCursosTipoConfidencialidad(
-            Id : "00000000-0000-0000-0000-000000000000",
-            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
-            Fecha : "2024-01-30T19:06:05.675Z",
-            Nombre : nombre,
-            Notas : "",
-            Observaciones: "",
-            Status : true,
-            Borrado: false
-            
-        )
-        
-        
-        
-        viewModelConfidencialidad.agregarCatalogoCursosTipoConfidencialidad(nuevoCatalogoCursosTipoConfidencialidad: nuevoCatalogoCursosTipoConfidencialidad)
-        isAdding.toggle()
-    }
-    
-    func guardarNuevoModalidad(nombre: String){
-        
-        
-        let nuevoCatalogoCursosModalidades = CatalogoCursosModalidades(
-            Id : "00000000-0000-0000-0000-000000000000",
-            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
-            Fecha : "2024-01-30T19:06:05.675Z",
-            Nombre : nombre,
-            Notas : "",
-            Observaciones: "",
-            Status : true,
-            Borrado: false
-            
-        )
-        
-        
-        
-        viewModelModalidad.agregarCatalogoCursosModalidades(nuevoCatalogoCursosModalidades: nuevoCatalogoCursosModalidades)
-        isAdding.toggle()
-    }
-    
-    func guardarNuevoPlataforma(nombre: String){
-        
-        let nuevoCatalogoCursosPlataformas = CatalogoCursosPlataformas(
-            Id : "00000000-0000-0000-0000-000000000000",
-            IdEmpresa : "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C",
-            Fecha : "2024-01-30T19:06:05.675Z",
-            Nombre : nombre,
-            Notas : "",
-            Observaciones: "",
-            Marca:"",
-            LinkAcceso:"",
-            Proveedor: "",
-            Sincrona:true,
-            Asincrona:true,
-            Status : true,
-            Borrado: false
-            
-        )
-        
-        viewModelPlataforma.agregarCatalogoCursosPlataformas(nuevoCatalogoCursosPlataformas: nuevoCatalogoCursosPlataformas)
-        isAdding.toggle()
-    }
-    
-    func verificarSeleccion() {
-        print(callingScreen)
-        switch callingScreen {
-        case "Formacion":
-            print("funciona? xxx")
-            guardarNuevoCampoFormacion(nombre: nombre)
-        case "Especialidad":
-            guardarNuevoCampoEspecialidad(nombre: nombre)
-        case "Confidencialidad":
-            guardarNuevoConfidencialidad(nombre: nombre)
-        case "Modalidad":
-            guardarNuevoModalidad(nombre: nombre)
-        default:
-            guardarNuevoPlataforma(nombre: nombre)
+            .navigationTitle("Cursos")
+        }.onAppear {
+            viewModelArea.fetchAreas()
+            viewModelEspecialidad.fetchCatalogoCursosEspecialidades(idArea: _IdArea)
+            viewModelCurso.fetchCursos()
+            viewModelCampoFormacion.fetchCatalogoCursosCampoDeFormacion()
+            viewModelArea.fetchAreas()
+            viewModelEspecialidad.fetchCatalogoCursosEspecialidades(idArea: _IdArea)
+            viewModelModalidad.fetchCatalogoCursosModalidades()
+            viewModelConfidencialidad.fetchCatalogoCursosTipoConfidencialidad()
+            viewModelPlataforma.fetchCatalogoCursosPlataformas()
         }
     }
 }
 
-
-
-
-//struct CursosView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CursosView(showSignInView: .constant(false))
-//    }
-//}
+#Preview {
+    CursosView()
+}

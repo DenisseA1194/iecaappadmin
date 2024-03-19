@@ -20,33 +20,60 @@ struct SucursalesView: View {
     @State private var _IdTitular = ""
     @State private var _IdRazonSocial = ""
     @State private var _IdZona = ""
-    @State private var _IdTipo = ""
+    @State private var _IdSucursalTipo = ""
     @State private var _Notas = ""
     @State private var _IdSucursal = ""
     @State private var buttonText = "Agregar"
-    @State private var regimenFiscal = RegimenFiscal.otro // Valor por defecto
+    
     @StateObject var viewModel = SucursalesViewModel()
     @StateObject var viewModelSucursalTipo = SucursalTipoViewModel()
+    @StateObject var viewModelZona = ZonasViewModel()
+    @StateObject var viewModelRazonSocial = RazonSocialViewModel()
+    @StateObject var viewModelUsuario = UsuariosViewModel()
+    
     @State var seleccionSucursal: Int = 0
     @State var seleccionSucursalTipo: Int = 0
-   
+    @State var seleccionZona: Int = 0
+    @State var seleccionRazonSocial: Int = 0
+    @State var seleccionTitular: Int = 0
+    @State var regimenFiscal: Int = 0
     
-    enum RegimenFiscal: String, CaseIterable, Identifiable {
-        case regimen1 = "Sucursal 1"
-        case regimen2 = "Razon sociales 2"
-        case regimen3 = "Razon sociales 3"
-        case regimen4 = "Razon sociales 4"
-        case regimen5 = "Razon sociales 5"
-        case regimen6 = "Razon sociales 6"
-        case otro = "Otro"
+    
+    @State private var imageUrl: String?
+    @State private var urlImagenFirebase: String? = ""
+    @State private var isShowingImagePicker = false
+    @State private var selectedImage: UIImage?
+    @State private var image: Image?
+    @State private var showAlert = false
+    @State private var showAlertAgregarModificar = false
+    @State private var avisoText = ""
+    
+    
+    func validarCamposSucursal() -> Bool {
+        // Verificar si todos los campos necesarios están llenos
+        guard !_Nombre.isEmpty,
+              !_Direccion.isEmpty,
+              !_Ciudad.isEmpty,
+              !_Telefono.isEmpty,
+              !_Numero.isEmpty,
+              !_Correo.isEmpty,
+              !_Pais.isEmpty,
+              !_IdTitular.isEmpty,
+              !_IdRazonSocial.isEmpty,
+              !_IdZona.isEmpty,
+              !_IdSucursalTipo.isEmpty,
+              let urlImagenFirebase = urlImagenFirebase else {
+            // Si algún campo está vacío, retornar falso
+            return false
+        }
         
-        var id: String { self.rawValue }
+        // Si todos los campos están llenos, retornar verdadero
+        return true
     }
     
     
     var body: some View {
-        NavigationView {
-           
+        NavigationView{
             Form {
                 Section(header: Text("Selecciona una Sucursal")) {
                     Picker("Sucursales", selection: $seleccionSucursal) {
@@ -54,7 +81,7 @@ struct SucursalesView: View {
                         let i = 0
                         ForEach([0] + viewModel.sucursales.indices.map { $0 + 1 }, id: \.self) { index in
                             if index == 0 {
-                                Text("") // Agregar texto vacío al principio
+                                Text("")
                                     .tag(0)
                             } else {
                                 Text(viewModel.sucursales[index - 1].Nombre)
@@ -62,7 +89,7 @@ struct SucursalesView: View {
                             }
                         }
                     }.onChange(of: seleccionSucursal) { index in
-                        // Aquí puedes acceder a los campos de la razón social seleccionada
+                        
                         print(index)
                         if index != 0 {
                             let sucursalSeleccionada = viewModel.sucursales[index-1]
@@ -72,38 +99,65 @@ struct SucursalesView: View {
                             _Ciudad = sucursalSeleccionada.Ciudad
                             _Telefono = sucursalSeleccionada.Telefono
                             _Numero = sucursalSeleccionada.Numero
-                            _Correo = sucursalSeleccionada.Ciudad
+                            _Correo = sucursalSeleccionada.Correo
                             _Pais = sucursalSeleccionada.Pais
                             _IdTitular = sucursalSeleccionada.IdTitular
                             _IdRazonSocial = sucursalSeleccionada.IdRazonSocial
                             _IdZona = sucursalSeleccionada.IdZona
                             _Notas = sucursalSeleccionada.Notas
+                            _IdSucursalTipo = sucursalSeleccionada.IdSucursalTipo
                             _IdSucursal = sucursalSeleccionada.Id
+                            urlImagenFirebase = sucursalSeleccionada.LinkImagen
+                            
+                            if let posicionRegistro = viewModelSucursalTipo.sucursalesTipo.firstIndex(where: { $0.Id.uppercased() == sucursalSeleccionada.IdSucursalTipo.uppercased() }) {
+                                seleccionSucursalTipo = posicionRegistro
+                            }
+                            
+                            if let posicionRegistro2 = viewModelZona.zonas.firstIndex(where: { $0.Id.uppercased() == sucursalSeleccionada.IdZona.uppercased() }) {
+                                seleccionZona = posicionRegistro2
+                            }
+                            
+                            if let posicionRegistro3 = viewModelRazonSocial.razonSocials.firstIndex(where: { $0.Id.uppercased() == sucursalSeleccionada.IdRazonSocial.uppercased() }) {
+                                seleccionRazonSocial = posicionRegistro3
+                            }
+                            
+                            if let posicionRegistro4 = viewModelUsuario.usuarios.firstIndex(where: { $0.Id.uppercased() == sucursalSeleccionada.IdTitular.uppercased() }) {
+                                seleccionTitular = posicionRegistro4
+                            }
                             
                             buttonText = "Actualizar"
                         }else{
-//                            LimpiarForm()
+                            limpiarFormulario()
+                            
                         }
                         
-                        // Asigna otros campos según sea necesario
+                        
                     }.onAppear {
-                        // Llama a tu función para recuperar las razones sociales
+                        
                         viewModel.fetchSucursales()
-                        viewModelSucursalTipo.fetchSucursales()
+                        viewModelSucursalTipo.fetchSucursalesTipo()
+                        viewModelZona.fetchZonas()
+                        viewModelRazonSocial.fetchRazonSocials()
+                        viewModelUsuario.fetchUsuarios()
                         seleccionSucursal = 0
+                        
+                        
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
-                                
+                                showAlert.toggle()
+                                limpiarFormulario()
                             }) {
                                 
                                 Image(systemName: "plus")
                                 
                             }
                         }
+                    }.alert(isPresented: $showAlert) {
+                        Alert(title: Text("Aviso"), message: Text("Agrega una nueva sucursal"), dismissButton: .default(Text("Aceptar")))
                     }
                 }
-                Section(header: Text("Sucursales")) {
+                Section() {
                     TextField("Nombre", text: $_Nombre)
                     TextField("Dirección", text: $_Direccion)
                     TextField("Ciudad", text: $_Ciudad)
@@ -113,102 +167,195 @@ struct SucursalesView: View {
                         .keyboardType(.numberPad)
                     TextField("Correo", text: $_Correo)
                     TextField("País", text: $_Pais)
-                    Picker("Titular", selection: $regimenFiscal) {
-                        
-                        ForEach(RegimenFiscal.allCases) { regimen in
-                            Text(regimen.rawValue)
+                    
+                    Picker("Titular", selection: $seleccionTitular) {
+                        ForEach(viewModelUsuario.usuarios.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelUsuario.usuarios[index].Nombre)
+                                .tag(index)
                         }
-                    }
-                    Picker("Razon social", selection: $regimenFiscal) {
                         
-                        ForEach(RegimenFiscal.allCases) { regimen in
-                            Text(regimen.rawValue)
-                        }
-                    }
-                    Picker("Zona", selection: $regimenFiscal) {
-                        
-                        ForEach(RegimenFiscal.allCases) { regimen in
-                            Text(regimen.rawValue)
-                        }
-                    }
-                    Picker("Tipo", selection: $seleccionSucursalTipo) {
-                        
-                        let i = 0
-                        ForEach([0] + viewModelSucursalTipo.SucursalTipo.indices.map { $0 + 1 }, id: \.self) { index in
-                            if index == 0 {
-                                Text("") // Agregar texto vacío al principio
-                                    .tag(0)
-                            } else {
-                                Text(viewModelSucursalTipo.SucursalTipo[index - 1].Nombre)
-                                    .tag(index)
-                            }
-                        }
-                     
-                    }.onAppear {
-                        // Llama a tu función para recuperar las razones sociales
-//                        viewModel.fetchSucursales()
-                        viewModelSucursalTipo.fetchSucursales()
-                        seleccionSucursalTipo = 0
+                    }.onChange(of: seleccionTitular) { index in
+                        let titularSeleccionada = viewModelUsuario.usuarios[seleccionTitular]
+                        _IdTitular = titularSeleccionada.Id
                     }
                     
+                    
+                    Picker("Razon social", selection: $seleccionRazonSocial) {
+                        ForEach(viewModelRazonSocial.razonSocials.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelRazonSocial.razonSocials[index].Nombre)
+                                .tag(index)
+                        }
+                    }.onChange(of: seleccionRazonSocial) { index in
+                        let razonSocialSeleccionada = viewModelRazonSocial.razonSocials[seleccionRazonSocial]
+                        _IdRazonSocial = razonSocialSeleccionada.Id
+                        
+                    }
+                    
+                    
+                    Picker("Zona", selection: $seleccionZona) {
+                        ForEach(viewModelZona.zonas.indices.map { $0}, id: \.self) { index in
+                            Text(viewModelZona.zonas[index].Nombre)
+                                .tag(index)
+                        }
+                    }.onChange(of: seleccionZona) { index in
+                        let zonaSeleccionada = viewModelZona.zonas[seleccionZona]
+                        _IdZona = zonaSeleccionada.Id
+                        
+                    }
+                    
+                    Picker("Tipo", selection: $seleccionSucursalTipo) {
+                        
+                        ForEach(viewModelSucursalTipo.sucursalesTipo.indices.map { $0}, id: \.self) { index in
+                            
+                            Text(viewModelSucursalTipo.sucursalesTipo[index].Nombre)
+                                .tag(index)
+                            
+                        }
+                        
+                    }.onChange(of: seleccionSucursalTipo) { index in
+                        let sucursalTipoSeleccionada = viewModelSucursalTipo.sucursalesTipo[seleccionSucursalTipo]
+                        _IdSucursalTipo = sucursalTipoSeleccionada.Id
+                    }
                 }
-                
-//                // Sección para los pickers
-//                Section(header: Text("Selección")) {
-//                    // Se deben agregar los pickers correspondientes aquí
-//                }
-                
                 Section(header: Text("Notas")) {
                     TextEditor(text: $_Notas)
-                        .frame(minHeight: 200)
+                        .frame(minHeight: 80)
                 }
-                HStack{
+                HStack {
                     Spacer()
-                    Image("logo") // Reemplaza "tu_imagen" con el nombre de tu imagen en el catálogo de activos
-                               .resizable()
-                               .aspectRatio(contentMode: .fit)
-                               .frame(width: 200, height: 200) // Ajusta el tamaño según sea necesario
-                               .clipShape(Circle()) // Opcional: recorta la imagen en forma de círculo
-                               .overlay(Circle().stroke(Color.blue, lineWidth: 4)) // Opcional: agrega un borde alrededor de la imagen
-                               .shadow(radius: 10)
+                    if let selectedImage = urlImagenFirebase {
+                        AsyncImage(url: URL(string: urlImagenFirebase ?? "logo")) { phase in
+                            if let image = phase.image {
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                            } else if phase.error != nil {
+                                // Handle error
+                                Image("logo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                            } else {
+                                // Placeholder image or activity indicator while loading
+                                //                                   /* */ProgressView()
+                                Image("logo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                            }
+                        }
+                    } else {
+                        Image("logo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 100)
+                    }
                     Spacer()
+                    Button("Seleccionar imagen") {
+                        imageUrl = "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C/LogoSucursal/"
+                        isShowingImagePicker.toggle()
+                    }
+                    .sheet(isPresented: $isShowingImagePicker) {
+                        ImagePicker(image: $image, isPresented: $isShowingImagePicker, imageUrl: $imageUrl, urlImagenFirebase: $urlImagenFirebase)
+                    }
                 }
                 
                 Section {
                     Button(action: {
-                        if buttonText == "Agregar"{
-                         
+                        if validarCamposSucursal() {
+                            if buttonText == "Agregar"{
+                                avisoText = "Registro Agregado"
+                                showAlertAgregarModificar.toggle()
+                                let nuevaSucursal = Sucursal(Id: _IdSucursal,
+                                                             Nombre: _Nombre,
+                                                             Direccion: _Direccion,
+                                                             Ciudad: _Ciudad,
+                                                             Telefono: _Telefono,
+                                                             Numero: _Numero,
+                                                             Correo: _Correo,
+                                                             Pais: _Pais,
+                                                             IdTitular: _IdTitular,
+                                                             IdRazonSocial: _IdRazonSocial,
+                                                             IdZona: _IdZona,
+                                                             IdSucursalTipo: _IdSucursalTipo,
+                                                             Notas: _Notas,
+                                                             borrado: false,
+                                                             Fecha: "2024-01-30T19:06:05.675Z",
+                                                             LinkImagen: urlImagenFirebase!,
+                                                             IdEmpresa: "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+                                )
+                                viewModel.agregarNuevaSucursal(nuevaSucursal: nuevaSucursal)
+                                viewModel.fetchSucursales()
+                                limpiarFormulario()
+                            }else{
+                                avisoText = "Registro Modificado"
+                                showAlertAgregarModificar.toggle()
+                                let sucursal = Sucursal(Id: _IdSucursal,
+                                                        Nombre: _Nombre,
+                                                        Direccion: _Direccion,
+                                                        Ciudad: _Ciudad,
+                                                        Telefono: _Telefono,
+                                                        Numero: _Numero,
+                                                        Correo: _Correo,
+                                                        Pais: _Pais,
+                                                        IdTitular: _IdTitular,
+                                                        IdRazonSocial: _IdRazonSocial,
+                                                        IdZona: _IdZona,
+                                                        IdSucursalTipo: _IdSucursalTipo,
+                                                        Notas: _Notas,
+                                                        borrado: false,
+                                                        Fecha: "2024-01-30T19:06:05.675Z",
+                                                        LinkImagen: urlImagenFirebase!,
+                                                        IdEmpresa: "4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+                                )
+                                viewModel.editarSucursal(sucursal: sucursal)
+                                viewModel.fetchSucursales()
+                                limpiarFormulario()
+                            }
+                            
                         }else{
-                            let sucursal = Sucursal(   Id: _IdSucursal,
-                                                       Nombre: _Nombre,
-                                                       Direccion: _Direccion,
-                                                       Ciudad: _Ciudad,
-                                                       Telefono: _Telefono,
-                                                       Numero: _Numero,
-                                                       Correo: _Correo,
-                                                       Pais: _Pais,
-                                                       IdTitular: _IdTitular,
-                                                       IdRazonSocial: _IdRazonSocial,
-                                                       IdZona: _IdZona,
-                                                       Tipo: _IdTipo,
-                                                       Notas: _Notas,
-                                                       borrado: false,
-                                                       Fecha: "2024-01-30T19:06:05.675Z"
-                                                               )
-                            viewModel.editarSucursal(sucursal: sucursal)
+                            avisoText = "Debes llenar todos los campos"
+                            showAlertAgregarModificar.toggle()
                         }
                         
-//                                               LimpiarForm()
-                        }) {
-                            Text(buttonText)
-                                .frame(maxWidth: .infinity) // Asegura que el texto ocupe todo el ancho disponible
-                                .multilineTextAlignment(.center) // Centra el texto
-                        }
+                        
+                    }) {
+                        Text(buttonText)
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                    }.alert(isPresented: $showAlertAgregarModificar) {
+                        Alert(title: Text("Aviso"), message: Text(avisoText), dismissButton: .default(Text("Aceptar")))
+                    }
                 }
             }
             .navigationTitle("Sucursales")
+            
         }
     }
     
-    
+    func limpiarFormulario() {
+        _Nombre = ""
+        _Direccion = ""
+        _Ciudad = ""
+        _Telefono = ""
+        _Numero = ""
+        _Correo = ""
+        _Pais = ""
+        _IdTitular = ""
+        _IdRazonSocial = ""
+        _IdZona = ""
+        _IdSucursalTipo = ""
+        _Notas = ""
+        _IdSucursal = ""
+        urlImagenFirebase = ""
+        buttonText = "Agregar"
+        
+        // Restablecer selecciones
+        seleccionSucursal = 0
+        seleccionSucursalTipo = 0
+        seleccionZona = 0
+        seleccionRazonSocial = 0
+        seleccionTitular = 0
+    }
 }

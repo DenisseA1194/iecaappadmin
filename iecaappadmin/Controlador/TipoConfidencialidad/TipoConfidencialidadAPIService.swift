@@ -12,14 +12,14 @@ class CatalogoCursosTipoConfidencialidadAPIService {
   
     private let webService = WebService()
     static let shared = CatalogoCursosTipoConfidencialidadAPIService()
+    private let baseURL = "http://webservices.iecapp.com"
     
     func editarCatalogoCursosTipoConfidencialidad(catalogoCursosTipoConfidencialidad: CatalogoCursosTipoConfidencialidad, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = webService.getBaseURL() + "/api/CatalogoCursosTipoConfidencialidad/\(catalogoCursosTipoConfidencialidad.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = baseURL + "/api/CatalogoCursosTipoConfidencialidad/\(catalogoCursosTipoConfidencialidad.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
-        // Obtener la fecha actual
+        
         let currentDate = Date()
                
-        // Formatear la fecha actual utilizando DateFormatterManager
         let formattedDate = DateFormatterManager.shared.format(date: currentDate)
         
         let parameters: [String: Any] = [
@@ -50,7 +50,7 @@ class CatalogoCursosTipoConfidencialidadAPIService {
 
     
     func eliminarCatalogoCursosTipoConfidencialidad(idCatalogoCursosTipoConfidencialidad: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = webService.getBaseURL() + "/api/CatalogoCursosTipoConfidencialidad/\(idCatalogoCursosTipoConfidencialidad)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+           let url = baseURL + "/api/CatalogoCursosTipoConfidencialidad/\(idCatalogoCursosTipoConfidencialidad)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            
            AF.request(url, method: .delete)
                .validate()
@@ -65,7 +65,7 @@ class CatalogoCursosTipoConfidencialidadAPIService {
        }
 
         func fetchCatalogoCursosTipoConfidencialidad(completion: @escaping (Result<[CatalogoCursosTipoConfidencialidad], Error>) -> Void) {
-            AF.request(webService.getBaseURL()+"/api/CatalogoCursosTipoConfidencialidad?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(baseURL+"/api/CatalogoCursosTipoConfidencialidad?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [CatalogoCursosTipoConfidencialidad].self) { response in
                     switch response.result {
@@ -87,7 +87,7 @@ class CatalogoCursosTipoConfidencialidadAPIService {
             "Status":nuevoCatalogoCursosTipoConfidencialidad.Status
            ]
         
-           AF.request(webService.getBaseURL() + "/api/CatalogoCursosTipoConfidencialidad", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/CatalogoCursosTipoConfidencialidad", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: CatalogoCursosTipoConfidencialidad.self) { response in
                    switch response.result {

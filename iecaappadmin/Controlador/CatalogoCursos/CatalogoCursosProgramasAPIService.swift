@@ -12,9 +12,9 @@ class CatalogoCursosProgramasAPIService {
   
     private let webService = WebService()
     static let shared = CatalogoCursosProgramasAPIService()
-    
+    private let baseURL = "http://webservices.iecapp.com"
     func editarCatalogoCursosProgramas(catalogoCursosProgramas: CatalogoCursosProgramas, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = webService.getBaseURL() + "/api/CatalogoCursosProgramas/\(catalogoCursosProgramas.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = baseURL + "/api/CatalogoCursosProgramas/\(catalogoCursosProgramas.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
         // Obtener la fecha actual
         let currentDate = Date()
@@ -23,12 +23,14 @@ class CatalogoCursosProgramasAPIService {
         let formattedDate = DateFormatterManager.shared.format(date: currentDate)
         
         let parameters: [String: Any] = [
-            "IdEmpresa":catalogoCursosProgramas.IdEmpresa,
-            "Fecha": formattedDate,
+            "Id":catalogoCursosProgramas.Id,
+            "IdEmpresa": catalogoCursosProgramas.IdEmpresa,
+            "Fecha": catalogoCursosProgramas.Fecha,
             "Nombre": catalogoCursosProgramas.Nombre,
             "Notas": catalogoCursosProgramas.Notas,
             "Observaciones": catalogoCursosProgramas.Observaciones,
-            "Status":catalogoCursosProgramas.Status
+            "Status": catalogoCursosProgramas.Status,
+            "Borrado": catalogoCursosProgramas.Borrado
         ]
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted),
                let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -50,7 +52,7 @@ class CatalogoCursosProgramasAPIService {
 
     
     func eliminarCatalogoCursosProgramas(idCatalogoCursosProgramas: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = webService.getBaseURL() + "/api/CatalogoCursosProgramas/\(idCatalogoCursosProgramas)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+           let url = baseURL + "/api/CatalogoCursosProgramas/\(idCatalogoCursosProgramas)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            
            AF.request(url, method: .delete)
                .validate()
@@ -65,7 +67,7 @@ class CatalogoCursosProgramasAPIService {
        }
 
         func fetchCatalogoCursosProgramas(completion: @escaping (Result<[CatalogoCursosProgramas], Error>) -> Void) {
-            AF.request(webService.getBaseURL()+"/api/CatalogoCursosProgramas?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(baseURL+"/api/CatalogoCursosProgramas?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [CatalogoCursosProgramas].self) { response in
                     switch response.result {
@@ -79,15 +81,17 @@ class CatalogoCursosProgramasAPIService {
     
     func agregarCatalogoCursosProgramas(nuevoCatalogoCursosProgramas: CatalogoCursosProgramas, completion: @escaping (Result<CatalogoCursosProgramas, Error>) -> Void) {
            let parameters: [String: Any] = [
-            "IdEmpresa":nuevoCatalogoCursosProgramas.IdEmpresa,
+            "Id":nuevoCatalogoCursosProgramas.Id,
+            "IdEmpresa": nuevoCatalogoCursosProgramas.IdEmpresa,
             "Fecha": nuevoCatalogoCursosProgramas.Fecha,
             "Nombre": nuevoCatalogoCursosProgramas.Nombre,
             "Notas": nuevoCatalogoCursosProgramas.Notas,
             "Observaciones": nuevoCatalogoCursosProgramas.Observaciones,
-            "Status":nuevoCatalogoCursosProgramas.Status
+            "Status": nuevoCatalogoCursosProgramas.Status,
+            "Borrado": nuevoCatalogoCursosProgramas.Borrado
            ]
         
-           AF.request(webService.getBaseURL() + "/api/CatalogoCursosProgramas", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/CatalogoCursosProgramas", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: CatalogoCursosProgramas.self) { response in
                    switch response.result {

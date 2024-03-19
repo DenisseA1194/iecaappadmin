@@ -13,16 +13,42 @@ class CatalogoCursosEspecialidadesViewModel: ObservableObject {
     
     private let service = CatalogoCursosEspecialidadesAPIService.shared
     private let apiService = CatalogoCursosEspecialidadesAPIService.shared
+   
     @Published var catalogoCursosEspecialidades: [CatalogoCursosEspecialidades] = []
     @Published var error: Error?
     @Published var isLoading = false
     
     // Función para recuperar los catálogos de cursos de especialidades
-    func fetchCatalogoCursosEspecialidades() {
-        apiService.fetchCatalogoCursosEspecialidades { result in
+    func fetchCatalogoCursosEspecialidades(idArea: String, completion: @escaping (Result<[CatalogoCursosEspecialidades], Error>) -> Void) {
+        apiService.fetchCatalogoCursosEspecialidades(idArea: idArea, completion: completion)
+    }
+//    func fetchData(idArea: String) {
+//           // Llamamos a la función que realiza la consulta al servidor
+//           CatalogoCursosEspecialidadesAPIService.shared.fetchCatalogoCursosEspecialidades(idArea: idArea) { [weak self] result in
+//               switch result {
+//               case .success(let catalogoCursosEspecialidades):
+//                   DispatchQueue.main.async {
+//                       // Actualizamos la propiedad catalogoCursosEspecialidades con los datos obtenidos
+//                       self?.catalogoCursosEspecialidades = catalogoCursosEspecialidades
+//                       // Llamamos a la función que depende de los registros obtenidos
+//                       self?.doSomethingWithCatalogo()
+//                   }
+//               case .failure(let error):
+//                   // Manejamos el error si es necesario
+//                   print("Error al obtener el catálogo de cursos de especialidades:", error)
+//               }
+//           }
+//       }
+       
+       func doSomethingWithCatalogo() {
+         
+       }
+    func fetchCatalogoCursosEspecialidades(idArea: String) {
+        apiService.fetchCatalogoCursosEspecialidades(idArea: idArea) { result in
             switch result {
             case .success(let catalogoCursosEspecialidades):
                 // Update the published property with the fetched data
+                print("Segunda parte")
                 DispatchQueue.main.async {
                     self.catalogoCursosEspecialidades = catalogoCursosEspecialidades
                 }
@@ -34,17 +60,17 @@ class CatalogoCursosEspecialidadesViewModel: ObservableObject {
     }
     
     // Función para agregar un nuevo catálogo de cursos de especialidades
-    func agregarCatalogoCursosEspecialidades(nuevoCatalogoCursosEspecialidades: CatalogoCursosEspecialidades) {
+    func agregarCatalogoCursosEspecialidades(idArea: String,nuevoCatalogoCursosEspecialidades: CatalogoCursosEspecialidades) {
         
         CatalogoCursosEspecialidadesAPIService.shared.agregarCatalogoCursosEspecialidades(nuevoCatalogoCursosEspecialidades: nuevoCatalogoCursosEspecialidades){ [weak self] result in
         switch result {
             case .success(let catalogoCursosEspeciales):
                 DispatchQueue.main.async {
                     self?.catalogoCursosEspecialidades.append(catalogoCursosEspeciales)
-                    self?.actualizarListaEspecialidades()
+                    self?.actualizarListaEspecialidades(idArea: idArea)
                 }
             case .failure(let error):
-            self?.actualizarListaEspecialidades()
+            self?.actualizarListaEspecialidades(idArea: idArea)
                 print("Error al agregar la Especialidad:", error)
                 // Puedes manejar el error de alguna manera si es necesario
             }
@@ -52,7 +78,7 @@ class CatalogoCursosEspecialidadesViewModel: ObservableObject {
     }
     
     // Función para editar un catálogo de cursos de especialidades existente
-    func editarCatalogoCursosEspecialidades(catalogoCursosEspecialidades: CatalogoCursosEspecialidades) {
+    func editarCatalogoCursosEspecialidades(idArea: String,catalogoCursosEspecialidades: CatalogoCursosEspecialidades) {
         isLoading = true
         service.editarCatalogoCursosEspecialidades(catalogoCursosEspecialidades: catalogoCursosEspecialidades) { result in
             DispatchQueue.main.async {
@@ -89,7 +115,7 @@ class CatalogoCursosEspecialidadesViewModel: ObservableObject {
         }
     }
     
-    func actualizarListaEspecialidades() {
-           fetchCatalogoCursosEspecialidades()
+    func actualizarListaEspecialidades(idArea: String) {
+        fetchCatalogoCursosEspecialidades(idArea: idArea)
        }
 }

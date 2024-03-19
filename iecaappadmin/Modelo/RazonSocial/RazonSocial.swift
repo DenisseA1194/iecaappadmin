@@ -28,6 +28,7 @@ struct RazonSocial: Identifiable, Codable {
     //var NombreComercial: String
     //var RegistroPatronal: String
     var IMGFIREBASE: String
+    var Notas: String
     //var SitioWeb: String
     //var SitioEncuesta: String
     //var borrado: Bool

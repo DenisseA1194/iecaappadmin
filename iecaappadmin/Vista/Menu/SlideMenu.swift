@@ -11,6 +11,7 @@ import SwiftUI
 struct HomeView: View {
     
     @Binding var presentSideMenu: Bool
+  
     
     var body: some View {
         VStack{
@@ -26,7 +27,7 @@ struct HomeView: View {
             }
             
             Spacer()
-            Text("Home View")
+            Text("IECA")
             Spacer()
         }
         .padding(.horizontal, 24)
@@ -71,6 +72,27 @@ enum SideMenuRowType: Int, CaseIterable{
     case editarevaluacion
     case tipoSucursal
     case instituto
+    case actividades
+    case competencias
+    case materiales
+    case programas
+    case temas
+    case razonSocial
+    case zona
+    case puesto
+    case departamentos
+    case sucursales
+    case cursosActividades
+    case cursosAutorizaciones
+    case cursosBibliografia
+    case cursosCompetencias
+    case cursosDocumentacion
+    case cursosEquipos
+    case cursosInstructores
+    case cursosTemas
+    case cursosMateriales
+    case SectorTipoCliente
+    
     
     var title: String{
         switch self {
@@ -79,21 +101,62 @@ enum SideMenuRowType: Int, CaseIterable{
         case .cursos:
             return "Cursos"
         case .evaluaciones:
-            return "Zonas"
+            return "Modalidad"
         case .ingresos:
-            return "Usuarios"
+            return "Tipo confidencialidad"
         case .statement:
-            return "Puestos"
+            return "Campo formacion"
         case .editarcurso:
-            return "Departamentos"
+            return "Area"
         case .editarevaluacion:
-            return "Sucursales"
+            return "Especialidades"
         case .profile:
-            return "Razon social"
+            return "Plataforma"
         case .tipoSucursal:
             return "Tipo sucursal"
         case .instituto:
             return "Institucion"
+        case .actividades:
+            return "actividades"
+        case .competencias:
+            return "competencias"
+        case .materiales:
+            return "materiales"
+        case .programas:
+            return "programas"
+        case .temas:
+            return "temas"
+        case .razonSocial:
+            return "Razon social"
+        case .zona:
+            return "Zona"
+        case .puesto:
+            return "Puestos"
+        case .departamentos:
+            return "Departamentos"
+        case .sucursales:
+            return "Sucursales"
+        case .cursosActividades:
+            return "Cursos Actividades"
+        case .cursosAutorizaciones:
+            return "Cursos Autorizaciones"
+        case .cursosBibliografia:
+            return "Cursos Bibliografia"
+        case .cursosCompetencias:
+            return "Cursos Competencias"
+        case .cursosDocumentacion:
+            return "Cursos Documentacion"
+        case .cursosEquipos:
+            return "Cursos Documentacion"
+        case .cursosInstructores:
+            return "Cursos Instructores"
+        case .cursosTemas:
+            return "Cursos Temas"
+        case .cursosMateriales:
+            return "Cursos Materiales"
+        case .SectorTipoCliente:
+            return "Sector tipo cliente"
+       
             
         }
         
@@ -102,25 +165,66 @@ enum SideMenuRowType: Int, CaseIterable{
     var iconName: String{
         switch self {
         case .dashboard:
-            return "IECA_azul"
+            return "ECA_azul"
         case .cursos:
-            return "IECA_azul"
+            return "ECA_azul"
         case .evaluaciones:
-            return "IECA_azul"
+            return "ECA_azul"
         case .ingresos:
-            return "IECA_azul"
+            return "ECA_azul"
         case .statement:
-            return "IECA_azul"
+            return "ECA_azul"
         case .editarcurso:
-            return "IECA_azul"
+            return "ECA_azul"
         case .editarevaluacion:
-            return "IECA_azul"
+            return "ECA_azul"
         case .profile:
-            return "IECA_azul"
+            return "ECA_azul"
         case .tipoSucursal:
-            return "IECA_azul"
+            return "ECA_azul"
         case .instituto:
-            return "IECA_azul"
+            return "ECA_azul"
+        case .actividades:
+            return "ECA_azul"
+        case .competencias:
+            return "ECA_azul"
+        case .materiales:
+            return "ECA_azul"
+        case .programas:
+            return "ECA_azul"
+        case .temas:
+            return "ECA_azul"
+        case .razonSocial:
+            return "ECA_azul"
+        case .zona:
+            return "ECA_azul"
+        case .puesto:
+            return "ECA_azul"
+        case .departamentos:
+            return "ECA_azul"
+        case .sucursales:
+            return "ECA_azul"
+        case .cursosActividades:
+            return "ECA_azul"
+        case .cursosAutorizaciones:
+            return "ECA_azul"
+        case .cursosBibliografia:
+            return "ECA_azul"
+        case .cursosCompetencias:
+            return "ECA_azul"
+        case .cursosDocumentacion:
+            return "ECA_azul"
+        case .cursosEquipos:
+            return "ECA_azul"
+        case .cursosInstructores:
+            return "ECA_azul"
+        case .cursosTemas:
+            return "ECA_azul"
+        case .cursosMateriales:
+            return "ECA_azul"
+        case .SectorTipoCliente:
+            return "ECA_azul"
+      
         }
     }
 }
@@ -212,7 +316,7 @@ struct SideMenuView: View {
         VStack(alignment: .center){
             HStack{
                 Spacer()
-                Image("IECA_azul")
+                Image("user")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
@@ -224,7 +328,7 @@ struct SideMenuView: View {
                 Spacer()
             }
             
-            Text("Usuario")
+            Text("Omar Campos")
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.black)
             
@@ -276,24 +380,65 @@ struct MainTabbedView: View {
             TabView(selection: $selectedSideMenuTab) {
                 HomeView(presentSideMenu: $presentSideMenu)
                     .tag(0)
-                CursosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                CursosView()
                     .tag(1)
-                RazonesSocialesView()
+                PlataformaView()
                     .tag(2)
-                ZonasView()
+                ModalidadView()
                     .tag(3)
-                UsuariosView()
+                TipoConfidencialidadView()
                     .tag(4)
-                PuestosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                CamposFormacionView()
                     .tag(5)
-                DepartamentosView()
+                AreasView()
                     .tag(6)
-                SucursalesView()
+                EspecialidadesView()
                     .tag(7)
                 TipoSucursalView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
                     .tag(8)
                 InstitucionesView()
                     .tag(9)
+                ActividadView()
+                    .tag(10)
+                CompetenciaView()
+                    .tag(11)
+                MaterialView()
+                    .tag(12)
+                ProgramaView()
+                    .tag(13)
+                TemasView()
+                    .tag(14)
+                RazonesSocialesView()
+                    .tag(15)
+                ZonasView()
+                    .tag(16)
+                PuestosView(presentSideMenu: $presentSideMenu, showSignInView: $presentSideMenu)
+                    .tag(17)
+                DepartamentosView()
+                    .tag(18)
+                SucursalesView()
+                    .tag(19)
+                CursosActividadView()
+                    .tag(20)
+                CursosAutorizacionView()
+                    .tag(21)
+                CursosBibliografiasView()
+                    .tag(22)
+                CursosCompetenciaView()
+                    .tag(23)
+                CursosDocView()
+                    .tag(24)
+                CursosEquiposView()
+                    .tag(25)
+                CursosInstructoresView()
+                    .tag(26)
+                CursosTemasView()
+                    .tag(27)
+                CursosMaterialesView()
+                    .tag(28)
+                SectorTipoCliente()
+                    .tag(29)
+                
             }.overlay (
                 HStack {
                   

@@ -35,6 +35,7 @@ final class SignInEmailViewModel: ObservableObject {
             print("No email or password found")
             return
         }
+        
         try await AuthenticationManager.shared.signInUser(email: email, password: password)
         
     }
@@ -128,6 +129,7 @@ struct Login: View {
     var body: some View {
         if showMainTabbedView {
             MainTabbedView()
+           
                 .transition(.slide)
         } else {
             NavigationStack{
@@ -296,7 +298,7 @@ struct Login: View {
 //    }
 //}
 
-//#Preview {
-//    Login()
-//}
+#Preview {
+    Login()
+}
 

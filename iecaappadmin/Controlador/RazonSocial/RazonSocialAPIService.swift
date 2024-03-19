@@ -31,10 +31,11 @@ class RazonSocialAPIService {
             "Colonia": razonSocial.Colonia,
             "Estado": razonSocial.Estado,
             "Pais":razonSocial.Pais,
-            "Regimen1": " ",
+            "Regimen1": razonSocial.Regimen1,
             "Telefono": razonSocial.Telefono,
-            "IMGFIREBASE": " ",
+            "IMGFIREBASE": razonSocial.IMGFIREBASE,
             "borrado": false,
+            "Notas": razonSocial.Notas
             
             // Aquí van el resto de los campos de RazonSocial
         ]
@@ -99,9 +100,10 @@ class RazonSocialAPIService {
             "Colonia": razonSocial.Colonia,
             "Estado": razonSocial.Estado,
             "Pais":razonSocial.Pais,
-            "Regimen1": " ",
+            "Regimen1": razonSocial.Regimen1,
             "Telefono": razonSocial.Telefono,
-            "IMGFIREBASE": " ",
+            "IMGFIREBASE": razonSocial.IMGFIREBASE,
+            "Notas":razonSocial.Notas,
             "borrado": false,
             
             // Aquí van el resto de los campos de RazonSocial

@@ -20,10 +20,12 @@ struct Sucursal: Identifiable, Codable {
     var IdTitular: String
     var IdRazonSocial: String
     var IdZona: String
-    var Tipo: String
+    var IdSucursalTipo: String
     var Notas: String
     var borrado: Bool
     var Fecha: String
+    var LinkImagen: String
+    var IdEmpresa: String
     
     //var Region: String
     //var Latitud: Double

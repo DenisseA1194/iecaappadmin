@@ -20,7 +20,7 @@ class CursoAPIService{
             "Id" : curso.Id,
             "Nombre" : curso.Nombre,
             "Version" : curso.Version,
-            "Fecha" : curso.Fecha,
+            "Fecha" : "2024-01-30T19:06:05.675Z",
             "Borrado" : curso.Borrado,
             "IdCampoDeFormacion": curso.IdCampoDeFormacion,
             "IdEspecialidad": curso.IdEspecialidad,
@@ -37,6 +37,8 @@ class CursoAPIService{
             "CodigoInterno": curso.CodigoInterno,
             "CodigoAlterno": curso.CodigoAlterno,
             "Activo": curso.Activo,
+            "IdArea": curso.IdArea,
+            "LinkFoto": curso.LinkFoto,
             "IdEmpresa": curso.IdEmpresa,
         ]
         
@@ -90,7 +92,7 @@ class CursoAPIService{
            let parameters: [String: Any] = [
             "Id" : curso.Id,
             "Nombre" : curso.Nombre,
-            "Version" : Int(curso.Version),
+            "Version" : curso.Version,
             "Fecha" : "2024-01-30T19:06:05.675Z",
             "Borrado" : curso.Borrado,
             "IdCampoDeFormacion": curso.IdCampoDeFormacion,
@@ -108,6 +110,8 @@ class CursoAPIService{
             "CodigoInterno": curso.CodigoInterno,
             "CodigoAlterno": curso.CodigoAlterno,
             "Activo": curso.Activo,
+            "IdArea": curso.IdArea,
+            "LinkFoto": curso.LinkFoto,
             "IdEmpresa": curso.IdEmpresa,
            ]
         

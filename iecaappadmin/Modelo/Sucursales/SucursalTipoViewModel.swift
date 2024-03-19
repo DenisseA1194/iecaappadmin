@@ -10,15 +10,15 @@ import Alamofire
 
 class SucursalTipoViewModel: ObservableObject {
     
-    @Published var sucursales: [SucursalTipo] = []
+    @Published var sucursalesTipo: [SucursalTipo] = []
 
-    func editarSucursal(sucursal: SucursalTipo) {
-        SucursalTipoAPIService.shared.editarSucursal(sucursal: sucursal) { [weak self] result in
+    func editarSucursalTipo(sucursalTipo: SucursalTipo) {
+        SucursalTipoAPIService.shared.editarSucursalTipo(sucursalTipo: sucursalTipo) { [weak self] result in
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    if let index = self?.sucursales.firstIndex(where: { $0.Id == sucursal.Id }) {
-                        self?.sucursales[index] = sucursal
+                    if let index = self?.sucursalesTipo.firstIndex(where: { $0.Id == sucursalTipo.Id }) {
+                        self?.sucursalesTipo[index] = sucursalTipo
                     }
                 }
             case .failure(let error):
@@ -27,16 +27,16 @@ class SucursalTipoViewModel: ObservableObject {
         }
     }
     
-    func eliminarSucursal(sucursal: SucursalTipo) {
-        guard let index = sucursales.firstIndex(where: { $0.Id == sucursal.Id }) else {
+    func eliminarSucursalTipo(sucursalTipo: SucursalTipo) {
+        guard let index = sucursalesTipo.firstIndex(where: { $0.Id == sucursalTipo.Id }) else {
             return
         }
 
-        SucursalTipoAPIService.shared.eliminarSucursal(idSucursal: sucursal.Id) { [weak self] result in
+        SucursalTipoAPIService.shared.eliminarSucursalTipo(idSucursalTipo: sucursalTipo.Id) { [weak self] result in
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self?.sucursales.remove(at: index)
+                    self?.sucursalesTipo.remove(at: index)
                 }
             case .failure(let error):
                 print("Error al eliminar la SucursalTipo:", error)
@@ -44,12 +44,12 @@ class SucursalTipoViewModel: ObservableObject {
         }
     }
 
-    func fetchSucursales() {
-        SucursalTipoAPIService.shared.fetchSucursales { [weak self] result in
+    func fetchSucursalesTipo() {
+        SucursalTipoAPIService.shared.fetchSucursalesTipo { [weak self] result in
             switch result {
             case .success(let sucursales):
                 DispatchQueue.main.async {
-                    self?.sucursales = sucursales
+                    self?.sucursalesTipo = sucursales
                 }
             case .failure(let error):
                 print("Error al obtener datos de la API:", error)
@@ -57,23 +57,23 @@ class SucursalTipoViewModel: ObservableObject {
         }
     }
     
-    // func agregarNuevaSucursal(nuevaSucursal: Sucursal) {
-    //     SucursalAPIService.shared.agregarSucursal(nuevaSucursal: nuevaSucursal) { [weak self] result in
-    //         switch result {
-    //         case .success(let sucursal):
-    //             DispatchQueue.main.async {
-    //                 self?.sucursales.append(sucursal)
-    //                 self?.actualizarListaSucursales()
-    //             }
-    //         case .failure(let error):
-    //             self?.actualizarListaSucursales()
-    //             print("Error al agregar la SucursalTipo:", error)
-    //         }
-    //     }
-    // }
+     func agregarNuevaSucursal(nuevaSucursalTipo: SucursalTipo) {
+         SucursalTipoAPIService.shared.agregarSucursalTipo(nuevaSucursalTipo: nuevaSucursalTipo) { [weak self] result in
+             switch result {
+             case .success(let sucursalTipo):
+                 DispatchQueue.main.async {
+                     self?.sucursalesTipo.append(sucursalTipo)
+                     self?.actualizarListaSucursalesTipo()
+                 }
+             case .failure(let error):
+                 self?.actualizarListaSucursalesTipo()
+                 print("Error al agregar la SucursalTipo:", error)
+             }
+         }
+     }
 
-    func actualizarListaSucursales() {
-        fetchSucursales()
+    func actualizarListaSucursalesTipo() {
+        fetchSucursalesTipo()
     }
 }
 

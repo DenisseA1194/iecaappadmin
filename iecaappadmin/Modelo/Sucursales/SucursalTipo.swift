@@ -13,7 +13,7 @@ struct SucursalTipo: Identifiable, Codable {
     var Nombre: String
     var Fecha: String
     var IdEmpresa: String
-    var borrado: Bool
+    var Borrado: Bool
     var Virtual: Bool
     var Notas: String
     

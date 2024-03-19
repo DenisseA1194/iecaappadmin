@@ -11,7 +11,7 @@ struct Curso: Identifiable, Codable {
     
     var Id: String
     var Nombre: String
-    var Version: String
+    var Version: Double
     var Fecha: String
     var Borrado: Bool
     var IdCampoDeFormacion: String
@@ -29,6 +29,8 @@ struct Curso: Identifiable, Codable {
     var CodigoInterno: String
     var CodigoAlterno: String
     var Activo: Bool
+    var IdArea: String
+    var LinkFoto: String
     var IdEmpresa: String
     
     var id: String {

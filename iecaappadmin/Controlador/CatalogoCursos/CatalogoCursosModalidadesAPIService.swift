@@ -12,9 +12,10 @@ class CatalogoCursosModalidadesAPIService {
   
     private let webService = WebService()
     static let shared = CatalogoCursosModalidadesAPIService()
+    private let baseURL = "http://webservices.iecapp.com"
     
     func editarCatalogoCursosModalidades(catalogoCursosModalidades: CatalogoCursosModalidades, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = webService.getBaseURL() + "/api/CatalogoCursosModalidades/\(catalogoCursosModalidades.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = baseURL + "/api/CatalogoCursosModalidades/\(catalogoCursosModalidades.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
         
         // Obtener la fecha actual
         let currentDate = Date()
@@ -50,7 +51,7 @@ class CatalogoCursosModalidadesAPIService {
 
     
     func eliminarCatalogoCursosModalidades(idCatalogoCursosModalidades: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = webService.getBaseURL() + "/api/CatalogoCursosModalidades/\(idCatalogoCursosModalidades)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+           let url = baseURL + "/api/CatalogoCursosModalidades/\(idCatalogoCursosModalidades)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            
            AF.request(url, method: .delete)
                .validate()
@@ -65,7 +66,7 @@ class CatalogoCursosModalidadesAPIService {
        }
 
         func fetchCatalogoCursosModalidades(completion: @escaping (Result<[CatalogoCursosModalidades], Error>) -> Void) {
-            AF.request(webService.getBaseURL()+"/api/CatalogoCursosModalidades?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(baseURL + "/api/CatalogoCursosModalidades?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [CatalogoCursosModalidades].self) { response in
                     switch response.result {
@@ -87,7 +88,7 @@ class CatalogoCursosModalidadesAPIService {
             "Status":nuevoCatalogoCursosModalidades.Status
            ]
         
-           AF.request(webService.getBaseURL() + "/api/CatalogoCursosModalidades", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/CatalogoCursosModalidades", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: CatalogoCursosModalidades.self) { response in
                    switch response.result {

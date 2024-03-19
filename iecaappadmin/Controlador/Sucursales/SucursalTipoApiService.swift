@@ -16,8 +16,8 @@ class SucursalTipoAPIService {
     private let webService = WebService()
     static let shared = SucursalTipoAPIService()
     
-    func editarSucursal(sucursal: SucursalTipo, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = baseURL + "/api/SucursalTipo/\(sucursal.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+    func editarSucursalTipo(sucursalTipo: SucursalTipo, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = baseURL + "/api/SucursalesTipos/\(sucursalTipo.Id)"
         
         // Obtener la fecha actual
         let currentDate = Date()
@@ -26,13 +26,13 @@ class SucursalTipoAPIService {
         let formattedDate = DateFormatterManager.shared.format(date: currentDate)
         
         let parameters: [String: Any] = [
-            "Id": sucursal.Id,
-            "Nombre": sucursal.Nombre,
-            "Fecha": sucursal.Fecha,
-            "IdEmpresa": sucursal.IdEmpresa,
-            "borrado": sucursal.borrado,
-            "Virtual": sucursal.Virtual,
-            "Notas": sucursal.Notas
+            "Id": sucursalTipo.Id,
+            "Nombre": sucursalTipo.Nombre,
+            "Fecha": sucursalTipo.Fecha,
+            "IdEmpresa": sucursalTipo.IdEmpresa,
+            "Borrado": sucursalTipo.Borrado,
+            "Virtual": sucursalTipo.Virtual,
+            "Notas": sucursalTipo.Notas
         ]
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted),
                let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -53,8 +53,8 @@ class SucursalTipoAPIService {
     }
 
     
-    func eliminarSucursal(idSucursal: String, completion: @escaping (Result<Void, Error>) -> Void) {
-           let url = webService.getBaseURL() + "/api/SucursalTipo/\(idSucursal)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+    func eliminarSucursalTipo(idSucursalTipo: String, completion: @escaping (Result<Void, Error>) -> Void) {
+           let url = baseURL + "/api/SucursalTipo/\(idSucursalTipo)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
            
            AF.request(url, method: .delete)
                .validate()
@@ -68,9 +68,9 @@ class SucursalTipoAPIService {
                }
        }
 
-        func fetchSucursales(completion: @escaping (Result<[SucursalTipo], Error>) -> Void) {
-            print(webService.getBaseURL()+"/api/SucursalTipo?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
-            AF.request(baseURL+"/api/SucursalTipo?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+        func fetchSucursalesTipo(completion: @escaping (Result<[SucursalTipo], Error>) -> Void) {
+            print(baseURL+"/api/SucursalesTipos?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(baseURL+"/api/SucursalesTipos?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [SucursalTipo].self) { response in
                     switch response.result {
@@ -82,18 +82,18 @@ class SucursalTipoAPIService {
                 }
         }
     
-    func agregarSucursal(nuevaSucursal: SucursalTipo, completion: @escaping (Result<SucursalTipo, Error>) -> Void) {
+    func agregarSucursalTipo(nuevaSucursalTipo: SucursalTipo, completion: @escaping (Result<SucursalTipo, Error>) -> Void) {
            let parameters: [String: Any] = [
-            "Id": nuevaSucursal.Id,
-            "Nombre": nuevaSucursal.Nombre,
-            "Fecha": nuevaSucursal.Fecha,
-            "IdEmpresa": nuevaSucursal.IdEmpresa,
-            "borrado": nuevaSucursal.borrado,
-            "Virtual": nuevaSucursal.Virtual,
-            "Notas": nuevaSucursal.Notas
+            "Id": nuevaSucursalTipo.Id,
+            "Nombre": nuevaSucursalTipo.Nombre,
+            "Fecha": nuevaSucursalTipo.Fecha,
+            "IdEmpresa": nuevaSucursalTipo.IdEmpresa,
+            "Borrado": nuevaSucursalTipo.Borrado,
+            "Virtual": nuevaSucursalTipo.Virtual,
+            "Notas": nuevaSucursalTipo.Notas
            ]
         
-           AF.request(webService.getBaseURL() + "/api/SucursalTipo", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/SucursalesTipos", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: SucursalTipo.self) { response in
                    switch response.result {

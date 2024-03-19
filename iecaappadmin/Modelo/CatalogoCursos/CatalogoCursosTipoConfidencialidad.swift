@@ -2,12 +2,15 @@
 //  CatalogoCursosTipoConfidencialidad.swift
 //  iecaappadmin
 //
-//  Created by Denisse Alejandra Martinez Mendiola on 01/02/24.
+//  Created by Omar on 07/03/24.
 //
 
 import Foundation
 
+
+
 struct CatalogoCursosTipoConfidencialidad: Identifiable, Codable {
+
     
     var Id: String
     var IdEmpresa: String

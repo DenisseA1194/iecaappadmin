@@ -12,9 +12,10 @@ class CatalogoCursosPlataformasAPIService {
   
     private let webService = WebService()
     static let shared = CatalogoCursosPlataformasAPIService()
+    private let baseURL = "http://webservices.iecapp.com"
     
     func editarCatalogoCursosPlataformas(catalogoCursosPlataformas: CatalogoCursosPlataformas, completion: @escaping (Result<Void, Error>) -> Void) {
-        let url = webService.getBaseURL() + "/api/CatalogoCursosPlataformas/\(catalogoCursosPlataformas.Id)?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C"
+        let url = baseURL + "/api/CatalogoCursosPlataformas/\(catalogoCursosPlataformas.Id)"
         
         // Obtener la fecha actual
         let currentDate = Date()
@@ -70,7 +71,7 @@ class CatalogoCursosPlataformasAPIService {
        }
 
         func fetchCatalogoCursosPlataformas(completion: @escaping (Result<[CatalogoCursosPlataformas], Error>) -> Void) {
-            AF.request(webService.getBaseURL()+"/api/CatalogoCursosPlataformas?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
+            AF.request(baseURL+"/api/CatalogoCursosPlataformas?idEmpresa=4BBC69B0-F299-4033-933F-2DE7DC8B9E8C")
                 .validate()
                 .responseDecodable(of: [CatalogoCursosPlataformas].self) { response in
                     switch response.result {
@@ -97,7 +98,7 @@ class CatalogoCursosPlataformasAPIService {
             "Status":nuevoCatalogoCursosPlataformas.Status
            ]
         
-           AF.request(webService.getBaseURL() + "/api/CatalogoCursosPlataformas", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
+           AF.request(baseURL + "/api/CatalogoCursosPlataformas", method: .post, parameters: parameters, encoding: JSONEncoding.prettyPrinted)
                .validate()
                .responseDecodable(of: CatalogoCursosPlataformas.self) { response in
                    switch response.result {
